@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">sct_project</string>
+    <string name="app_name"><i>Strength Cluster Training</i></string>
+    <string name="login">Login</string>
+    <string name="start">Comenzar</string>
+    <string name="break_your_limits">Break Your Limits</string>
 </resources>
