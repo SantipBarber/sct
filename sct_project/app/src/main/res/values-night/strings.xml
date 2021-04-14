@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="login">LogIn</string>
+    <string name="app_name"><i>Strength Cluster Training</i></string>
+    <string name="to_login">Login</string>
     <string name="start">Comenzar</string>
-    <string name="break_your_limits">Break Your Limits</string>
+    <string name="break_your_limits">¡Rompe tus límites!</string>
+    <string name="forgot_password">Olvidé la contraseña</string>
+    <string name="login">iniciar sesión</string>
+    <string name="or_text">ó</string>
 </resources>
