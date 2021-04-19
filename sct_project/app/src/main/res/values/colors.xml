@@ -21,6 +21,7 @@
     <color name="color_error">#CC3E20</color>
 
     <!-- Definción de colores generales -->
+    <color name="blue_google">#4285F4</color>
     <color name="white">#FFffffff</color>
     <color name="black">#FF000000</color>
 </resources>

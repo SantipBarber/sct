@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragments.LogoInfoFragment"
+    tools:context=".ui.fragments.InitFragment"
     android:background="@color/color_background">
 
     <androidx.constraintlayout.widget.Guideline
@@ -78,6 +78,7 @@
         android:src="@mipmap/logo_sct"
         app:civ_border_color="@color/color_surface"
         app:civ_border_width="3dp"
+        android:cropToPadding="true"
         app:layout_constraintBottom_toTopOf="@+id/tv_byl"
         app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
         app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"

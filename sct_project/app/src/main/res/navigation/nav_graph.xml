@@ -1,5 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/initFragment">
 
+    <fragment
+        android:id="@+id/initFragment"
+        android:name="com.spbarber.sct_project.ui.fragments.InitFragment"
+        android:label="fragment_init"
+        tools:layout="@layout/fragment_init" >
+        <action
+            android:id="@+id/action_initFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_initFragment_to_experienceFragment"
+            app:destination="@id/experienceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.spbarber.sct_project.ui.fragments.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/experienceFragment"
+        android:name="com.spbarber.sct_project.ui.fragments.ExperienceFragment"
+        android:label="fragment_experience"
+        tools:layout="@layout/fragment_experience" >
+        <action
+            android:id="@+id/action_experienceFragment_to_initFragment"
+            app:destination="@id/initFragment" />
+    </fragment>
 </navigation>

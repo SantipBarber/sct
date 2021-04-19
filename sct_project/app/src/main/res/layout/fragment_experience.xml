@@ -1,14 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExperienceFragment">
+    tools:context=".ui.fragments.ExperienceFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/main_vertical_start_guide"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.025"/>
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/main_vertical_end_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.975"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/main_horizontal_start_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.0125"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/main_horizontal_end_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9875"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_back_sigin"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        app:icon="@drawable/ic_baseline_arrow_back_24"
+        app:iconTint="@color/color_secondary"
+        android:text="@string/btn_back"
+        android:padding="0dp"
+        android:textColor="@color/color_secondary"
+        android:textAllCaps="false"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toStartOf="@id/main_vertical_end_guide"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@id/main_vertical_start_guide"
+        app:layout_constraintTop_toBottomOf="@id/main_horizontal_start_guide"
+        android:gravity="center|start" />
+
+    <ir.beigirad.zigzagview.ZigzagView
+        android:id="@+id/main_top_separator"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_surface"
+        app:layout_constraintTop_toBottomOf="@+id/btn_back_sigin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:zigzagElevation="1dp"
+        app:zigzagHeight="4dp"
+        app:zigzagPaddingContent="16dp"
+        app:zigzagShadowAlpha="0.9"
+        app:zigzagSides="top|bottom"
+        app:zigzagBackgroundColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/tv_experience"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/rg_experience"
+        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
+        app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
+        app:layout_constraintTop_toBottomOf="@+id/main_top_separator"
+        android:text="Indica tu experiencia:"
+        android:textSize="36dp"
+        android:textStyle="normal"
+        android:textColor="@color/color_on_primary"
+        android:layout_marginTop="15dp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_gravity="fill" />
+
+
+
+    <RadioGroup
+        android:id="@+id/rg_experience"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_experience"
+        app:layout_constraintBottom_toTopOf="@id/main_bottom_separator"
+        app:layout_constraintStart_toEndOf="@id/main_vertical_start_guide"
+        app:layout_constraintEnd_toStartOf="@id/main_vertical_end_guide">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/rb_experience_beginner"
+            android:layout_width="362dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:padding="40dp"
+            android:text="Principiante"
+            android:textAlignment="center"
+            android:textColor="@color/color_secondary"
+            android:textSize="32dp"
+            android:cursorVisible="true"
+            app:layout_constraintBottom_toTopOf="@+id/rb_experience_intermediate"
+            app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
+            app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/rb_experience_intermediate"
+            android:layout_width="361dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:padding="40dp"
+            android:text="Intermedio"
+            android:textAlignment="center"
+            android:textColor="@color/color_secondary"
+            android:textSize="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/rb_experience_advance"
+            app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
+            app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/rb_experience_advance"
+            android:layout_width="364dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:padding="40dp"
+            android:text="@string/advanced"
+            android:textAlignment="center"
+            android:textColor="@color/color_secondary"
+            android:textSize="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/main_bottom_separator"
+            app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
+            app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide" />
+    </RadioGroup>
+
+
+
+    <ir.beigirad.zigzagview.ZigzagView
+        android:id="@+id/main_bottom_separator"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_surface"
+        app:layout_constraintBottom_toTopOf="@+id/btn_experience_next"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:zigzagElevation="1dp"
+        app:zigzagHeight="4dp"
+        app:zigzagPaddingContent="16dp"
+        app:zigzagShadowAlpha="0.9"
+        app:zigzagSides="top|bottom"
+        app:zigzagBackgroundColor="@color/black"
+        android:layout_marginBottom="15dp" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_experience_next"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/main_horizontal_end_guide"
+        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
+        app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
+        android:backgroundTint="@color/color_secondary"
+        android:text="@string/next"
+        app:cornerRadius="15dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:icon="@drawable/ic_baseline_arrow_forward_24"
+        app:iconGravity="textEnd"
+        android:layout_marginBottom="10dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
