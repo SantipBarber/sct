@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragments.LogoInfoFragment"
+    android:background="@color/color_background">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/main_vertical_start_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.025"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/main_vertical_end_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.975"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/main_horizontal_start_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.0125"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/main_horizontal_end_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9875"/>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_to_login"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/to_login"
+        android:textStyle="italic"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textColor="@color/color_secondary"
+        app:flow_verticalAlign="center"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintEnd_toStartOf="@id/main_vertical_end_guide"
+        app:layout_constraintHorizontal_bias="0.99"
+        app:layout_constraintStart_toEndOf="@id/main_vertical_start_guide"
+        app:layout_constraintTop_toBottomOf="@id/main_horizontal_start_guide" />
+
+    <ir.beigirad.zigzagview.ZigzagView
+        android:id="@+id/main_top_separator"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_surface"
+        app:layout_constraintTop_toBottomOf="@+id/btn_to_login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:zigzagElevation="1dp"
+        app:zigzagHeight="4dp"
+        app:zigzagPaddingContent="16dp"
+        app:zigzagShadowAlpha="0.9"
+        app:zigzagSides="top|bottom"
+        app:zigzagBackgroundColor="@color/black"
+        android:layout_marginBottom="15dp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/logo_main"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@mipmap/logo_sct"
+        app:civ_border_color="@color/color_surface"
+        app:civ_border_width="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_byl"
+        app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
+        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
+        app:layout_constraintTop_toBottomOf="@+id/main_top_separator"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_byl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layoutDirection="ltr"
+        android:padding="10dp"
+        android:text="@string/break_your_limits"
+        android:textAlignment="center"
+        android:textColor="@color/color_on_background"
+        android:textSize="32dp"
+        android:textStyle="italic|bold"
+        app:layout_constraintBottom_toTopOf="@+id/main_bottom_separator"
+        app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
+        app:layout_constraintTop_toBottomOf="@+id/logo_main"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ir.beigirad.zigzagview.ZigzagView
+        android:id="@+id/main_bottom_separator"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_surface"
+        app:layout_constraintBottom_toTopOf="@+id/btn_start_signin"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:zigzagElevation="1dp"
+        app:zigzagHeight="4dp"
+        app:zigzagPaddingContent="16dp"
+        app:zigzagShadowAlpha="0.9"
+        app:zigzagSides="top|bottom"
+        app:zigzagBackgroundColor="@color/black"
+        android:layout_marginBottom="15dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_start_signin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/main_horizontal_end_guide"
+        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
+        app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
+        android:backgroundTint="@color/color_secondary"
+        android:text="@string/start"
+        app:cornerRadius="15dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
