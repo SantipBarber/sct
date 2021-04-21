@@ -30,5 +30,22 @@
         <action
             android:id="@+id/action_experienceFragment_to_initFragment"
             app:destination="@id/initFragment" />
+        <action
+            android:id="@+id/action_experienceFragment_to_goalFragment"
+            app:destination="@id/goalFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/targetFragment"
+        android:name="com.spbarber.sct_project.TargetFragment"
+        android:label="fragment_target"
+        tools:layout="@layout/fragment_target" />
+    <fragment
+        android:id="@+id/goalFragment"
+        android:name="com.spbarber.sct_project.ui.fragments.GoalFragment"
+        android:label="fragment_goal"
+        tools:layout="@layout/fragment_goal" >
+        <action
+            android:id="@+id/action_goalFragment_to_experienceFragment"
+            app:destination="@id/experienceFragment" />
     </fragment>
 </navigation>

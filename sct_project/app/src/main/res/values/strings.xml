@@ -15,4 +15,7 @@
     <string name="btn_back">Atrás</string>
     <string name="next">Siguiente</string>
     <string name="advanced">Avanzado</string>
+    <string name="maximal_stregth">Maximal Strength</string>
+    <string name="improve_endurance">Improve Endurance</string>
+    <string name="beast_size">Beast Size</string>
 </resources>

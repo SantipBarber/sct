@@ -15,12 +15,16 @@ class ExperienceFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = FragmentExperienceBinding.inflate(layoutInflater)
-        val view = binding!!.root
+        val view = binding.root
 
         binding.btnBackSigin.setOnClickListener {
             NavHostFragment.findNavController(this).navigate(R.id.action_experienceFragment_to_initFragment)
         }
 
+        binding.btnExperienceNext.setOnClickListener {
+            NavHostFragment.findNavController(this).navigate(R.id.action_experienceFragment_to_goalFragment)
+
+        }
         return view
     }
 
