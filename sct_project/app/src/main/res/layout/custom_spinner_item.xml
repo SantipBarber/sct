@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/spinner_temp_rule"
+    style="?android:attr/spinnerItemStyle"
+    android:singleLine="true"
+    android:background="@color/color_surface"
+    android:textColor="@color/color_on_surface"
+    android:textStyle="italic"
+    android:gravity="start|center_vertical"
+    android:textSize="20dp">
+</TextView>

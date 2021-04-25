@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="duration_array">
+        <item>8 semanas</item>
+        <item>12 semanas</item>
+        <item>16 semanas</item>
+        <item>20 semanas</item>
+    </string-array>
+    <string-array name="frequency_array">
+        <item>Todos los días</item>
+        <item>2 días</item>
+        <item>3 días</item>
+        <item>4 días</item>
+        <item>5 días</item>
+        <item>6 días</item>
+    </string-array>
+</resources>

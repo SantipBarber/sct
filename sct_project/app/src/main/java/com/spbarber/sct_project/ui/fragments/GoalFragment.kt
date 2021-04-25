@@ -24,6 +24,10 @@ class GoalFragment : Fragment() {
             NavHostFragment.findNavController(this).navigate(R.id.action_goalFragment_to_experienceFragment)
         }
 
+        binding.btnGoalNext.setOnClickListener {
+            NavHostFragment.findNavController(this).navigate(R.id.action_goalFragment_to_tempRuleFragment)
+        }
+
 
         return binding.root
     }

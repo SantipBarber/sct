@@ -160,7 +160,7 @@
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:background="@color/color_surface"
-        app:layout_constraintBottom_toTopOf="@+id/btn_experience_next"
+        app:layout_constraintBottom_toTopOf="@+id/btn_goal_next"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
         app:zigzagElevation="1dp"
@@ -172,7 +172,7 @@
         android:layout_marginBottom="15dp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_experience_next"
+        android:id="@+id/btn_goal_next"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/main_horizontal_end_guide"

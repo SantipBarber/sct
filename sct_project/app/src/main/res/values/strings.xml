@@ -18,4 +18,9 @@
     <string name="maximal_stregth">Maximal Strength</string>
     <string name="improve_endurance">Improve Endurance</string>
     <string name="beast_size">Beast Size</string>
+    <string name="choose_duration">Elige la duración:</string>
+    <string name="record_your_rm">Registra tus RMs:</string>
+    <string name="tv_squat">Squat</string>
+    <string name="tv_bench_press">Bench Press</string>
+    <string name="tv_deadlift">Deadlift</string>
 </resources>

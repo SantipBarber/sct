@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.RecordsFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/main_vertical_start_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.025" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/main_vertical_end_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.975" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/main_horizontal_start_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.0125" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/main_horizontal_end_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9875" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_back"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center|start"
+        android:padding="0dp"
+        android:text="@string/btn_back"
+        android:textAllCaps="false"
+        android:textColor="@color/color_secondary"
+        android:textStyle="italic"
+        app:icon="@drawable/ic_baseline_arrow_back_24"
+        app:iconTint="@color/color_secondary"
+        app:layout_constraintEnd_toStartOf="@id/main_vertical_end_guide"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@id/main_vertical_start_guide"
+        app:layout_constraintTop_toBottomOf="@id/main_horizontal_start_guide" />
+
+    <ir.beigirad.zigzagview.ZigzagView
+        android:id="@+id/main_top_separator"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_surface"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_back"
+        app:zigzagBackgroundColor="@color/black"
+        app:zigzagElevation="1dp"
+        app:zigzagHeight="4dp"
+        app:zigzagPaddingContent="16dp"
+        app:zigzagShadowAlpha="0.9"
+        app:zigzagSides="top|bottom" />
+
+    <TextView
+        android:id="@+id/tv_records"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+
+        android:text="@string/record_your_rm"
+        android:textAlignment="center"
+        android:textColor="@color/color_on_primary"
+        android:textSize="32dp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@id/tv_record_squat"
+        app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
+        app:layout_constraintTop_toBottomOf="@+id/main_top_separator" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tv_record_squat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/tv_squat"
+        app:hintTextColor="@color/color_on_surface"
+        app:errorTextColor="@color/color_error"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        app:layout_constraintTop_toBottomOf="@+id/tv_records"
+        app:errorEnabled="true"
+        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
+        app:layout_constraintEnd_toStartOf="@id/main_vertical_end_guide"
+        app:endIconMode="clear_text"
+        app:boxBackgroundColor="@color/color_surface"
+        app:boxStrokeWidth="2.5dp"
+        app:boxStrokeColor="@color/color_primary"
+        app:helperText="1 repetición máxima en kg"
+        app:helperTextTextColor="@color/color_secondary"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tv_record_bench_press"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/tv_bench_press"
+        app:hintTextColor="@color/color_on_surface"
+        app:errorTextColor="@color/color_error"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        app:boxBackgroundColor="@color/color_surface"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        app:layout_constraintTop_toBottomOf="@+id/tv_record_squat"
+        app:errorEnabled="true"
+        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
+        app:layout_constraintEnd_toStartOf="@id/main_vertical_end_guide"
+        app:endIconMode="clear_text"
+        app:boxStrokeWidth="2.5dp"
+        app:boxStrokeColor="@color/color_primary"
+        app:helperText="1 repetición máxima en kg"
+        app:helperTextTextColor="@color/color_secondary"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:clickable="true"
+            android:inputType="number"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tv_record_deadlift"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/tv_deadlift"
+        app:hintTextColor="@color/color_on_surface"
+        app:errorTextColor="@color/color_error"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        app:boxBackgroundColor="@color/color_surface"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        app:layout_constraintTop_toBottomOf="@+id/tv_record_bench_press"
+        app:errorEnabled="true"
+        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
+        app:layout_constraintEnd_toStartOf="@id/main_vertical_end_guide"
+        app:endIconMode="clear_text"
+        app:boxStrokeWidth="5dp"
+        app:placeholderTextColor="@color/color_surface"
+        app:boxStrokeColor="@color/secondary_light_color"
+        app:helperText="1 repetición máxima en kg"
+        app:helperTextTextColor="@color/color_secondary"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:clickable="true"
+            android:inputType="number"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <ir.beigirad.zigzagview.ZigzagView
+        android:id="@+id/main_bottom_separator"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginBottom="15dp"
+        android:background="@color/color_surface"
+        app:layout_constraintBottom_toTopOf="@+id/btn_records_next"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:zigzagBackgroundColor="@color/black"
+        app:zigzagElevation="1dp"
+        app:zigzagHeight="4dp"
+        app:zigzagPaddingContent="16dp"
+        app:zigzagShadowAlpha="0.9"
+        app:zigzagSides="top|bottom" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_records_next"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/color_secondary"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/next"
+        app:cornerRadius="15dp"
+        app:icon="@drawable/ic_baseline_arrow_forward_24"
+        app:iconGravity="textEnd"
+        app:layout_constraintBottom_toTopOf="@id/main_horizontal_end_guide"
+        app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
+        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

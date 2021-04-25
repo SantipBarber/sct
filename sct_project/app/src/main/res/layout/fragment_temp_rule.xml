@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.TempRuleFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/main_vertical_start_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.025" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/main_vertical_end_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.975" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/main_horizontal_start_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.0125" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/main_horizontal_end_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9875" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_back"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center|start"
+        android:padding="0dp"
+        android:text="@string/btn_back"
+        android:textAllCaps="false"
+        android:textColor="@color/color_secondary"
+        android:textStyle="italic"
+        app:icon="@drawable/ic_baseline_arrow_back_24"
+        app:iconTint="@color/color_secondary"
+        app:layout_constraintEnd_toStartOf="@id/main_vertical_end_guide"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@id/main_vertical_start_guide"
+        app:layout_constraintTop_toBottomOf="@id/main_horizontal_start_guide" />
+
+    <ir.beigirad.zigzagview.ZigzagView
+        android:id="@+id/main_top_separator"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_surface"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_back"
+        app:zigzagBackgroundColor="@color/black"
+        app:zigzagElevation="1dp"
+        app:zigzagHeight="4dp"
+        app:zigzagPaddingContent="16dp"
+        app:zigzagShadowAlpha="0.9"
+        app:zigzagSides="top|bottom" />
+
+
+    <TextView
+        android:id="@+id/tv_duration"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="@string/choose_duration"
+        android:textAlignment="center"
+        android:textColor="@color/color_on_primary"
+        android:textSize="32dp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@id/dropdown_menu_duration"
+        app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
+        app:layout_constraintTop_toBottomOf="@+id/main_top_separator" />
+
+    <Spinner
+        android:id="@+id/dropdown_menu_duration"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/color_surface"
+        android:gravity="end"
+        android:popupBackground="@color/color_surface"
+        android:textStyle="italic|bold"
+        app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
+        app:layout_constraintTop_toBottomOf="@+id/tv_duration" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:text="Días de entrenamiento:"
+        android:textAlignment="center"
+        android:textColor="@color/color_on_primary"
+        android:textSize="28dp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/dropdown_menu_training_days"
+        app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide" />
+
+    <Spinner
+        android:id="@+id/dropdown_menu_training_days"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="72dp"
+        android:background="@color/color_surface"
+        android:gravity="end"
+        android:popupBackground="@color/color_surface"
+        android:textStyle="italic|bold"
+        app:layout_constraintBottom_toTopOf="@+id/tv_frequency"
+        app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide" />
+
+    <TextView
+        android:id="@+id/tv_frequency"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Frecuencia por movimiento:"
+        android:textAlignment="center"
+        android:textColor="@color/color_on_primary"
+        android:textSize="28dp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/rg_frecuency"
+        app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide" />
+
+    <RadioGroup
+        android:id="@+id/rg_frecuency"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="72dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/main_bottom_separator"
+        app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide">
+
+        <RadioButton
+            android:id="@+id/rb_frequency_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:text="1x"
+            android:textColor="@color/color_secondary"
+            android:textSize="30dp" />
+
+        <RadioButton
+            android:id="@+id/rb_frequency_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:text="2x"
+            android:textColor="@color/color_secondary"
+            android:textSize="30dp" />
+
+        <RadioButton
+            android:id="@+id/rb_frequency_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:text="3x"
+            android:textColor="@color/color_secondary"
+            android:textSize="30dp" />
+    </RadioGroup>
+
+    <ir.beigirad.zigzagview.ZigzagView
+        android:id="@+id/main_bottom_separator"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginBottom="15dp"
+        android:background="@color/color_surface"
+        app:layout_constraintBottom_toTopOf="@+id/btn_temp_rule_next"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:zigzagBackgroundColor="@color/black"
+        app:zigzagElevation="1dp"
+        app:zigzagHeight="4dp"
+        app:zigzagPaddingContent="16dp"
+        app:zigzagShadowAlpha="0.9"
+        app:zigzagSides="top|bottom" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_temp_rule_next"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/color_secondary"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/next"
+        app:cornerRadius="15dp"
+        app:icon="@drawable/ic_baseline_arrow_forward_24"
+        app:iconGravity="textEnd"
+        app:layout_constraintBottom_toTopOf="@id/main_horizontal_end_guide"
+        app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
+        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

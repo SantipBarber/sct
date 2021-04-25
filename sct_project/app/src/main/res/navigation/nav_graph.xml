@@ -35,11 +35,6 @@
             app:destination="@id/goalFragment" />
     </fragment>
     <fragment
-        android:id="@+id/targetFragment"
-        android:name="com.spbarber.sct_project.TargetFragment"
-        android:label="fragment_target"
-        tools:layout="@layout/fragment_target" />
-    <fragment
         android:id="@+id/goalFragment"
         android:name="com.spbarber.sct_project.ui.fragments.GoalFragment"
         android:label="fragment_goal"
@@ -47,5 +42,29 @@
         <action
             android:id="@+id/action_goalFragment_to_experienceFragment"
             app:destination="@id/experienceFragment" />
+        <action
+            android:id="@+id/action_goalFragment_to_tempRuleFragment"
+            app:destination="@id/tempRuleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tempRuleFragment"
+        android:name="com.spbarber.sct_project.ui.fragments.TempRuleFragment"
+        android:label="fragment_temp_rule"
+        tools:layout="@layout/fragment_temp_rule" >
+        <action
+            android:id="@+id/action_tempRuleFragment_to_goalFragment"
+            app:destination="@id/goalFragment" />
+        <action
+            android:id="@+id/action_tempRuleFragment_to_recordsFragment"
+            app:destination="@id/recordsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recordsFragment"
+        android:name="com.spbarber.sct_project.ui.fragments.RecordsFragment"
+        android:label="fragment_records"
+        tools:layout="@layout/fragment_records" >
+        <action
+            android:id="@+id/action_recordsFragment_to_tempRuleFragment"
+            app:destination="@id/tempRuleFragment" />
     </fragment>
 </navigation>
