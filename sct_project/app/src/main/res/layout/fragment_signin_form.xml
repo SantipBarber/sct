@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.SigninFormFragment"
+    android:layout_gravity="center_horizontal">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_name_user"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre"
+        app:boxStrokeColor="@color/color_primary"
+        app:boxStrokeWidth="2.5dp"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:errorTextColor="@color/color_error"
+        app:hintTextColor="@color/color_on_surface"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_surnames_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_name_user"
+        app:errorEnabled="true"
+        android:hint="Apellidos"
+        app:hintTextColor="@color/color_on_surface"
+        app:errorTextColor="@color/color_error"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:endIconMode="clear_text"
+        app:boxStrokeWidth="2.5dp"
+        app:boxStrokeColor="@color/color_primary">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:clickable="true"
+            android:inputType="textEmailAddress"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_surnames_user"
+        app:errorEnabled="true"
+        android:hint="@string/hint_user"
+        app:hintTextColor="@color/color_on_surface"
+        app:errorTextColor="@color/color_error"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:endIconMode="clear_text"
+        app:boxStrokeWidth="2.5dp"
+        app:boxStrokeColor="@color/color_primary">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:clickable="true"
+            android:inputType="textEmailAddress"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_user"
+        android:hint="@string/hint_password"
+        app:hintTextColor="@color/color_on_surface"
+        app:errorEnabled="true"
+        app:errorTextColor="@color/color_error"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:endIconMode="password_toggle"
+        app:boxStrokeColor="@color/color_primary"
+        app:boxStrokeWidth="2.5dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:clickable="true"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_confirm_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_password"
+        android:hint="Confirma la contraseña"
+        app:hintTextColor="@color/color_on_surface"
+        app:errorEnabled="true"
+        app:errorTextColor="@color/color_error"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:endIconMode="password_toggle"
+        app:boxStrokeColor="@color/color_primary"
+        app:boxStrokeWidth="2.5dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:clickable="true"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

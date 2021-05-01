@@ -66,5 +66,29 @@
         <action
             android:id="@+id/action_recordsFragment_to_tempRuleFragment"
             app:destination="@id/tempRuleFragment" />
+        <action
+            android:id="@+id/action_recordsFragment_to_personalDataFragment"
+            app:destination="@id/personalDataFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personalDataFragment"
+        android:name="com.spbarber.sct_project.ui.fragments.PersonalDataFragment"
+        android:label="fragment_personal_data"
+        tools:layout="@layout/fragment_personal_data" >
+        <action
+            android:id="@+id/action_personalDataFragment_to_recordsFragment"
+            app:destination="@id/recordsFragment" />
+        <action
+            android:id="@+id/action_personalDataFragment_to_siginFragment"
+            app:destination="@id/siginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/siginFragment"
+        android:name="com.spbarber.sct_project.ui.fragments.SiginFragment"
+        android:label="fragment_sigin"
+        tools:layout="@layout/fragment_sigin" >
+        <action
+            android:id="@+id/action_siginFragment_to_personalDataFragment"
+            app:destination="@id/personalDataFragment" />
     </fragment>
 </navigation>
