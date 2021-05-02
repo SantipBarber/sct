@@ -21,6 +21,11 @@ import com.spbarber.sct_project.databinding.FragmentPersonalDataBinding
 import org.w3c.dom.Text
 import java.util.*
 
+var nameAthlete = ""
+var heigthAthlete = ""
+var weigthAthlete = ""
+var genreAthlete = ""
+var birthdateAthlete = ""
 class PersonalDataFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     private lateinit var binding: FragmentPersonalDataBinding
 
@@ -34,9 +39,19 @@ class PersonalDataFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
         binding.btnPersonalDataNext.setOnClickListener {
             NavHostFragment.findNavController(this).navigate(R.id.action_personalDataFragment_to_siginFragment)
+            
+            nameAthlete =  binding.tilAthleteName.editText?.text.toString()
+            heigthAthlete =  binding.tilAthleteHeight.editText?.text.toString()
+            weigthAthlete =  binding.tilAthleteWeight.editText?.text.toString()
+            var genreAthleteID = binding.rgAthleteGender.checkedRadioButtonId
+            when(genreAthleteID){
+                R.id.rb_genre_man -> genreAthlete = "man"
+                R.id.rb_genre_woman -> genreAthlete = "woman"
+            }
+            birthdateAthlete = binding.tilAthleteBirthdate.editText?.text.toString()
         }
 
-        binding.tieAthleteBirthdate.setEndIconOnClickListener{
+        binding.tilAthleteBirthdate.setEndIconOnClickListener{
             val c = Calendar.getInstance()
             val year = c.get(Calendar.YEAR)
             val month = c.get(Calendar.MONTH)
@@ -63,5 +78,19 @@ class PersonalDataFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     }
 
 
+    companion object{
+        @JvmStatic
+        fun newInstance(name: String, height: Double, weigth: Double, genre: String, birthdate: String){
+            PersonalDataFragment().apply {
+                arguments?.apply {
+                    putString(nameAthlete, name)
+                    putDouble(heigthAthlete, height)
+                    putDouble(weigthAthlete, weigth)
+                    putString(genreAthlete, genre)
+                    putString(birthdateAthlete, birthdate)
+                }
+            }
+        }
+    }
 }
 

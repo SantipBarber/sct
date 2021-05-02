@@ -109,7 +109,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:gravity="center"
-        android:text="Días de entrenamiento:"
+        android:text="@string/training_days"
         android:textAlignment="center"
         android:textColor="@color/color_on_primary"
         android:textSize="28dp"
@@ -141,7 +141,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Frecuencia por movimiento:"
+        android:text="@string/tv_frequency"
         android:textAlignment="center"
         android:textColor="@color/color_on_primary"
         android:textSize="28dp"
@@ -163,7 +163,8 @@
         app:layout_constraintBottom_toTopOf="@+id/main_bottom_separator"
         app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide">
+        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
+        android:checkedButton="@id/rb_frequency_1">
 
         <RadioButton
             android:id="@+id/rb_frequency_1"

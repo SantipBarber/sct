@@ -92,13 +92,14 @@
         android:id="@+id/rg_target"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:checkedButton="@id/rb_target_max_strength"
         app:layout_constraintTop_toBottomOf="@+id/tv_target"
         app:layout_constraintBottom_toTopOf="@id/main_bottom_separator"
         app:layout_constraintStart_toEndOf="@id/main_vertical_start_guide"
         app:layout_constraintEnd_toStartOf="@id/main_vertical_end_guide">
 
         <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/rb_target_beginner"
+            android:id="@+id/rb_target_max_strength"
             android:layout_width="362dp"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
@@ -117,10 +118,12 @@
             app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/rb_target_intermediate"
-            android:layout_width="361dp"
+            android:id="@+id/rb_target_strength"
+            android:layout_width="362dp"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="20dp"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
@@ -135,8 +138,8 @@
             app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/rb_target_advance"
-            android:layout_width="364dp"
+            android:id="@+id/rb_target_size"
+            android:layout_width="362dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"

@@ -82,14 +82,14 @@
         android:textColor="@color/color_on_primary"
         android:textSize="32dp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toTopOf="@id/tv_record_squat"
+        app:layout_constraintBottom_toTopOf="@id/til_record_squat"
         app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
         app:layout_constraintTop_toBottomOf="@+id/main_top_separator" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tv_record_squat"
+        android:id="@+id/til_record_squat"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/tv_squat"
@@ -120,7 +120,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tv_record_bench_press"
+        android:id="@+id/til_record_bench_press"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/tv_bench_press"
@@ -131,7 +131,7 @@
         android:layout_marginTop="20dp"
         app:boxBackgroundColor="@color/color_surface"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-        app:layout_constraintTop_toBottomOf="@+id/tv_record_squat"
+        app:layout_constraintTop_toBottomOf="@+id/til_record_squat"
         app:errorEnabled="true"
         app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
         app:layout_constraintEnd_toStartOf="@id/main_vertical_end_guide"
@@ -152,7 +152,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tv_record_deadlift"
+        android:id="@+id/til_record_deadlift"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/tv_deadlift"
@@ -163,7 +163,7 @@
         android:layout_marginTop="20dp"
         app:boxBackgroundColor="@color/color_surface"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-        app:layout_constraintTop_toBottomOf="@+id/tv_record_bench_press"
+        app:layout_constraintTop_toBottomOf="@+id/til_record_bench_press"
         app:errorEnabled="true"
         app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
         app:layout_constraintEnd_toStartOf="@id/main_vertical_end_guide"

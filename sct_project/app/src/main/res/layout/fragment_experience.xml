@@ -88,10 +88,9 @@
         android:gravity="center"
         android:layout_gravity="fill" />
 
-
-
     <RadioGroup
         android:id="@+id/rg_experience"
+        android:checkedButton="@id/rb_experience_beginner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/tv_experience"

@@ -81,14 +81,14 @@
         android:textColor="@color/color_on_primary"
         android:textSize="32dp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toTopOf="@id/tie_athlete_name"
+        app:layout_constraintBottom_toTopOf="@id/til_athlete_name"
         app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
         app:layout_constraintTop_toBottomOf="@+id/main_top_separator" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tie_athlete_name"
+        android:id="@+id/til_athlete_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Nombre del Atleta"
@@ -119,7 +119,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tie_athlete_height"
+        android:id="@+id/til_athlete_height"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Altura en cm"
@@ -130,7 +130,7 @@
         android:layout_marginTop="10dp"
         app:boxBackgroundColor="@color/color_surface"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-        app:layout_constraintTop_toBottomOf="@+id/tie_athlete_name"
+        app:layout_constraintTop_toBottomOf="@+id/til_athlete_name"
         app:errorEnabled="true"
         app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
         app:layout_constraintEnd_toStartOf="@id/main_vertical_end_guide"
@@ -150,7 +150,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tie_athlete_weight"
+        android:id="@+id/til_athlete_weight"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Peso en kg"
@@ -161,7 +161,7 @@
         android:layout_marginTop="10dp"
         app:boxBackgroundColor="@color/color_surface"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-        app:layout_constraintTop_toBottomOf="@+id/tie_athlete_height"
+        app:layout_constraintTop_toBottomOf="@+id/til_athlete_height"
         app:errorEnabled="true"
         app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
         app:layout_constraintEnd_toStartOf="@id/main_vertical_end_guide"
@@ -191,7 +191,7 @@
         android:textColor="@color/color_on_primary"
         android:textSize="28dp"
         android:textStyle="normal"
-        app:layout_constraintTop_toBottomOf="@+id/tie_athlete_weight"
+        app:layout_constraintTop_toBottomOf="@+id/til_athlete_weight"
         app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
         app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"/>
 
@@ -202,11 +202,13 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_athlete_gender"
         app:layout_constraintStart_toEndOf="@id/main_vertical_start_guide"
         app:layout_constraintEnd_toStartOf="@id/main_vertical_end_guide"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:orientation="horizontal">
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="horizontal"
+        android:checkedButton="@id/rb_genre_man">
 
         <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/rb_genre_man"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hombre"
@@ -217,6 +219,7 @@
             />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/rb_genre_woman"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mujer"
@@ -228,7 +231,7 @@
     </RadioGroup>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tie_athlete_birthdate"
+        android:id="@+id/til_athlete_birthdate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Fecha de nacimiento"
@@ -264,7 +267,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/tie_athlete_birthdate"
+        app:layout_constraintTop_toBottomOf="@id/til_athlete_birthdate"
         app:layout_constraintEnd_toStartOf="@id/main_vertical_end_guide"
         app:layout_constraintStart_toEndOf="@id/main_vertical_start_guide"
         app:layout_constraintBottom_toTopOf="@id/main_bottom_separator">
