@@ -2,17 +2,16 @@ package com.spbarber.sct_project.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.spbarber.sct_project.R
+import com.spbarber.sct_project.RecordsFragmentArgs
+import com.spbarber.sct_project.RecordsFragmentDirections
 import com.spbarber.sct_project.databinding.FragmentRecordsBinding
 
-var rmSquatuser = ""
-var rmPressUser = ""
-var rmDeadliftUser = ""
 class RecordsFragment : Fragment() {
     private lateinit var binding: FragmentRecordsBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -20,32 +19,37 @@ class RecordsFragment : Fragment() {
 
         binding = FragmentRecordsBinding.inflate(layoutInflater)
 
+        val experience = arguments?.let {
+            RecordsFragmentArgs.fromBundle(it).experience
+        }
+        val goal = arguments?.let {
+            RecordsFragmentArgs.fromBundle(it).goal
+        }
+        val duration = arguments?.let {
+            RecordsFragmentArgs.fromBundle(it).duration
+        }
+        val ndays = arguments?.let {
+            RecordsFragmentArgs.fromBundle(it).ndays
+        }
+        val frequency = arguments?.let {
+            RecordsFragmentArgs.fromBundle(it).frequency
+        }
+
         binding.btnBack.setOnClickListener {
             NavHostFragment.findNavController(this).navigate(R.id.action_recordsFragment_to_tempRuleFragment)
         }
 
         binding.btnRecordsNext.setOnClickListener {
-            NavHostFragment.findNavController(this).navigate(R.id.action_recordsFragment_to_personalDataFragment)
-            rmSquatuser = binding.tilRecordSquat.editText?.text.toString()
-            rmPressUser = binding.tilRecordBenchPress.editText?.text.toString()
-            rmDeadliftUser = binding.tilRecordDeadlift.editText?.text.toString()
-        }
+            val rmSquatuser = binding.tilRecordSquat.editText?.text.toString()
+            val rmPressUser = binding.tilRecordBenchPress.editText?.text.toString()
+            val rmDeadliftUser = binding.tilRecordDeadlift.editText?.text.toString()
 
+            val action = RecordsFragmentDirections.actionRecordsFragmentToPersonalDataFragment(experience!!, goal!!, duration!!, ndays!!, frequency!!, rmSquatuser, rmPressUser, rmDeadliftUser)
+            NavHostFragment.findNavController(this).navigate(action)
+            Log.i("TAG",experience + " " + goal + " " + duration + " " + ndays + " " + frequency + " " + rmSquatuser + " " + rmPressUser + " " + rmDeadliftUser)
+        }
 
         return binding.root
     }
 
-
-    companion object{
-        @JvmStatic
-        fun newInstance(rmSquat: Double, rmPress: Double, rmDeadlift: Double){
-            RecordsFragment().apply {
-                arguments?.apply {
-                    putDouble(rmSquatuser, rmSquat)
-                    putDouble(rmPressUser, rmPress)
-                    putDouble(rmDeadliftUser, rmDeadlift)
-                }
-            }
-        }
-    }
 }

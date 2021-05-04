@@ -45,30 +45,66 @@
         <action
             android:id="@+id/action_goalFragment_to_tempRuleFragment"
             app:destination="@id/tempRuleFragment" />
+        <argument
+            android:name="experience"
+            app:argType="string"
+            app:nullable="false"
+            android:defaultValue="principiante" />
     </fragment>
     <fragment
         android:id="@+id/tempRuleFragment"
         android:name="com.spbarber.sct_project.ui.fragments.TempRuleFragment"
         android:label="fragment_temp_rule"
         tools:layout="@layout/fragment_temp_rule" >
-        <action
-            android:id="@+id/action_tempRuleFragment_to_goalFragment"
-            app:destination="@id/goalFragment" />
+        <argument
+            android:name="experience"
+            app:argType="string"
+            app:nullable="false"/>
+        <argument
+            android:name="goal"
+            app:argType="string"
+            app:nullable="false"
+            android:defaultValue="maximal strength" />
         <action
             android:id="@+id/action_tempRuleFragment_to_recordsFragment"
             app:destination="@id/recordsFragment" />
+        <action
+            android:id="@+id/action_tempRuleFragment_to_goalFragment"
+            app:destination="@id/goalFragment" />
     </fragment>
     <fragment
         android:id="@+id/recordsFragment"
-        android:name="com.spbarber.sct_project.ui.fragments.RecordsFragment"
         android:label="fragment_records"
-        tools:layout="@layout/fragment_records" >
+        tools:layout="@layout/fragment_records">
         <action
             android:id="@+id/action_recordsFragment_to_tempRuleFragment"
             app:destination="@id/tempRuleFragment" />
         <action
             android:id="@+id/action_recordsFragment_to_personalDataFragment"
             app:destination="@id/personalDataFragment" />
+        <argument
+            android:name="experience"
+            app:argType="string"
+            app:nullable="false"/>
+        <argument
+            android:name="goal"
+            app:argType="string"
+            app:nullable="false"/>
+        <argument
+            android:name="duration"
+            app:argType="string"
+            android:defaultValue="8 semanas"
+            app:nullable="false"/>
+        <argument
+            android:name="ndays"
+            app:argType="string"
+            android:defaultValue="4"
+            app:nullable="false"/>
+        <argument
+            android:name="frequency"
+            app:argType="string"
+            android:defaultValue="1"
+            app:nullable="false"/>
     </fragment>
     <fragment
         android:id="@+id/personalDataFragment"
@@ -81,6 +117,41 @@
         <action
             android:id="@+id/action_personalDataFragment_to_siginFragment"
             app:destination="@id/siginFragment" />
+        <argument
+            android:name="experience"
+            app:argType="string"
+            app:nullable="false"/>
+        <argument
+            android:name="goal"
+            app:argType="string"
+            app:nullable="false"/>
+        <argument
+            android:name="duration"
+            app:argType="string"
+            app:nullable="false"/>
+        <argument
+            android:name="ndays"
+            app:argType="string"
+            app:nullable="false"/>
+        <argument
+            android:name="frequency"
+            app:argType="string"
+            app:nullable="false"/>
+        <argument
+            android:name="rmSquat"
+            app:argType="string"
+            android:defaultValue="0"
+            app:nullable="false"/>
+        <argument
+            android:name="rmDeadlift"
+            app:argType="string"
+            android:defaultValue="0"
+            app:nullable="false"/>
+        <argument
+            android:name="rmPress"
+            app:argType="string"
+            android:defaultValue="0"
+            app:nullable="false"/>
     </fragment>
     <fragment
         android:id="@+id/siginFragment"

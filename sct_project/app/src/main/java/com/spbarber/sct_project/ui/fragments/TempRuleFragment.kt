@@ -5,24 +5,26 @@ import android.util.Log
 import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentTempRuleBinding
-import java.util.zip.Inflater
 
-var durationProgram = "8"
-var trainingDaysProgram = "7"
-var frequencyMovement = "1"
 class TempRuleFragment : Fragment() {
     private lateinit var binding: FragmentTempRuleBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = FragmentTempRuleBinding.inflate(layoutInflater)
 
+        val goal = arguments?.let {
+            TempRuleFragmentArgs.fromBundle(it).goal
+        }
+        val experience = arguments?.let {
+            GoalFragmentArgs.fromBundle(it).experience
+        }
         val spinnerDuration: Spinner = binding.dropdownMenuDuration
-// Create an ArrayAdapter using the string array and a default spinner layout
+        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
                 requireContext(),
                 R.array.duration_array,
@@ -49,33 +51,23 @@ class TempRuleFragment : Fragment() {
         }
 
         binding.btnTempRuleNext.setOnClickListener {
-            NavHostFragment.findNavController(this).navigate(R.id.action_tempRuleFragment_to_recordsFragment)
-            val durationProgramItem = binding.dropdownMenuDuration.selectedItem
-            val trainingDaysItem = binding.dropdownMenuTrainingDays.selectedItem
+            var durationProgramItem = binding.dropdownMenuDuration.selectedItem.toString()
+            var trainingDaysItem = binding.dropdownMenuTrainingDays.selectedItem.toString()
+            var frequencyMovement = "1"
             val frequencyID = binding.rgFrecuency.checkedRadioButtonId
             when(frequencyID){
                 R.id.rb_frequency_1 -> frequencyMovement = "1"
                 R.id.rb_frequency_2 -> frequencyMovement = "2"
                 R.id.rb_frequency_3 -> frequencyMovement = "3"
             }
+            Log.i("TAG",experience + " " + goal + " " + durationProgramItem + " " + trainingDaysItem + " " + frequencyMovement)
+            val action = TempRuleFragmentDirections.actionTempRuleFragmentToRecordsFragment(experience!!, goal!!, durationProgramItem, trainingDaysItem, frequencyMovement)
+            NavHostFragment.findNavController(this).navigate(action)
         }
 
         return binding.root
 
     }
 
-
-    companion object{
-        @JvmStatic
-        fun newInstance(duration: Int, trainingDays: Int, frequency: Int){
-            TempRuleFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(durationProgram, duration)
-                    putInt(trainingDaysProgram, trainingDays)
-                    putInt(frequencyMovement, frequency)
-                }
-            }
-        }
-    }
 }
 

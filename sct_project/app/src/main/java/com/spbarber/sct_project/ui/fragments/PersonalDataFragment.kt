@@ -38,20 +38,23 @@ class PersonalDataFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         }
 
         binding.btnPersonalDataNext.setOnClickListener {
-            NavHostFragment.findNavController(this).navigate(R.id.action_personalDataFragment_to_siginFragment)
-            
-            nameAthlete =  binding.tilAthleteName.editText?.text.toString()
-            heigthAthlete =  binding.tilAthleteHeight.editText?.text.toString()
-            weigthAthlete =  binding.tilAthleteWeight.editText?.text.toString()
+
+            val nameAthlete =  binding.tilAthleteName.editText?.text
+            val heigthAthlete =  binding.tilAthleteHeight.editText?.text
+            val weigthAthlete =  binding.tilAthleteWeight.editText?.text
+            var genreAthlete = ""
             var genreAthleteID = binding.rgAthleteGender.checkedRadioButtonId
             when(genreAthleteID){
                 R.id.rb_genre_man -> genreAthlete = "man"
                 R.id.rb_genre_woman -> genreAthlete = "woman"
             }
-            birthdateAthlete = binding.tilAthleteBirthdate.editText?.text.toString()
+            val birthdateAthlete = binding.tilAthleteBirthdate.editText?.text
+
+            val action = PersonalDataFragmentDirections.actionPersonalDataFragmentToSiginFragment()
+            NavHostFragment.findNavController(this).navigate(action)
         }
 
-        binding.tilAthleteBirthdate.setEndIconOnClickListener{
+        binding.tilAthleteBirthdate.setOnFocusChangeListener { _, hasFocus ->
             val c = Calendar.getInstance()
             val year = c.get(Calendar.YEAR)
             val month = c.get(Calendar.MONTH)
@@ -72,25 +75,8 @@ class PersonalDataFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, day: Int) {
         val calendar = Calendar.getInstance()
         calendar.set(year, month, day)
-        val dateSelect = "$day/${month + 1}/$year"
-        //binding.etAthleteBirthdate.text.toString() = dateSelect
-        //binding.etAthleteBirthdate.text = "$day/${month + 1}/$year"
+        binding.etAthleteBirthdate.setText("$day/${month + 1}/$year")
     }
 
-
-    companion object{
-        @JvmStatic
-        fun newInstance(name: String, height: Double, weigth: Double, genre: String, birthdate: String){
-            PersonalDataFragment().apply {
-                arguments?.apply {
-                    putString(nameAthlete, name)
-                    putDouble(heigthAthlete, height)
-                    putDouble(weigthAthlete, weigth)
-                    putString(genreAthlete, genre)
-                    putString(birthdateAthlete, birthdate)
-                }
-            }
-        }
-    }
 }
 
