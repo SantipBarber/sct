@@ -1,13 +1,10 @@
 package com.spbarber.sct_project.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.NavHost
-import androidx.navigation.NavHostController
 import androidx.navigation.fragment.NavHostFragment
 import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentGoalBinding
@@ -20,7 +17,6 @@ class GoalFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGoalBinding.inflate(layoutInflater)
-
         val experience = arguments?.let {
             GoalFragmentArgs.fromBundle(it).experience
         }
@@ -37,9 +33,9 @@ class GoalFragment : Fragment() {
                 R.id.rb_target_strength -> goalUser = "improveEndurance"
                 R.id.rb_target_size -> goalUser = "size"
             }
-            val action = GoalFragmentDirections.actionGoalFragmentToTempRuleFragment(experience!!, goalUser)
-            NavHostFragment.findNavController(this).navigate(action)
 
+            val action = GoalFragmentDirections.actionGoalFragmentToTempRuleFragment(experience, goalUser)
+            NavHostFragment.findNavController(this).navigate(action)
         }
 
 

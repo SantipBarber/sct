@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.spbarber.sct_project.R
-import com.spbarber.sct_project.RecordsFragmentArgs
-import com.spbarber.sct_project.RecordsFragmentDirections
 import com.spbarber.sct_project.databinding.FragmentRecordsBinding
 
 class RecordsFragment : Fragment() {
@@ -28,7 +26,7 @@ class RecordsFragment : Fragment() {
         val duration = arguments?.let {
             RecordsFragmentArgs.fromBundle(it).duration
         }
-        val ndays = arguments?.let {
+        val days = arguments?.let {
             RecordsFragmentArgs.fromBundle(it).ndays
         }
         val frequency = arguments?.let {
@@ -36,17 +34,26 @@ class RecordsFragment : Fragment() {
         }
 
         binding.btnBack.setOnClickListener {
-            NavHostFragment.findNavController(this).navigate(R.id.action_recordsFragment_to_tempRuleFragment)
+            NavHostFragment.findNavController(this).navigate(R.id.action_recordsFragment2_to_tempRuleFragment)
         }
 
         binding.btnRecordsNext.setOnClickListener {
-            val rmSquatuser = binding.tilRecordSquat.editText?.text.toString()
-            val rmPressUser = binding.tilRecordBenchPress.editText?.text.toString()
-            val rmDeadliftUser = binding.tilRecordDeadlift.editText?.text.toString()
+            val rmSquatuser = binding.tilRecordSquat.editText?.text.toString().toFloat()
+            val rmPressUser = binding.tilRecordBenchPress.editText?.text.toString().toFloat()
+            val rmDeadliftUser = binding.tilRecordDeadlift.editText?.text.toString().toFloat()
 
-            val action = RecordsFragmentDirections.actionRecordsFragmentToPersonalDataFragment(experience!!, goal!!, duration!!, ndays!!, frequency!!, rmSquatuser, rmPressUser, rmDeadliftUser)
+            val action = RecordsFragmentDirections
+                    .actionRecordsFragment2ToPersonalDataFragment(
+                            experience,
+                            goal,
+                            duration,
+                            days,
+                            frequency!!,
+                            rmSquatuser,
+                            rmPressUser,
+                            rmDeadliftUser
+                    )
             NavHostFragment.findNavController(this).navigate(action)
-            Log.i("TAG",experience + " " + goal + " " + duration + " " + ndays + " " + frequency + " " + rmSquatuser + " " + rmPressUser + " " + rmDeadliftUser)
         }
 
         return binding.root

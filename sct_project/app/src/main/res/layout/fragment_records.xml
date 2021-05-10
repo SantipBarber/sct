@@ -148,6 +148,7 @@
             android:focusable="true"
             android:clickable="true"
             android:inputType="number"
+
             />
     </com.google.android.material.textfield.TextInputLayout>
 

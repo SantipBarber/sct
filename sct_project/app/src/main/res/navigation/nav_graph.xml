@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
@@ -48,63 +49,30 @@
         <argument
             android:name="experience"
             app:argType="string"
-            app:nullable="false"
-            android:defaultValue="principiante" />
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/tempRuleFragment"
         android:name="com.spbarber.sct_project.ui.fragments.TempRuleFragment"
         android:label="fragment_temp_rule"
         tools:layout="@layout/fragment_temp_rule" >
-        <argument
-            android:name="experience"
-            app:argType="string"
-            app:nullable="false"/>
-        <argument
-            android:name="goal"
-            app:argType="string"
-            app:nullable="false"
-            android:defaultValue="maximal strength" />
-        <action
-            android:id="@+id/action_tempRuleFragment_to_recordsFragment"
-            app:destination="@id/recordsFragment" />
         <action
             android:id="@+id/action_tempRuleFragment_to_goalFragment"
             app:destination="@id/goalFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/recordsFragment"
-        android:label="fragment_records"
-        tools:layout="@layout/fragment_records">
         <action
-            android:id="@+id/action_recordsFragment_to_tempRuleFragment"
-            app:destination="@id/tempRuleFragment" />
-        <action
-            android:id="@+id/action_recordsFragment_to_personalDataFragment"
-            app:destination="@id/personalDataFragment" />
+            android:id="@+id/action_tempRuleFragment_to_recordsFragment2"
+            app:destination="@id/recordsFragment2" />
         <argument
             android:name="experience"
             app:argType="string"
-            app:nullable="false"/>
+            app:nullable="true"
+            android:defaultValue="@null" />
         <argument
             android:name="goal"
             app:argType="string"
-            app:nullable="false"/>
-        <argument
-            android:name="duration"
-            app:argType="string"
-            android:defaultValue="8 semanas"
-            app:nullable="false"/>
-        <argument
-            android:name="ndays"
-            app:argType="string"
-            android:defaultValue="4"
-            app:nullable="false"/>
-        <argument
-            android:name="frequency"
-            app:argType="string"
-            android:defaultValue="1"
-            app:nullable="false"/>
+            android:defaultValue="@null"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/personalDataFragment"
@@ -112,47 +80,72 @@
         android:label="fragment_personal_data"
         tools:layout="@layout/fragment_personal_data" >
         <action
-            android:id="@+id/action_personalDataFragment_to_recordsFragment"
-            app:destination="@id/recordsFragment" />
-        <action
             android:id="@+id/action_personalDataFragment_to_siginFragment"
             app:destination="@id/siginFragment" />
+        <action
+            android:id="@+id/action_personalDataFragment_to_recordsFragment2"
+            app:destination="@id/recordsFragment2" />
         <argument
             android:name="experience"
             app:argType="string"
-            app:nullable="false"/>
+            app:nullable="true"
+            android:defaultValue="@null" />
         <argument
             android:name="goal"
             app:argType="string"
-            app:nullable="false"/>
+            app:nullable="true"
+            android:defaultValue="@null" />
         <argument
             android:name="duration"
             app:argType="string"
-            app:nullable="false"/>
+            app:nullable="true"
+            android:defaultValue="@null" />
         <argument
-            android:name="ndays"
+            android:name="days"
             app:argType="string"
-            app:nullable="false"/>
+            app:nullable="true"
+            android:defaultValue="@null" />
         <argument
             android:name="frequency"
-            app:argType="string"
-            app:nullable="false"/>
+            app:argType="integer"
+            android:defaultValue="1" />
         <argument
             android:name="rmSquat"
-            app:argType="string"
-            android:defaultValue="0"
-            app:nullable="false"/>
-        <argument
-            android:name="rmDeadlift"
-            app:argType="string"
-            android:defaultValue="0"
-            app:nullable="false"/>
+            app:argType="float"
+            android:defaultValue="0.0" />
         <argument
             android:name="rmPress"
+            app:argType="float"
+            android:defaultValue="0.0" />
+        <argument
+            android:name="rmdeadlift"
+            android:defaultValue="0.0"
+            app:argType="float" />
+        <argument
+            android:name="name"
             app:argType="string"
-            android:defaultValue="0"
-            app:nullable="false"/>
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="heigth"
+            app:argType="integer"
+            android:defaultValue="170" />
+        <argument
+            android:name="weight"
+            app:argType="float"
+            android:defaultValue="80.0" />
+        <argument
+            android:name="genre"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="man" />
+        <argument
+            android:name="birthdate"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
+
     <fragment
         android:id="@+id/siginFragment"
         android:name="com.spbarber.sct_project.ui.fragments.SiginFragment"
@@ -161,5 +154,78 @@
         <action
             android:id="@+id/action_siginFragment_to_personalDataFragment"
             app:destination="@id/personalDataFragment" />
+        <argument
+            android:name="experience"
+            app:argType="string" />
+        <argument
+            android:name="goal"
+            app:argType="string" />
+        <argument
+            android:name="duration"
+            app:argType="string" />
+        <argument
+            android:name="days"
+            app:argType="string" />
+        <argument
+            android:name="frequency"
+            app:argType="integer" />
+        <argument
+            android:name="rmSquat"
+            app:argType="float" />
+        <argument
+            android:name="rmPress"
+            app:argType="float" />
+        <argument
+            android:name="rmDeadlift"
+            app:argType="float" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="heigth"
+            app:argType="integer" />
+        <argument
+            android:name="weight"
+            app:argType="float" />
+        <argument
+            android:name="genre"
+            app:argType="string" />
+        <argument
+            android:name="birthdate"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/recordsFragment2"
+        android:name="com.spbarber.sct_project.ui.fragments.RecordsFragment"
+        android:label="fragment_records"
+        tools:layout="@layout/fragment_records" >
+        <action
+            android:id="@+id/action_recordsFragment2_to_tempRuleFragment"
+            app:destination="@id/tempRuleFragment" />
+        <action
+            android:id="@+id/action_recordsFragment2_to_personalDataFragment"
+            app:destination="@id/personalDataFragment" />
+        <argument
+            android:name="experience"
+            app:argType="string"
+            app:nullable="false"/>
+        <argument
+            android:name="goal"
+            app:argType="string"
+            app:nullable="false"/>
+        <argument
+            android:name="duration"
+            app:argType="string"
+            android:defaultValue="8 semanas" />
+        <argument
+            android:name="ndays"
+            app:argType="string"
+            android:defaultValue="@null"
+            app:nullable="true" />
+        <argument
+            android:name="frequency"
+            app:argType="integer"
+            android:defaultValue="1" />
     </fragment>
 </navigation>

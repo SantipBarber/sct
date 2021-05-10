@@ -6,7 +6,6 @@ import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentTempRuleBinding
@@ -53,15 +52,14 @@ class TempRuleFragment : Fragment() {
         binding.btnTempRuleNext.setOnClickListener {
             var durationProgramItem = binding.dropdownMenuDuration.selectedItem.toString()
             var trainingDaysItem = binding.dropdownMenuTrainingDays.selectedItem.toString()
-            var frequencyMovement = "1"
-            val frequencyID = binding.rgFrecuency.checkedRadioButtonId
-            when(frequencyID){
-                R.id.rb_frequency_1 -> frequencyMovement = "1"
-                R.id.rb_frequency_2 -> frequencyMovement = "2"
-                R.id.rb_frequency_3 -> frequencyMovement = "3"
+            var frequencyMovement:Int = 1
+            when(binding.rgFrecuency.checkedRadioButtonId){
+                R.id.rb_frequency_1 -> frequencyMovement = 1
+                R.id.rb_frequency_2 -> frequencyMovement = 2
+                R.id.rb_frequency_3 -> frequencyMovement = 3
             }
-            Log.i("TAG",experience + " " + goal + " " + durationProgramItem + " " + trainingDaysItem + " " + frequencyMovement)
-            val action = TempRuleFragmentDirections.actionTempRuleFragmentToRecordsFragment(experience!!, goal!!, durationProgramItem, trainingDaysItem, frequencyMovement)
+            Log.i("TAG", "$experience $goal $durationProgramItem $trainingDaysItem $frequencyMovement")
+            val action = TempRuleFragmentDirections.actionTempRuleFragmentToRecordsFragment2(experience!!, goal!!, durationProgramItem, trainingDaysItem, frequencyMovement)
             NavHostFragment.findNavController(this).navigate(action)
         }
 
