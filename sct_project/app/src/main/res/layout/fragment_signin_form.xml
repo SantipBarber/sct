@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nombre"
+        android:layout_marginTop="30dp"
         app:boxStrokeColor="@color/color_primary"
         app:boxStrokeWidth="2.5dp"
         app:endIconMode="clear_text"

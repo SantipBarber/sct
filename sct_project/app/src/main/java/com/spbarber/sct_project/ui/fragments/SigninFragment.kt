@@ -5,8 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -20,6 +22,7 @@ class SigninFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = FragmentSiginBinding.inflate(layoutInflater)
+        //Bindeo del formulario para el registro
         val bindingForm = FragmentSigninFormBinding.bind(binding.scrollviewSignin.rootView)
 
         val experience = arguments?.let {
@@ -61,6 +64,26 @@ class SigninFragment : Fragment() {
         val birthdate = arguments?.let {
             SigninFragmentArgs.fromBundle(it).birthdate
         }
+        Log.i("TAG", "$experience $goal $duration $days $frequency $rmSquat $rmPress $rmDeadlift $nameAthlete $heigth $weight $genre $birthdate")
+
+        binding.btnGoogleLogin.setOnClickListener {
+            if (binding.btnMailLogin.isVisible){
+                binding.btnMailLogin.isVisible = false
+            }
+        }
+
+        binding.btnMailLogin.setOnClickListener {
+            if(binding.btnGoogleLogin.isVisible){
+                binding.btnGoogleLogin.isVisible = false
+                binding.scrollviewSignin.isVisible = true
+                binding.btnMailLogin.isVisible = false
+            }
+        }
+
+        binding.btnBack.setOnClickListener {
+            val action = SigninFragmentDirections.actionSiginFragmentToPersonalDataFragment(experience, goal, duration, days, frequency!!, rmSquat!!, rmPress!!, rmDeadlift!!)
+            NavHostFragment.findNavController(this).navigate(action)
+        }
 
         //Recogemos todos las preferencias del usuario
         val userPreferences = mutableListOf(experience, goal, duration, days, frequency, rmSquat, rmPress, rmDeadlift, nameAthlete, heigth, weight, genre, birthdate)
@@ -80,8 +103,7 @@ class SigninFragment : Fragment() {
             }
         }
         bindingForm.tietSurnames.addTextChangedListener{
-            val text = it as TextInputEditText
-            if (text.text!!.isNullOrBlank()){
+            if (it.isNullOrBlank()){
                 bindingForm.tilSurnamesUser.error = "Introduce un apellido"
             } else {
                 bindingForm.tilSurnamesUser.error = ""
@@ -94,8 +116,7 @@ class SigninFragment : Fragment() {
             }
         }
         bindingForm.tietUser.addTextChangedListener{
-            val text = it as TextInputEditText
-            if (text.text!!.isNullOrBlank()){
+            if (it.isNullOrBlank()){
                 bindingForm.tilUser.error = "Introduce un nombre de atleta"
             } else {
                 bindingForm.tilUser.error = ""
@@ -108,8 +129,7 @@ class SigninFragment : Fragment() {
             }
         }
         bindingForm.tietPassword.addTextChangedListener{
-            val text = it as TextInputEditText
-            if (text.text!!.isNullOrBlank()){
+            if (it.isNullOrBlank()){
                 bindingForm.tilPassword.error = "Introduce una contraseña válida"
             } else {
                 bindingForm.tilPassword.error = ""
@@ -122,8 +142,7 @@ class SigninFragment : Fragment() {
             }
         }
         bindingForm.tietConfirmPassword.addTextChangedListener{
-            val text = it as TextInputEditText
-            if (text.text!!.isNullOrBlank()){
+            if (it.isNullOrBlank()){
                 bindingForm.tilConfirmPassword.error = "Debes repetir la contraseña"
             } else {
                 bindingForm.tilConfirmPassword.error = ""
@@ -134,9 +153,6 @@ class SigninFragment : Fragment() {
             run{
                 if (hasFocus) bindingForm.tietPassword.error = ""
             }
-        }
-        binding.btnBack.setOnClickListener {
-            NavHostFragment.findNavController(this).navigate(R.id.action_siginFragment_to_personalDataFragment)
         }
 
         binding.btnSignin.setOnClickListener {
@@ -155,7 +171,7 @@ class SigninFragment : Fragment() {
                         R.id.tiet_name -> {
                             bindingForm.tilNameUser.error = "Introduce un nombre  válido"
                         }
-                        R.id.tiet_name -> {
+                        R.id.tiet_surnames -> {
                             bindingForm.tilSurnamesUser.error = "Introduce al menos un apellido"
                         }
                         R.id.tiet_user -> {
@@ -174,7 +190,7 @@ class SigninFragment : Fragment() {
                     bindingForm.tilPassword.error = "La contraseña debe contener al menos 6 caracteres"
                     return@setOnClickListener
                 }
-                if (password.getInputText().equals(confirmPassword.getInputText())){
+                if (!password.getInputText().equals(confirmPassword.getInputText())){
                     bindingForm.tilPassword.error = "Las contraseñas no son iguales"
                     bindingForm.tilConfirmPassword.error = "Las contraseñas no son iguales"
                     return@setOnClickListener

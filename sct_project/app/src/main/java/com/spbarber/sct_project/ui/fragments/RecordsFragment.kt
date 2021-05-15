@@ -1,21 +1,23 @@
 package com.spbarber.sct_project.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.set
 import androidx.core.view.isEmpty
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import com.google.android.material.textfield.TextInputEditText
 import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentRecordsBinding
 
 class RecordsFragment : Fragment() {
+    private val TAG = "TAG"
     private lateinit var binding: FragmentRecordsBinding
-    private var rmSquatuser: Float = 0.0F
-    private var rmPressUser: Float = 0.0F
-    private var rmDeadliftUser: Float = 0.0F
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
@@ -37,23 +39,27 @@ class RecordsFragment : Fragment() {
             RecordsFragmentArgs.fromBundle(it).frequency
         }
 
+        Log.i(TAG, "$experience $goal $duration $days $frequency")
+
         binding.btnBack.setOnClickListener {
-            NavHostFragment.findNavController(this).navigate(R.id.action_recordsFragment2_to_tempRuleFragment)
+            val action = RecordsFragmentDirections.actionRecordsFragment2ToTempRuleFragment(experience, goal)
+            NavHostFragment.findNavController(this).navigate(action)
         }
 
         binding.tietRecordSquat.setOnFocusChangeListener { _, hasFocus ->
             run {
                 if (hasFocus) {
                     binding.tilRecordSquat.error = ""
-                    //binding.tilRecordSquat.editText?.text?.clear()
+                    binding.tietRecordSquat.text?.clear()
                 }
-
             }
         }
         binding.tietRecordSquat.addTextChangedListener {
             val minSquatRecord = it!!.length
             if (minSquatRecord < 2) {
                 binding.tilRecordSquat.error = "Debes introducir tu marca personal"
+            } else if (minSquatRecord < 1){
+                it.insert(0, "0")
             } else {
                 binding.tilRecordSquat.error = ""
                 binding.tilRecordSquat.helperText = ""
@@ -63,7 +69,7 @@ class RecordsFragment : Fragment() {
             run {
                 if (hasFocus) {
                     binding.tilRecordBenchPress.error = ""
-                    //binding.tilRecordBenchPress.editText?.text?.clear()
+                    binding.tietRecordBenchPress.text?.clear()
                 }
             }
         }
@@ -71,6 +77,8 @@ class RecordsFragment : Fragment() {
             val minPressRecord = it!!.length
             if (minPressRecord < 2) {
                 binding.tilRecordBenchPress.error = "Debes introducir tu marca personal"
+            } else if (minPressRecord < 1){
+                it.insert(0, "0")
             } else {
                 binding.tilRecordBenchPress.error = ""
                 binding.tilRecordBenchPress.helperText = ""
@@ -80,7 +88,7 @@ class RecordsFragment : Fragment() {
             run {
                 if (hasFocus) {
                     binding.tilRecordDeadlift.error = ""
-                    //binding.tilRecordDeadlift.editText?.text?.clear()
+                    binding.tietRecordDeadlift.text?.clear()
                 }
             }
         }
@@ -88,6 +96,8 @@ class RecordsFragment : Fragment() {
             val minDeadliftRecord = it!!.length
             if (minDeadliftRecord < 2) {
                 binding.tilRecordDeadlift.error = "Debes introducir tu marca personal"
+            } else if (minDeadliftRecord < 1){
+                it.insert(0, "0")
             } else {
                 binding.tilRecordDeadlift.error = ""
                 binding.tilRecordDeadlift.helperText = ""
@@ -95,22 +105,40 @@ class RecordsFragment : Fragment() {
         }
 
         binding.btnRecordsNext.setOnClickListener {
-            rmSquatuser = binding.tilRecordSquat.editText!!.text.toString().toFloat()
-            if (rmSquatuser < 50 || binding.tilRecordSquat.isEmpty()) {
-                binding.tilRecordSquat.error = "Debes introducir una marca valida para la sentadilla"
+            val rmSquatuser = binding.tietRecordSquat
+            val rmPressUser = binding.tietRecordBenchPress
+            val rmDeadliftUser = binding.tietRecordDeadlift
+            val recordsUser = listOf(rmSquatuser, rmPressUser, rmDeadliftUser)
+            var error = false
+            recordsUser.forEach {
+                if (it.getInputText().isBlank()){
+                    error = true
+                    when(it.id){
+                        R.id.til_record_squat -> {
+                            binding.tilRecordSquat.error = "Introduce una marca válida"
+                        }
+                        R.id.til_record_bench_press -> {
+                            binding.tilRecordBenchPress.error = "Introduce una marca válida"
+                        }
+                        R.id.til_record_deadlift -> {
+                            binding.tilRecordDeadlift.error = "Introduce una marca válida"
+                        }
+                    }
+                }
+            }
+            if (error) return@setOnClickListener
+            if (rmSquatuser.getInputText().toFloat() < 50) {
+                binding.tilRecordSquat.error = "Debes introducir una marca válida para la sentadilla"
                 return@setOnClickListener
             }
-            rmPressUser = binding.tilRecordBenchPress.editText!!.text.toString().toFloat()
-            if (rmPressUser < 50 || binding.tilRecordBenchPress.isEmpty()) {
+            if (rmPressUser.getInputText().toFloat() < 50) {
                 binding.tilRecordBenchPress.error = "Debes introducir una marca válida para la banca"
                 return@setOnClickListener
             }
-            rmDeadliftUser = binding.tilRecordDeadlift.editText!!.text.toString().toFloat()
-            if (rmDeadliftUser < 50 || binding.tilRecordDeadlift.isEmpty()) {
+            if (rmDeadliftUser.getInputText().toFloat() < 50) {
                 binding.tilRecordDeadlift.error = "Debes introducir una marca válida para el peso muerto"
                 return@setOnClickListener
             }
-
 
             val action = RecordsFragmentDirections
                     .actionRecordsFragment2ToPersonalDataFragment(
@@ -119,14 +147,17 @@ class RecordsFragment : Fragment() {
                             duration,
                             days,
                             frequency!!,
-                            rmSquatuser,
-                            rmPressUser,
-                            rmDeadliftUser
+                            rmSquatuser.getInputText().toFloat(),
+                            rmPressUser.getInputText().toFloat(),
+                            rmDeadliftUser.getInputText().toFloat()
                     )
             NavHostFragment.findNavController(this).navigate(action)
         }
 
         return binding.root
+    }
+    fun TextInputEditText.getInputText(): String{
+        return text.toString()
     }
 
 }

@@ -103,11 +103,36 @@
         android:textStyle="bold"
         app:cornerRadius="7.5dp"
         app:layout_constraintTop_toBottomOf="@+id/tv_sigin_message"
-        app:layout_constraintBottom_toTopOf="@+id/scrollview_signin"
+        app:layout_constraintBottom_toTopOf="@+id/btn_mail_login"
         app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
-        app:strokeColor="@color/color_on_primary" />
+        app:strokeColor="@color/color_on_primary"
+        android:visibility="visible"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_mail_login"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/btn_google_login"
+        app:layout_constraintBottom_toTopOf="@+id/scrollview_signin"
+        app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
+        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
+        android:clickable="true"
+        android:focusable="true"
+        android:backgroundTint="@color/color_secondary"
+        android:textAllCaps="false"
+        android:drawableLeft="@drawable/ic_baseline_mail_outline_24"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:cornerRadius="7.5dp"
+        app:strokeColor="@color/color_on_primary"
+        android:text="Continuar con email"
+        android:paddingLeft="40dp" />
 
     <ScrollView
         android:id="@+id/scrollview_signin"
@@ -117,9 +142,9 @@
         android:layout_marginEnd="20dp"
         app:layout_constraintStart_toEndOf="@id/main_vertical_start_guide"
         app:layout_constraintEnd_toStartOf="@id/main_vertical_end_guide"
-        app:layout_constraintTop_toBottomOf="@id/btn_google_login"
-        app:layout_constraintBottom_toBottomOf="@id/main_bottom_separator">
-
+        app:layout_constraintTop_toBottomOf="@id/btn_mail_login"
+        app:layout_constraintBottom_toBottomOf="@id/main_bottom_separator"
+        android:visibility="invisible">
         <include layout="@layout/fragment_signin_form"/>
     </ScrollView>
 

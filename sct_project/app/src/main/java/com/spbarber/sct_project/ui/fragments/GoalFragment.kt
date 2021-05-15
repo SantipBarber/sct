@@ -1,6 +1,7 @@
 package com.spbarber.sct_project.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,7 @@ import com.spbarber.sct_project.databinding.FragmentGoalBinding
 
 class GoalFragment : Fragment() {
     private lateinit var binding: FragmentGoalBinding
-
+    private val TAG = "TAG"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -20,10 +21,11 @@ class GoalFragment : Fragment() {
         val experience = arguments?.let {
             GoalFragmentArgs.fromBundle(it).experience
         }
+        Log.i(TAG, "$experience")
 
         binding.btnGoalBack.setOnClickListener {
-            NavHostFragment.findNavController(this).navigate(R.id.action_goalFragment_to_experienceFragment)
-
+            val action = GoalFragmentDirections.actionGoalFragmentToExperienceFragment()
+            NavHostFragment.findNavController(this).navigate(action)
         }
 
         binding.btnGoalNext.setOnClickListener {
@@ -37,6 +39,7 @@ class GoalFragment : Fragment() {
 
             val action = GoalFragmentDirections.actionGoalFragmentToTempRuleFragment(experience, goalUser)
             NavHostFragment.findNavController(this).navigate(action)
+            //Log.i(TAG, "$experience $goalUser")
         }
 
         return binding.root

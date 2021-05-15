@@ -12,6 +12,7 @@ import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentTempRuleBinding
 
 class TempRuleFragment : Fragment() {
+    private val TAG = "TAG"
     private lateinit var binding: FragmentTempRuleBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -23,6 +24,9 @@ class TempRuleFragment : Fragment() {
         val experience = arguments?.let {
             GoalFragmentArgs.fromBundle(it).experience
         }
+
+        Log.i(TAG, "$experience $goal")
+
         val spinnerDuration: Spinner = binding.dropdownMenuDuration
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
@@ -47,7 +51,8 @@ class TempRuleFragment : Fragment() {
         }
 
         binding.btnBack.setOnClickListener {
-            NavHostFragment.findNavController(this).navigate(R.id.action_tempRuleFragment_to_goalFragment)
+            val action = TempRuleFragmentDirections.actionTempRuleFragmentToGoalFragment(experience)
+            NavHostFragment.findNavController(this).navigate(action)
         }
 
         binding.btnTempRuleNext.setOnClickListener {
@@ -59,7 +64,7 @@ class TempRuleFragment : Fragment() {
                 R.id.rb_frequency_2 -> frequencyMovement = 2
                 R.id.rb_frequency_3 -> frequencyMovement = 3
             }
-            Log.i("TAG", "$experience $goal $durationProgramItem $trainingDaysItem $frequencyMovement")
+            //Log.i("TAG", "$experience $goal $durationProgramItem $trainingDaysItem $frequencyMovement")
             val action = TempRuleFragmentDirections.actionTempRuleFragmentToRecordsFragment2(experience!!, goal!!, durationProgramItem, trainingDaysItem, frequencyMovement)
             NavHostFragment.findNavController(this).navigate(action)
         }
