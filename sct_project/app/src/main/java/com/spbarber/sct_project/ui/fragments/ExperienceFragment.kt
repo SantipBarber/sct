@@ -20,6 +20,7 @@ class ExperienceFragment : Fragment() {
 
         binding.btnBackSigin.setOnClickListener {
             NavHostFragment.findNavController(this).navigate(R.id.action_experienceFragment_to_initFragment)
+
         }
 
         binding.btnExperienceNext.setOnClickListener {
@@ -32,7 +33,6 @@ class ExperienceFragment : Fragment() {
 
             val action = ExperienceFragmentDirections.actionExperienceFragmentToGoalFragment(experienceUser)
             NavHostFragment.findNavController(this).navigate(action)
-
         }
         return view
     }

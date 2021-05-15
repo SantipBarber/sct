@@ -111,6 +111,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_athlete_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -119,7 +120,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_athlete_height"
+        android:id="@+id/til_athlete_heigth"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Altura en cm"
@@ -141,6 +142,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_athete_heigth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="true"
@@ -161,7 +163,7 @@
         android:layout_marginTop="10dp"
         app:boxBackgroundColor="@color/color_surface"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-        app:layout_constraintTop_toBottomOf="@+id/til_athlete_height"
+        app:layout_constraintTop_toBottomOf="@+id/til_athlete_heigth"
         app:errorEnabled="true"
         app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
         app:layout_constraintEnd_toStartOf="@id/main_vertical_end_guide"
@@ -171,13 +173,13 @@
         app:boxStrokeColor="@color/secondary_light_color"
         app:helperTextTextColor="@color/color_secondary"
         >
-
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_athlete_weight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="true"
             android:clickable="true"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -254,7 +256,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_athlete_birthdate"
+            android:id="@+id/tiet_athlete_birthdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="date"

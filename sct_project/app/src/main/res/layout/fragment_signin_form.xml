@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.SigninFormFragment"
+    tools:context=".ui.fragments.SigninFragment"
     android:layout_gravity="center_horizontal">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -20,19 +20,18 @@
         app:errorEnabled="true"
         app:errorTextColor="@color/color_error"
         app:hintTextColor="@color/color_on_surface"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="true"
             android:focusable="true"
             android:inputType="textEmailAddress" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -52,6 +51,7 @@
         app:boxStrokeColor="@color/color_primary">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_surnames"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:focusable="true"
@@ -77,6 +77,7 @@
         app:boxStrokeColor="@color/color_primary">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_user"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:focusable="true"
@@ -102,6 +103,7 @@
         app:boxStrokeWidth="2.5dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:focusable="true"
@@ -126,6 +128,7 @@
         app:boxStrokeWidth="2.5dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:focusable="true"

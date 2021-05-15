@@ -18,7 +18,7 @@
     <!-- Definción de colores superficies y fondos -->
     <color name="color_background">#2B2B29</color>
     <color name="color_surface">#E1E2E1</color>
-    <color name="color_error">#CC3E20</color>
+    <color name="color_error">#4285F4</color>
 
     <!-- Definción de colores generales -->
     <color name="blue_google">#4285F4</color>

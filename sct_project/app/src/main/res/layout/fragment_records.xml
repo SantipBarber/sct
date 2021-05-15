@@ -112,11 +112,13 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_record_squat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
-            android:inputType="number" />
+            android:inputType="numberDecimal"
+            android:text="0.0"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -143,12 +145,13 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_record_bench_press"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="true"
             android:clickable="true"
-            android:inputType="number"
-
+            android:inputType="numberDecimal"
+            android:text="0.0"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -177,11 +180,13 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_record_deadlift"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="true"
             android:clickable="true"
-            android:inputType="number"
+            android:inputType="numberDecimal"
+            android:text="0.0"
             />
     </com.google.android.material.textfield.TextInputLayout>
 

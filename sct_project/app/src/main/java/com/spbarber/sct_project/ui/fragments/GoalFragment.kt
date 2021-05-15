@@ -23,6 +23,7 @@ class GoalFragment : Fragment() {
 
         binding.btnGoalBack.setOnClickListener {
             NavHostFragment.findNavController(this).navigate(R.id.action_goalFragment_to_experienceFragment)
+
         }
 
         binding.btnGoalNext.setOnClickListener {
@@ -37,7 +38,6 @@ class GoalFragment : Fragment() {
             val action = GoalFragmentDirections.actionGoalFragmentToTempRuleFragment(experience, goalUser)
             NavHostFragment.findNavController(this).navigate(action)
         }
-
 
         return binding.root
     }

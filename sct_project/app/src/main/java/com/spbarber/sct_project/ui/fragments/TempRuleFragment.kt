@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentTempRuleBinding
 
