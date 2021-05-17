@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "60349328084",
+    "project_id": "sct-project-88401",
+    "storage_bucket": "sct-project-88401.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:60349328084:android:67db2a78f6d4f2ecf8a941",
+        "android_client_info": {
+          "package_name": "com.spbarber.sct_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "60349328084-7jesrbgdod9s2ts1s3hdlb1f6fdp4u5r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiA4QAjwUCMhCGL74KXP-DOf9jV3fSK7Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "60349328084-7jesrbgdod9s2ts1s3hdlb1f6fdp4u5r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

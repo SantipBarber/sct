@@ -8,19 +8,28 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthEmailException
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentSiginBinding
 import com.spbarber.sct_project.databinding.FragmentSigninFormBinding
+import java.util.regex.Pattern
 
 class SigninFragment : Fragment() {
     private lateinit var binding: FragmentSiginBinding
+    private lateinit var auth: FirebaseAuth
     private val TAG = "TAG"
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentSiginBinding.inflate(layoutInflater)
         //Bindeo del formulario para el registro
         val bindingForm = FragmentSigninFormBinding.bind(binding.scrollviewSignin.rootView)
@@ -64,16 +73,19 @@ class SigninFragment : Fragment() {
         val birthdate = arguments?.let {
             SigninFragmentArgs.fromBundle(it).birthdate
         }
-        Log.i("TAG", "$experience $goal $duration $days $frequency $rmSquat $rmPress $rmDeadlift $nameAthlete $heigth $weight $genre $birthdate")
+        Log.i(
+            "TAG",
+            "$experience $goal $duration $days $frequency $rmSquat $rmPress $rmDeadlift $nameAthlete $heigth $weight $genre $birthdate"
+        )
 
         binding.btnGoogleLogin.setOnClickListener {
-            if (binding.btnMailLogin.isVisible){
+            if (binding.btnMailLogin.isVisible) {
                 binding.btnMailLogin.isVisible = false
             }
         }
 
         binding.btnMailLogin.setOnClickListener {
-            if(binding.btnGoogleLogin.isVisible){
+            if (binding.btnGoogleLogin.isVisible) {
                 binding.btnGoogleLogin.isVisible = false
                 binding.scrollviewSignin.isVisible = true
                 binding.btnMailLogin.isVisible = false
@@ -81,16 +93,39 @@ class SigninFragment : Fragment() {
         }
 
         binding.btnBack.setOnClickListener {
-            val action = SigninFragmentDirections.actionSiginFragmentToPersonalDataFragment(experience, goal, duration, days, frequency!!, rmSquat!!, rmPress!!, rmDeadlift!!)
+            val action = SigninFragmentDirections.actionSiginFragmentToPersonalDataFragment(
+                experience,
+                goal,
+                duration,
+                days,
+                frequency!!,
+                rmSquat!!,
+                rmPress!!,
+                rmDeadlift!!
+            )
             NavHostFragment.findNavController(this).navigate(action)
         }
 
         //Recogemos todos las preferencias del usuario
-        val userPreferences = mutableListOf(experience, goal, duration, days, frequency, rmSquat, rmPress, rmDeadlift, nameAthlete, heigth, weight, genre, birthdate)
+        val userPreferences = mutableListOf(
+            experience,
+            goal,
+            duration,
+            days,
+            frequency,
+            rmSquat,
+            rmPress,
+            rmDeadlift,
+            nameAthlete,
+            heigth,
+            weight,
+            genre,
+            birthdate
+        )
 
 
-        bindingForm.tietName.addTextChangedListener{
-            if (it.isNullOrBlank()){
+        bindingForm.tietName.addTextChangedListener {
+            if (it.isNullOrBlank()) {
                 bindingForm.tilNameUser.error = "Introduce un nombre válido"
             } else {
                 bindingForm.tilNameUser.error = ""
@@ -98,12 +133,12 @@ class SigninFragment : Fragment() {
             }
         }
         bindingForm.tietName.setOnFocusChangeListener { _, hasFocus ->
-            run{
+            run {
                 if (hasFocus) bindingForm.tilNameUser.error = ""
             }
         }
-        bindingForm.tietSurnames.addTextChangedListener{
-            if (it.isNullOrBlank()){
+        bindingForm.tietSurnames.addTextChangedListener {
+            if (it.isNullOrBlank()) {
                 bindingForm.tilSurnamesUser.error = "Introduce un apellido"
             } else {
                 bindingForm.tilSurnamesUser.error = ""
@@ -111,25 +146,25 @@ class SigninFragment : Fragment() {
             }
         }
         bindingForm.tietSurnames.setOnFocusChangeListener { _, hasFocus ->
-            run{
+            run {
                 if (hasFocus) bindingForm.tilSurnamesUser.error = ""
             }
         }
-        bindingForm.tietUser.addTextChangedListener{
-            if (it.isNullOrBlank()){
-                bindingForm.tilUser.error = "Introduce un nombre de atleta"
+        bindingForm.tietUser.addTextChangedListener {
+            if (it.isNullOrBlank()) {
+                bindingForm.tilUser.error = "Introduce tu email"
             } else {
                 bindingForm.tilUser.error = ""
                 bindingForm.tilUser.helperText = ""
             }
         }
         bindingForm.tietUser.setOnFocusChangeListener { _, hasFocus ->
-            run{
+            run {
                 if (hasFocus) bindingForm.tilUser.error = ""
             }
         }
-        bindingForm.tietPassword.addTextChangedListener{
-            if (it.isNullOrBlank()){
+        bindingForm.tietPassword.addTextChangedListener {
+            if (it.isNullOrBlank()) {
                 bindingForm.tilPassword.error = "Introduce una contraseña válida"
             } else {
                 bindingForm.tilPassword.error = ""
@@ -137,12 +172,15 @@ class SigninFragment : Fragment() {
             }
         }
         bindingForm.tietPassword.setOnFocusChangeListener { _, hasFocus ->
-            run{
-                if (hasFocus) bindingForm.tietPassword.error = ""
+            run {
+                if (hasFocus) {
+                    bindingForm.tietPassword.error = ""
+                    bindingForm.tietPassword.text?.clear()
+                }
             }
         }
-        bindingForm.tietConfirmPassword.addTextChangedListener{
-            if (it.isNullOrBlank()){
+        bindingForm.tietConfirmPassword.addTextChangedListener {
+            if (it.isNullOrBlank()) {
                 bindingForm.tilConfirmPassword.error = "Debes repetir la contraseña"
             } else {
                 bindingForm.tilConfirmPassword.error = ""
@@ -150,24 +188,27 @@ class SigninFragment : Fragment() {
             }
         }
         bindingForm.tietPassword.setOnFocusChangeListener { _, hasFocus ->
-            run{
-                if (hasFocus) bindingForm.tietPassword.error = ""
+            run {
+                if (hasFocus) {
+                    bindingForm.tietPassword.error = ""
+                    bindingForm.tietConfirmPassword.text?.clear()
+                }
             }
         }
 
         binding.btnSignin.setOnClickListener {
             val firstName = bindingForm.tietName
             val surnames = bindingForm.tietSurnames
-            val nameAthlete = bindingForm.tietUser
+            val username = bindingForm.tietUser
             val password = bindingForm.tietPassword
             val confirmPassword = bindingForm.tietConfirmPassword
 
-            val attrUser = listOf(firstName, surnames, nameAthlete, password, confirmPassword)
-            var error = false;
+            val attrUser = listOf(firstName, surnames, username, password, confirmPassword)
+            var error = false
             attrUser.forEach {
-                if (it.getInputText().isBlank()){
+                if (it.getInputText().isBlank()) {
                     error = true
-                    when(it.id){
+                    when (it.id) {
                         R.id.tiet_name -> {
                             bindingForm.tilNameUser.error = "Introduce un nombre  válido"
                         }
@@ -181,16 +222,25 @@ class SigninFragment : Fragment() {
                             bindingForm.tilPassword.error = "Debes introducir una contraseña"
                         }
                         R.id.tiet_confirm_password -> {
-                            bindingForm.tilConfirmPassword.error = "Debes volver a introducir la contraseña"
+                            bindingForm.tilConfirmPassword.error =
+                                "Debes volver a introducir la contraseña"
                         }
                     }
                 }
                 if (error) return@setOnClickListener
-                if (password.getInputText().length < 6) {
-                    bindingForm.tilPassword.error = "La contraseña debe contener al menos 6 caracteres"
+                val emailPattern = Pattern.compile("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")
+                val emailMatcher = emailPattern.matcher(username.getInputText())
+                val validEmail = emailMatcher.matches()
+                if (!validEmail) {
+                    bindingForm.tilUser.error = "Introduce un formato de email válido"
                     return@setOnClickListener
                 }
-                if (!password.getInputText().equals(confirmPassword.getInputText())){
+                if (password.getInputText().length < 6) {
+                    bindingForm.tilPassword.error =
+                        "La contraseña debe contener al menos 6 caracteres"
+                    return@setOnClickListener
+                }
+                if (!password.getInputText().equals(confirmPassword.getInputText())) {
                     bindingForm.tilPassword.error = "Las contraseñas no son iguales"
                     bindingForm.tilConfirmPassword.error = "Las contraseñas no son iguales"
                     return@setOnClickListener
@@ -201,15 +251,58 @@ class SigninFragment : Fragment() {
                 println(it)
             }
             attrUser.forEach {
-                println(it)
+                println(it.getInputText())
             }
+            auth = Firebase.auth
+
+            auth.createUserWithEmailAndPassword(username.getInputText(), password.getInputText())
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val action = SigninFragmentDirections
+                            .actionSiginFragmentToReviewAndConfirmFragment(
+                                experience,
+                                goal,
+                                duration,
+                                days,
+                                frequency!!,
+                                rmSquat!!,
+                                rmPress!!,
+                                rmDeadlift!!,
+                                nameAthlete,
+                                heigth!!,
+                                weight!!,
+                                genre,
+                                birthdate,
+                                firstName.getInputText(),
+                                surnames.getInputText(),
+                                username.getInputText(),
+                                password.getInputText()
+                            )
+                        NavHostFragment.findNavController(this).navigate(action)
+                    } else {
+                        when (task.exception) {
+                            is FirebaseAuthInvalidCredentialsException -> {
+                                Snackbar.make(
+                                    binding.root,
+                                    R.string.email_already_exist,
+                                    Snackbar.LENGTH_SHORT
+                                ).show()
+                            }
+                            is FirebaseAuthWeakPasswordException ->{
+                                Snackbar.make(binding.root, "La contraseña es muy corta", Snackbar.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                }
         }
 
         return binding.root
     }
-    fun TextInputEditText.getInputText(): String{
+
+    private fun TextInputEditText.getInputText(): String {
         return text.toString()
     }
+
 
 }
 

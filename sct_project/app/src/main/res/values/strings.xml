@@ -26,4 +26,5 @@
     <string name="tv_personal_data">Datos personales:</string>
     <string name="training_days">Días de entrenamiento:</string>
     <string name="tv_frequency">Frecuencia por movimiento:</string>
+    <string name="email_already_exist">Este email ya esta siendo utilizado</string>
 </resources>

@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.SigninFragment">
+    tools:context=".ui.fragments.ReviewAndConfirmFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/main_vertical_start_guide"
@@ -71,92 +71,16 @@
         app:zigzagBackgroundColor="@color/black"
         />
 
-    <TextView
-        android:id="@+id/tv_sigin_message"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/main_top_separator"
-        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
-        app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
-        android:text="Registrarse para continuar:"
-        android:textColor="@color/color_on_background"
-        android:textSize="36dp"
-        android:gravity="center"
-        android:textStyle="italic"/>
 
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_google_login"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/blue_google"
-        android:clickable="true"
-        android:drawableLeft="@mipmap/btn_sigin_google"
-        android:focusable="true"
-        android:text="@string/sign_in_with_google"
-        android:textAllCaps="false"
-        android:textColor="@color/color_surface"
-        android:textStyle="bold"
-        app:cornerRadius="7.5dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_sigin_message"
-        app:layout_constraintBottom_toTopOf="@+id/btn_mail_login"
-        app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
-        app:strokeColor="@color/color_on_primary"
-        android:visibility="visible"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_mail_login"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="0dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/btn_google_login"
-        app:layout_constraintBottom_toTopOf="@+id/scrollview_signin"
-        app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
-        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
-        android:clickable="true"
-        android:focusable="true"
-        android:backgroundTint="@color/color_secondary"
-        android:textAllCaps="false"
-        android:drawableLeft="@drawable/ic_baseline_mail_outline_24"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:cornerRadius="7.5dp"
-        app:strokeColor="@color/color_on_primary"
-        android:text="Continuar con email"
-        android:paddingLeft="40dp" />
-
-    <ScrollView
-        android:id="@+id/scrollview_signin"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintStart_toEndOf="@id/main_vertical_start_guide"
-        app:layout_constraintEnd_toStartOf="@id/main_vertical_end_guide"
-        app:layout_constraintTop_toBottomOf="@id/btn_mail_login"
-        app:layout_constraintBottom_toBottomOf="@id/main_bottom_separator"
-        android:visibility="invisible">
-        <include layout="@layout/fragment_signin_form"/>
-    </ScrollView>
 
     <ir.beigirad.zigzagview.ZigzagView
         android:id="@+id/main_bottom_separator"
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:background="@color/color_surface"
-        app:layout_constraintBottom_toTopOf="@+id/btn_signin"
+        app:layout_constraintBottom_toTopOf="@+id/btn_generate"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollview_signin"
         app:zigzagElevation="1dp"
         app:zigzagHeight="4dp"
         app:zigzagPaddingContent="16dp"
@@ -166,24 +90,20 @@
         android:layout_marginBottom="15dp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_signin"
+        android:id="@+id/btn_generate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/main_horizontal_end_guide"
         app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
         app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:backgroundTint="@color/color_secondary"
-        android:text="Registrarse"
+        android:text="Generar Programa"
+        android:textStyle="bold"
         app:cornerRadius="15dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:clickable="true"
         android:focusable="true"
-        app:icon="@drawable/ic_baseline_login_24"
         android:layout_marginBottom="10dp"
         />
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

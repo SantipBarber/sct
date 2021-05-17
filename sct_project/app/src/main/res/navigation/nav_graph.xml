@@ -23,7 +23,18 @@
         android:id="@+id/loginFragment"
         android:name="com.spbarber.sct_project.ui.fragments.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <argument
+            android:name="username"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="password"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 
     <fragment
         android:id="@+id/experienceFragment"
@@ -194,7 +205,9 @@
             app:argType="float" />
         <argument
             android:name="name"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
         <argument
             android:name="heigth"
             app:argType="integer" />
@@ -203,10 +216,14 @@
             app:argType="float" />
         <argument
             android:name="genre"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="man" />
         <argument
             android:name="birthdate"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
         <argument
             android:name="firstName"
             app:argType="string"
@@ -236,6 +253,9 @@
             android:id="@+id/action_siginFragment_to_personalDataFragment"
             app:destination="@id/personalDataFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_siginFragment_to_reviewAndConfirmFragment"
+            app:destination="@id/reviewAndConfirmFragment" />
     </fragment>
 
     <fragment
@@ -272,5 +292,91 @@
             android:name="frequency"
             app:argType="integer"
             android:defaultValue="1" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewAndConfirmFragment"
+        android:name="com.spbarber.sct_project.ui.fragments.ReviewAndConfirmFragment"
+        android:label="fragment_review_and_confirm"
+        tools:layout="@layout/fragment_review_and_confirm" >
+        <action
+            android:id="@+id/action_reviewAndConfirmFragment_to_siginFragment"
+            app:destination="@id/siginFragment" />
+        <argument
+            android:name="experience"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="goal"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="duration"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="days"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="frequency"
+            app:argType="integer"
+            android:defaultValue="1" />
+        <argument
+            android:name="rmSquat"
+            app:argType="float" />
+        <argument
+            android:name="rmPress"
+            app:argType="float" />
+        <argument
+            android:name="rmDeadlift"
+            app:argType="float" />
+        <argument
+            android:name="name"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="heigth"
+            app:argType="integer" />
+        <argument
+            android:name="weight"
+            app:argType="float" />
+        <argument
+            android:name="genre"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="man" />
+        <argument
+            android:name="birthdate"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="firstname"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="surname"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="username"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="password"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_reviewAndConfirmFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 </navigation>
