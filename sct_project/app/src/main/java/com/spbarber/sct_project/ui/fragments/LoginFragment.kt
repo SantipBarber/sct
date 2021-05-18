@@ -1,5 +1,6 @@
 package com.spbarber.sct_project.ui.fragments
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,18 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
-import com.spbarber.sct_project.App.Companion.getAuth
 import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentLoginBinding
+import com.spbarber.sct_project.viewmodels.UsuarioViewModel
 import java.util.regex.Pattern
 
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
+    private val model: UsuarioViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentLoginBinding.inflate(layoutInflater)
@@ -29,7 +33,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLoginBinding.inflate(layoutInflater)
 
         binding.mainInputUsername.addTextChangedListener {
@@ -96,35 +100,36 @@ class LoginFragment : Fragment() {
                 return@setOnClickListener
             }
 
+            //Para indicar que está cargando
+            binding.loginProgressBar.visibility = View.VISIBLE
             //Acceso por Firebase
-            getAuth().signInWithEmailAndPassword(username.getInputText(), pass.getInputText())
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d("TAG", "signInWithEmail:success")
-                        goToApp()
-                    } else {
-                        Log.d("TAG", task.exception.toString())
-                        when (task.exception) {
-                            is FirebaseAuthInvalidUserException -> {
-                                Snackbar.make(
-                                    binding.root,
-                                    "Debes registrarte para acceder",
-                                    Snackbar.LENGTH_LONG
-                                ).show()
-                            }
-                            else -> {
-                                Snackbar.make(
-                                    binding.root,
-                                    "Error al iniciar sesión",
-                                    Snackbar.LENGTH_LONG
-                                ).show()
-                            }
+
+            model.login(username.getInputText(), pass.getInputText()).observe(viewLifecycleOwner, { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("TAG", "signInWithEmail:success")
+                    goToApp()
+                } else {
+                    binding.loginProgressBar.visibility = View.GONE
+                    Log.d("TAG", task.exception.toString())
+                    when (task.exception) {
+                        is FirebaseAuthInvalidUserException -> {
+                            Snackbar.make(
+                                binding.root,
+                                "Debes registrarte para acceder",
+                                Snackbar.LENGTH_LONG
+                            ).show()
+                        }
+                        else -> {
+                            Snackbar.make(
+                                binding.root,
+                                "Error al iniciar sesión",
+                                Snackbar.LENGTH_LONG
+                            ).show()
                         }
                     }
                 }
-
-
+            })
         }
 
         return binding.root

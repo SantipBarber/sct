@@ -263,8 +263,6 @@ class SigninFragment : Fragment() {
                                     firstName.getInputText(),
                                     surnames.getInputText(),
                                     password.getInputText(),
-                                    Date(System.currentTimeMillis()),
-                                    Date(System.currentTimeMillis())
                                 )
                             )
                             .addOnCompleteListener { taskNewUser ->
