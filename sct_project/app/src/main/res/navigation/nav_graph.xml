@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_initFragment_to_experienceFragment"
             app:destination="@id/experienceFragment" />
+        <action
+            android:id="@+id/action_initFragment_to_sctAppFragment"
+            app:destination="@id/sctAppFragment" />
     </fragment>
 
     <fragment
@@ -34,6 +37,9 @@
             app:argType="string"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_loginFragment_to_sctAppFragment"
+            app:destination="@id/sctAppFragment" />
     </fragment>
 
     <fragment
@@ -378,5 +384,14 @@
         <action
             android:id="@+id/action_reviewAndConfirmFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sctAppFragment"
+        android:name="com.spbarber.sct_project.ui.fragments.SctAppFragment"
+        android:label="fragment_sct_app"
+        tools:layout="@layout/fragment_sct_app" >
+        <action
+            android:id="@+id/action_sctAppFragment_to_initFragment"
+            app:destination="@id/initFragment" />
     </fragment>
 </navigation>

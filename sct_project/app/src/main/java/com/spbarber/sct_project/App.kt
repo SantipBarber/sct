@@ -13,15 +13,19 @@ class App: Application() {
     companion object{
 
         fun getAuth(): FirebaseAuth{
+            //Acceso a Firebase Auth
             return Firebase.auth
         }
 
         fun getFirestore(): FirebaseFirestore{
+            //Acceso a Cloud Firestore
             return Firebase.firestore
         }
 
         fun getStorage(): FirebaseStorage {
             return Firebase.storage
         }
+
+
     }
 }

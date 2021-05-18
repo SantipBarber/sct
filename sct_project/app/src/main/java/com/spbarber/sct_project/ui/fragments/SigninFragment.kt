@@ -11,20 +11,20 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthEmailException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.spbarber.sct_project.App.Companion.getAuth
+import com.spbarber.sct_project.App.Companion.getFirestore
 import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentSiginBinding
 import com.spbarber.sct_project.databinding.FragmentSigninFormBinding
+import com.spbarber.sct_project.entities.User
+import com.spbarber.sct_project.utils.Constants
+import java.util.*
 import java.util.regex.Pattern
 
 class SigninFragment : Fragment() {
     private lateinit var binding: FragmentSiginBinding
-    private lateinit var auth: FirebaseAuth
     private val TAG = "TAG"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -247,38 +247,57 @@ class SigninFragment : Fragment() {
                 }
 
             }
-            userPreferences.forEach {
-                println(it)
-            }
-            attrUser.forEach {
-                println(it.getInputText())
-            }
-            auth = Firebase.auth
 
-            auth.createUserWithEmailAndPassword(username.getInputText(), password.getInputText())
+            getAuth().createUserWithEmailAndPassword(
+                username.getInputText(),
+                password.getInputText()
+            )
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        val action = SigninFragmentDirections
-                            .actionSiginFragmentToReviewAndConfirmFragment(
-                                experience,
-                                goal,
-                                duration,
-                                days,
-                                frequency!!,
-                                rmSquat!!,
-                                rmPress!!,
-                                rmDeadlift!!,
-                                nameAthlete,
-                                heigth!!,
-                                weight!!,
-                                genre,
-                                birthdate,
-                                firstName.getInputText(),
-                                surnames.getInputText(),
-                                username.getInputText(),
-                                password.getInputText()
+                        getFirestore()
+                            .collection(Constants.USERS)
+                            .document(getAuth().currentUser!!.uid)
+                            .set(
+                                User(
+                                    username.getInputText(),
+                                    firstName.getInputText(),
+                                    surnames.getInputText(),
+                                    password.getInputText(),
+                                    Date(System.currentTimeMillis()),
+                                    Date(System.currentTimeMillis())
+                                )
                             )
-                        NavHostFragment.findNavController(this).navigate(action)
+                            .addOnCompleteListener { taskNewUser ->
+                                if (taskNewUser.isSuccessful) {
+                                    val action = SigninFragmentDirections
+                                        .actionSiginFragmentToReviewAndConfirmFragment(
+                                            experience,
+                                            goal,
+                                            duration,
+                                            days,
+                                            frequency!!,
+                                            rmSquat!!,
+                                            rmPress!!,
+                                            rmDeadlift!!,
+                                            nameAthlete,
+                                            heigth!!,
+                                            weight!!,
+                                            genre,
+                                            birthdate,
+                                            firstName.getInputText(),
+                                            surnames.getInputText(),
+                                            username.getInputText(),
+                                            password.getInputText()
+                                        )
+                                    NavHostFragment.findNavController(this).navigate(action)
+                                } else {
+                                    Snackbar.make(
+                                        binding.root,
+                                        "No se ha podido crear el usuario",
+                                        Snackbar.LENGTH_LONG
+                                    ).show()
+                                }
+                            }
                     } else {
                         when (task.exception) {
                             is FirebaseAuthInvalidCredentialsException -> {
@@ -288,8 +307,19 @@ class SigninFragment : Fragment() {
                                     Snackbar.LENGTH_SHORT
                                 ).show()
                             }
-                            is FirebaseAuthWeakPasswordException ->{
-                                Snackbar.make(binding.root, "La contraseña es muy corta", Snackbar.LENGTH_SHORT).show()
+                            is FirebaseAuthWeakPasswordException -> {
+                                Snackbar.make(
+                                    binding.root,
+                                    "La contraseña es muy corta",
+                                    Snackbar.LENGTH_SHORT
+                                ).show()
+                            }
+                            else -> {
+                                Snackbar.make(
+                                    binding.root,
+                                    "No se ha podido realizar el registro",
+                                    Snackbar.LENGTH_LONG
+                                ).show()
                             }
                         }
                     }

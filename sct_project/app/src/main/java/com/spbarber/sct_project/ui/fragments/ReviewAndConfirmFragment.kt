@@ -16,7 +16,6 @@ import com.spbarber.sct_project.databinding.FragmentReviewAndConfirmBinding
 
 class ReviewAndConfirmFragment : Fragment() {
     private lateinit var binding: FragmentReviewAndConfirmBinding
-    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -98,6 +97,7 @@ class ReviewAndConfirmFragment : Fragment() {
                 genre,
                 birthdate
             )
+            NavHostFragment.findNavController(this).navigate(action)
         }
 
         binding.btnGenerate.setOnClickListener {
