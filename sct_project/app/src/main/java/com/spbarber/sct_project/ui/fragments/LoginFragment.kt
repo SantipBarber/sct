@@ -1,6 +1,5 @@
 package com.spbarber.sct_project.ui.fragments
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,12 +14,14 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentLoginBinding
+import com.spbarber.sct_project.databinding.MyProgressBarBinding
 import com.spbarber.sct_project.viewmodels.UsuarioViewModel
 import java.util.regex.Pattern
 
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
+    private lateinit var bindingProgressBar: MyProgressBarBinding
     private val model: UsuarioViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +36,7 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoginBinding.inflate(layoutInflater)
+        bindingProgressBar = MyProgressBarBinding.inflate(layoutInflater)
 
         binding.mainInputUsername.addTextChangedListener {
             if (it.isNullOrBlank()) {
@@ -101,7 +103,7 @@ class LoginFragment : Fragment() {
             }
 
             //Para indicar que está cargando
-            binding.loginProgressBar.visibility = View.VISIBLE
+            bindingProgressBar.myProgressBar.visibility = View.VISIBLE
             //Acceso por Firebase
 
             model.login(username.getInputText(), pass.getInputText()).observe(viewLifecycleOwner, { task ->
@@ -110,7 +112,7 @@ class LoginFragment : Fragment() {
                     Log.d("TAG", "signInWithEmail:success")
                     goToApp()
                 } else {
-                    binding.loginProgressBar.visibility = View.GONE
+                    bindingProgressBar.myProgressBar.visibility = View.GONE
                     Log.d("TAG", task.exception.toString())
                     when (task.exception) {
                         is FirebaseAuthInvalidUserException -> {

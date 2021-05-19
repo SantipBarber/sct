@@ -8,6 +8,6 @@ data class User(
     val firstName: String,
     val lastName: String,
     val password: String,
-    //val createAt: Date,
-    //val updateAt: Date
+    val createAt: Date,
+    val updateAt: Date
 )

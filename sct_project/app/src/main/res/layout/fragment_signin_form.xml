@@ -32,7 +32,8 @@
             android:layout_height="match_parent"
             android:clickable="true"
             android:focusable="true"
-            android:inputType="textEmailAddress" />
+            android:inputType="textPersonName"
+            android:text="Santi"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -57,7 +58,8 @@
             android:layout_height="match_parent"
             android:focusable="true"
             android:clickable="true"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textPersonName"
+            android:text="Pérez Barber"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,7 +85,8 @@
             android:layout_height="match_parent"
             android:focusable="true"
             android:clickable="true"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress"
+            android:text="santipbr@gmail.com"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,7 +112,8 @@
             android:layout_height="match_parent"
             android:focusable="true"
             android:clickable="true"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:text="123456"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -134,7 +138,8 @@
             android:layout_height="match_parent"
             android:focusable="true"
             android:clickable="true"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:text="123456"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

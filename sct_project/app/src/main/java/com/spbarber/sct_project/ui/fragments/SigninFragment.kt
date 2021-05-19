@@ -8,28 +8,29 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
-import com.spbarber.sct_project.App.Companion.getAuth
-import com.spbarber.sct_project.App.Companion.getFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
 import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentSiginBinding
 import com.spbarber.sct_project.databinding.FragmentSigninFormBinding
 import com.spbarber.sct_project.entities.User
-import com.spbarber.sct_project.utils.Constants
+import com.spbarber.sct_project.viewmodels.UsuarioViewModel
 import java.util.*
 import java.util.regex.Pattern
 
 class SigninFragment : Fragment() {
     private lateinit var binding: FragmentSiginBinding
-    private val TAG = "TAG"
+    private val model: UsuarioViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSiginBinding.inflate(layoutInflater)
         //Bindeo del formulario para el registro
         val bindingForm = FragmentSigninFormBinding.bind(binding.scrollviewSignin.rootView)
@@ -247,57 +248,41 @@ class SigninFragment : Fragment() {
                 }
 
             }
-
-            getAuth().createUserWithEmailAndPassword(
+            val user = User(
+                firstName.getInputText(),
+                surnames.getInputText(),
                 username.getInputText(),
-                password.getInputText()
+                password.getInputText(),
+                Date(System.currentTimeMillis()),
+                Date(System.currentTimeMillis())
             )
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        getFirestore()
-                            .collection(Constants.USERS)
-                            .document(getAuth().currentUser!!.uid)
-                            .set(
-                                User(
-                                    username.getInputText(),
-                                    firstName.getInputText(),
-                                    surnames.getInputText(),
-                                    password.getInputText(),
-                                )
+
+            model.registro(user)
+                .observe(viewLifecycleOwner, {
+                    if (it==null) {
+                        val action = SigninFragmentDirections
+                            .actionSiginFragmentToReviewAndConfirmFragment(
+                                experience,
+                                goal,
+                                duration,
+                                days,
+                                frequency!!,
+                                rmSquat!!,
+                                rmPress!!,
+                                rmDeadlift!!,
+                                nameAthlete,
+                                heigth!!,
+                                weight!!,
+                                genre,
+                                birthdate,
+                                firstName.getInputText(),
+                                surnames.getInputText(),
+                                username.getInputText(),
+                                password.getInputText()
                             )
-                            .addOnCompleteListener { taskNewUser ->
-                                if (taskNewUser.isSuccessful) {
-                                    val action = SigninFragmentDirections
-                                        .actionSiginFragmentToReviewAndConfirmFragment(
-                                            experience,
-                                            goal,
-                                            duration,
-                                            days,
-                                            frequency!!,
-                                            rmSquat!!,
-                                            rmPress!!,
-                                            rmDeadlift!!,
-                                            nameAthlete,
-                                            heigth!!,
-                                            weight!!,
-                                            genre,
-                                            birthdate,
-                                            firstName.getInputText(),
-                                            surnames.getInputText(),
-                                            username.getInputText(),
-                                            password.getInputText()
-                                        )
-                                    NavHostFragment.findNavController(this).navigate(action)
-                                } else {
-                                    Snackbar.make(
-                                        binding.root,
-                                        "No se ha podido crear el usuario",
-                                        Snackbar.LENGTH_LONG
-                                    ).show()
-                                }
-                            }
+                        NavHostFragment.findNavController(this).navigate(action)
                     } else {
-                        when (task.exception) {
+                        when (it) {
                             is FirebaseAuthInvalidCredentialsException -> {
                                 Snackbar.make(
                                     binding.root,
@@ -312,16 +297,29 @@ class SigninFragment : Fragment() {
                                     Snackbar.LENGTH_SHORT
                                 ).show()
                             }
-                            else -> {
+                            is FirebaseAuthInvalidUserException -> {
                                 Snackbar.make(
                                     binding.root,
                                     "No se ha podido realizar el registro",
                                     Snackbar.LENGTH_LONG
                                 ).show()
                             }
+                            is FirebaseFirestoreException -> {
+                                Snackbar.make(
+                                    binding.root,
+                                    "No se ha podido añadir la colección a Firebase",
+                                    Snackbar.LENGTH_LONG
+                                ).show()
+                            } else -> {
+                            Snackbar.make(
+                                binding.root,
+                                "Algo no ha ido bien",
+                                Snackbar.LENGTH_LONG
+                            ).show()
+                            }
                         }
                     }
-                }
+                })
         }
 
         return binding.root
