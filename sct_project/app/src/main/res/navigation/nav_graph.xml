@@ -382,8 +382,8 @@
             app:nullable="true"
             android:defaultValue="@null" />
         <action
-            android:id="@+id/action_reviewAndConfirmFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            android:id="@+id/action_reviewAndConfirmFragment_to_sctAppFragment"
+            app:destination="@id/sctAppFragment" />
     </fragment>
     <fragment
         android:id="@+id/sctAppFragment"

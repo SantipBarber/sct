@@ -1,18 +1,17 @@
 package com.spbarber.sct_project.ui.fragments
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.spbarber.sct_project.App.Companion.getAuth
+import com.spbarber.sct_project.App.Companion.getFirestore
 import com.spbarber.sct_project.databinding.FragmentReviewAndConfirmBinding
+import com.spbarber.sct_project.entities.Athlete
+import com.spbarber.sct_project.utils.Constants
 
 class ReviewAndConfirmFragment : Fragment() {
     private lateinit var binding: FragmentReviewAndConfirmBinding
@@ -21,8 +20,10 @@ class ReviewAndConfirmFragment : Fragment() {
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentReviewAndConfirmBinding.inflate(layoutInflater)
 
         val experience = arguments?.let {
@@ -82,26 +83,50 @@ class ReviewAndConfirmFragment : Fragment() {
         )
 
         binding.btnBack.setOnClickListener {
-            val action = ReviewAndConfirmFragmentDirections.actionReviewAndConfirmFragmentToSiginFragment(
-                experience,
-                goal,
-                duration,
-                days!!,
-                frequency!!,
-                rmSquat!!,
-                rmPress!!,
-                rmDeadlift!!,
-                nameAthlete,
-                heigth!!,
-                weight!!,
-                genre,
-                birthdate
-            )
+            val action =
+                ReviewAndConfirmFragmentDirections.actionReviewAndConfirmFragmentToSiginFragment(
+                    experience,
+                    goal,
+                    duration,
+                    days!!,
+                    frequency!!,
+                    rmSquat!!,
+                    rmPress!!,
+                    rmDeadlift!!,
+                    nameAthlete,
+                    heigth!!,
+                    weight!!,
+                    genre,
+                    birthdate
+                )
             NavHostFragment.findNavController(this).navigate(action)
         }
 
+        val user = getAuth().currentUser
         binding.btnGenerate.setOnClickListener {
+            val athlete = user?.uid?.let { it1 ->
+                Athlete(
+                    nameAthlete.toString(),
+                    heigth.toString().toInt(),
+                    weight.toString().toFloat(),
+                    birthdate.toString(),
+                    it1
+                )
+            }
+            if (athlete != null) {
+                getFirestore()
+                    .collection(Constants.ATHLETES)
+                    .document(getAuth().currentUser!!.uid)
+                    .set(athlete)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful){
+                            Log.i("TAG", "Hemos creado el primer atleta")
 
+                        } else {
+                            Log.i("TAG", "no se ha creado el atleta")
+                        }
+                    }
+            }
 
         }
 
@@ -114,8 +139,8 @@ class ReviewAndConfirmFragment : Fragment() {
 
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-                ReviewAndConfirmFragment().apply {
+            ReviewAndConfirmFragment().apply {
 
-                }
+            }
     }
 }

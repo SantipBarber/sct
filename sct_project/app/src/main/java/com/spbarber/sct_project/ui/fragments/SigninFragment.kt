@@ -19,6 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentSiginBinding
 import com.spbarber.sct_project.databinding.FragmentSigninFormBinding
+import com.spbarber.sct_project.databinding.MyProgressBarBinding
 import com.spbarber.sct_project.entities.User
 import com.spbarber.sct_project.viewmodels.UsuarioViewModel
 import java.util.*
@@ -26,12 +27,16 @@ import java.util.regex.Pattern
 
 class SigninFragment : Fragment() {
     private lateinit var binding: FragmentSiginBinding
+    private lateinit var bindingProgressBar: MyProgressBarBinding
+
     private val model: UsuarioViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSiginBinding.inflate(layoutInflater)
+        bindingProgressBar = MyProgressBarBinding.inflate(layoutInflater)
+
         //Bindeo del formulario para el registro
         val bindingForm = FragmentSigninFormBinding.bind(binding.scrollviewSignin.rootView)
 
@@ -256,33 +261,35 @@ class SigninFragment : Fragment() {
                 Date(System.currentTimeMillis()),
                 Date(System.currentTimeMillis())
             )
+            //Para indicar que está cargando
+            bindingProgressBar.myProgressBar.visibility = View.VISIBLE
+            //Registro por Firebase
 
             model.registro(user)
-                .observe(viewLifecycleOwner, {
-                    if (it==null) {
-                        val action = SigninFragmentDirections
-                            .actionSiginFragmentToReviewAndConfirmFragment(
-                                experience,
-                                goal,
-                                duration,
-                                days,
-                                frequency!!,
-                                rmSquat!!,
-                                rmPress!!,
-                                rmDeadlift!!,
-                                nameAthlete,
-                                heigth!!,
-                                weight!!,
-                                genre,
-                                birthdate,
-                                firstName.getInputText(),
-                                surnames.getInputText(),
-                                username.getInputText(),
-                                password.getInputText()
-                            )
-                        NavHostFragment.findNavController(this).navigate(action)
+                .observe(viewLifecycleOwner, { exception ->
+                    if (exception==null) {
+                        Log.i("TAG", "Entra en el IF...")
+                        goToApp(
+                            experience,
+                            goal,
+                            duration,
+                            days,
+                            frequency!!,
+                            rmSquat!!,
+                            rmPress!!,
+                            rmDeadlift!!,
+                            nameAthlete,
+                            heigth!!,
+                            weight!!,
+                            genre,
+                            birthdate,
+                            firstName.getInputText(),
+                            surnames.getInputText(),
+                            username.getInputText(),
+                            password.getInputText()
+                        )
                     } else {
-                        when (it) {
+                        when (exception) {
                             is FirebaseAuthInvalidCredentialsException -> {
                                 Snackbar.make(
                                     binding.root,
@@ -323,6 +330,48 @@ class SigninFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun goToApp(
+        experience: String?,
+        goal: String?,
+        duration: String?,
+        days: String?,
+        frequency: Int,
+        rmSquat: Float,
+        rmPress: Float,
+        rmDeadlift: Float,
+        nameAthlete: String?,
+        heigth: Int,
+        weight: Float,
+        genre: String?,
+        birthdate: String?,
+        firstname: String,
+        lastname: String,
+        username: String,
+        password: String
+    ) {
+        val action = SigninFragmentDirections
+            .actionSiginFragmentToReviewAndConfirmFragment(
+                experience,
+                goal,
+                duration,
+                days,
+                frequency,
+                rmSquat,
+                rmPress,
+                rmDeadlift,
+                nameAthlete,
+                heigth,
+                weight,
+                genre,
+                birthdate,
+                firstname,
+                lastname,
+                username,
+                password
+            )
+        NavHostFragment.findNavController(this).navigate(action)
     }
 
     private fun TextInputEditText.getInputText(): String {
