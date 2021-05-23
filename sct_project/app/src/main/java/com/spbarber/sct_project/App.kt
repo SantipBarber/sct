@@ -23,9 +23,9 @@ class App: Application() {
         }
 
         fun getStorage(): FirebaseStorage {
+            //Para imágenes, archivos...
             return Firebase.storage
         }
-
 
     }
 }

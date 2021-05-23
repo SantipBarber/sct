@@ -31,6 +31,7 @@ class LoginFragment : Fragment() {
 
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -106,39 +107,43 @@ class LoginFragment : Fragment() {
             bindingProgressBar.myProgressBar.visibility = View.VISIBLE
             //Acceso por Firebase
 
-            model.login(username.getInputText(), pass.getInputText()).observe(viewLifecycleOwner, { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d("TAG", "signInWithEmail:success")
-                    goToApp()
-                } else {
-                    bindingProgressBar.myProgressBar.visibility = View.GONE
-                    Log.d("TAG", task.exception.toString())
-                    when (task.exception) {
-                        is FirebaseAuthInvalidUserException -> {
-                            Snackbar.make(
-                                binding.root,
-                                "Debes registrarte para acceder",
-                                Snackbar.LENGTH_LONG
-                            ).show()
-                        }
-                        else -> {
-                            Snackbar.make(
-                                binding.root,
-                                "Error al iniciar sesión",
-                                Snackbar.LENGTH_LONG
-                            ).show()
+            model.login(username.getInputText(), pass.getInputText())
+                .observe(viewLifecycleOwner, { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        model._users.observe(viewLifecycleOwner, { it ->
+
+
+                        })
+                        goToApp()
+                    } else {
+                        bindingProgressBar.myProgressBar.visibility = View.GONE
+                        Log.d("TAG", task.exception.toString())
+                        when (task.exception) {
+                            is FirebaseAuthInvalidUserException -> {
+                                Snackbar.make(
+                                    binding.root,
+                                    "Debes registrarte para acceder",
+                                    Snackbar.LENGTH_LONG
+                                ).show()
+                            }
+                            else -> {
+                                Snackbar.make(
+                                    binding.root,
+                                    "Error al iniciar sesión",
+                                    Snackbar.LENGTH_LONG
+                                ).show()
+                            }
                         }
                     }
-                }
-            })
+                })
         }
 
         return binding.root
     }
 
     private fun goToApp() {
-        val action = LoginFragmentDirections.actionLoginFragmentToSctAppFragment()
+        val action = LoginFragmentDirections.actionLoginFragmentToBottomNavGraph()
         NavHostFragment.findNavController(this).navigate(action)
     }
 

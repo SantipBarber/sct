@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/WorkoutFragment"
+        android:icon="@drawable/ic_baseline_accessibility_24"
+        android:title="WORKOUT" />
+
+    <item
+        android:id="@+id/progressFragment"
+        android:icon="@drawable/ic_baseline_speed_24"
+        android:title="YOUR PROGRESS" />
+    <item
+        android:id="@+id/statsFragment"
+        android:icon="@drawable/ic_baseline_query_stats_24"
+        android:title="WORKOUT" />
+
+</menu>

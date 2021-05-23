@@ -18,14 +18,10 @@ class TempRuleFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         binding = FragmentTempRuleBinding.inflate(layoutInflater)
 
-        val goal = arguments?.let {
-            TempRuleFragmentArgs.fromBundle(it).goal
-        }
-        val experience = arguments?.let {
-            GoalFragmentArgs.fromBundle(it).experience
+        val preferences = arguments?.let {
+            TempRuleFragmentArgs.fromBundle(it).preferences
         }
 
-        Log.i(TAG, "$experience $goal")
 
         val spinnerDuration: Spinner = binding.dropdownMenuDuration
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -51,7 +47,7 @@ class TempRuleFragment : Fragment() {
         }
 
         binding.btnBack.setOnClickListener {
-            val action = TempRuleFragmentDirections.actionTempRuleFragmentToGoalFragment(experience)
+            val action = TempRuleFragmentDirections.actionTempRuleFragmentToGoalFragment(preferences)
             NavHostFragment.findNavController(this).navigate(action)
         }
 
@@ -64,8 +60,10 @@ class TempRuleFragment : Fragment() {
                 R.id.rb_frequency_2 -> frequencyMovement = 2
                 R.id.rb_frequency_3 -> frequencyMovement = 3
             }
-            //Log.i("TAG", "$experience $goal $durationProgramItem $trainingDaysItem $frequencyMovement")
-            val action = TempRuleFragmentDirections.actionTempRuleFragmentToRecordsFragment2(experience!!, goal!!, durationProgramItem, trainingDaysItem, frequencyMovement)
+            preferences?.duration = durationProgramItem
+            preferences?.days = trainingDaysItem
+            preferences?.frequency = frequencyMovement
+            val action = TempRuleFragmentDirections.actionTempRuleFragmentToRecordsFragment2(preferences)
             NavHostFragment.findNavController(this).navigate(action)
         }
 

@@ -1,23 +1,28 @@
 package com.spbarber.sct_project.ui.fragments
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavHostController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.spbarber.sct_project.App
 import com.spbarber.sct_project.App.Companion.getAuth
 import com.spbarber.sct_project.R
-import com.spbarber.sct_project.databinding.FragmentSctAppBinding
+import com.spbarber.sct_project.databinding.FragmentWorkoutBinding
+import com.spbarber.sct_project.listeners.MainListener
+import com.spbarber.sct_project.ui.activities.MainActivity
 
-class SctAppFragment : Fragment() {
-    private lateinit var binding: FragmentSctAppBinding
+class WorkoutFragment : Fragment() {
+    private lateinit var binding: FragmentWorkoutBinding
+    private var listener: MainListener? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
     }
 
@@ -25,14 +30,8 @@ class SctAppFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSctAppBinding.inflate(layoutInflater)
+        binding = FragmentWorkoutBinding.inflate(layoutInflater)
 
-
-
-        binding.btnLogout.setOnClickListener {
-            Firebase.auth.signOut()
-            NavHostFragment.findNavController(this).navigate(R.id.action_sctAppFragment_to_initFragment)
-        }
 
         return binding.root
     }
@@ -44,6 +43,12 @@ class SctAppFragment : Fragment() {
         if(currentUser != null){
             Snackbar.make(binding.root, "El usuario logueado es $nameUser", Snackbar.LENGTH_LONG).show()
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener = context as MainActivity
+        listener!!.showBottomNavigation()
     }
 
 }

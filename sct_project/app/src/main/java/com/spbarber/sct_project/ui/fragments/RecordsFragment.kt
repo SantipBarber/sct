@@ -23,26 +23,12 @@ class RecordsFragment : Fragment() {
 
         binding = FragmentRecordsBinding.inflate(layoutInflater)
 
-        val experience = arguments?.let {
-            RecordsFragmentArgs.fromBundle(it).experience
+        val preferences = arguments?.let {
+            RecordsFragmentArgs.fromBundle(it).preferences
         }
-        val goal = arguments?.let {
-            RecordsFragmentArgs.fromBundle(it).goal
-        }
-        val duration = arguments?.let {
-            RecordsFragmentArgs.fromBundle(it).duration
-        }
-        val days = arguments?.let {
-            RecordsFragmentArgs.fromBundle(it).ndays
-        }
-        val frequency = arguments?.let {
-            RecordsFragmentArgs.fromBundle(it).frequency
-        }
-
-        Log.i(TAG, "$experience $goal $duration $days $frequency")
 
         binding.btnBack.setOnClickListener {
-            val action = RecordsFragmentDirections.actionRecordsFragment2ToTempRuleFragment(experience, goal)
+            val action = RecordsFragmentDirections.actionRecordsFragment2ToTempRuleFragment(preferences)
             NavHostFragment.findNavController(this).navigate(action)
         }
 
@@ -139,17 +125,13 @@ class RecordsFragment : Fragment() {
                 binding.tilRecordDeadlift.error = "Debes introducir una marca válida para el peso muerto"
                 return@setOnClickListener
             }
+            preferences?.rmSquat = rmSquatuser.getInputText().toFloat()
+            preferences?.rmPress = rmPressUser.getInputText().toFloat()
+            preferences?.rmDeadlift = rmDeadliftUser.getInputText().toFloat()
 
             val action = RecordsFragmentDirections
                     .actionRecordsFragment2ToPersonalDataFragment(
-                            experience,
-                            goal,
-                            duration,
-                            days,
-                            frequency!!,
-                            rmSquatuser.getInputText().toFloat(),
-                            rmPressUser.getInputText().toFloat(),
-                            rmDeadliftUser.getInputText().toFloat()
+                            preferences
                     )
             NavHostFragment.findNavController(this).navigate(action)
         }

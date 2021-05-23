@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_nav_graph"
+    app:startDestination="@id/WorkoutFragment">
+
+    <fragment
+        android:id="@+id/WorkoutFragment"
+        android:name="com.spbarber.sct_project.ui.fragments.WorkoutFragment"
+        android:label="fragment_sct_app"
+        tools:layout="@layout/fragment_workout" />
+    <fragment
+        android:id="@+id/progressFragment"
+        android:name="com.spbarber.sct_project.ui.fragments.ProgressFragment"
+        android:label="fragment_progress"
+        tools:layout="@layout/fragment_progress" />
+    <fragment
+        android:id="@+id/statsFragment"
+        android:name="com.spbarber.sct_project.ui.fragments.StatsFragment"
+        android:label="fragment_stats"
+        tools:layout="@layout/fragment_stats" />
+</navigation>

@@ -10,4 +10,6 @@ data class User(
     val password: String,
     val createAt: Date,
     val updateAt: Date
-)
+) {
+    constructor() : this("", "", "santiaguet@me.com", "123456", Date(), Date())
+}

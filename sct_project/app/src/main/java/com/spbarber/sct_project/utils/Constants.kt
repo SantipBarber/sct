@@ -8,6 +8,7 @@ class Constants {
         val PROGRAMS = "programs"
         val DETAILS = "programDetails"
         val EXERCISES = "exercises"
+        val PREFS = "preferences"
     }
 
 }

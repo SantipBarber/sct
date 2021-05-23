@@ -24,31 +24,10 @@ class PersonalDataFragment : Fragment(), DatePickerDialog.OnDateSetListener {
                               savedInstanceState: Bundle?): View? {
         binding = FragmentPersonalDataBinding.inflate(layoutInflater)
 
-        val experience = arguments?.let {
-            PersonalDataFragmentArgs.fromBundle(it).experience
+        val preferences = arguments?.let {
+            PersonalDataFragmentArgs.fromBundle(it).preferences
         }
-        val goal = arguments?.let {
-            PersonalDataFragmentArgs.fromBundle(it).goal
-        }
-        val duration = arguments?.let {
-            PersonalDataFragmentArgs.fromBundle(it).duration
-        }
-        val days = arguments?.let {
-            PersonalDataFragmentArgs.fromBundle(it).days
-        }
-        val frequency = arguments?.let {
-            PersonalDataFragmentArgs.fromBundle(it).frequency
-        }
-        val rmSquat = arguments?.let {
-            PersonalDataFragmentArgs.fromBundle(it).rmSquat
-        }
-        val rmPress = arguments?.let {
-            PersonalDataFragmentArgs.fromBundle(it).rmPress
-        }
-        val rmDeadlift = arguments?.let {
-            PersonalDataFragmentArgs.fromBundle(it).rmdeadlift
-        }
-        Log.i("TAG", "$experience $goal $duration $days $frequency $rmSquat $rmPress $rmDeadlift")
+
 
         binding.tietAthleteName.addTextChangedListener {
             val size = it!!.length
@@ -125,7 +104,7 @@ class PersonalDataFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         }
 
         binding.btnBack.setOnClickListener {
-            val action = PersonalDataFragmentDirections.actionPersonalDataFragmentToRecordsFragment2(experience, goal, duration!!, days, frequency!!)
+            val action = PersonalDataFragmentDirections.actionPersonalDataFragmentToRecordsFragment2(preferences)
             NavHostFragment.findNavController(this).navigate(action)
         }
 
@@ -182,20 +161,15 @@ class PersonalDataFragment : Fragment(), DatePickerDialog.OnDateSetListener {
                 binding.tilAthleteBirthdate.error = "Introduce un formato de fecha correcto"
                 return@setOnClickListener
             }
+
+            preferences?.name = nameAthlete.getInputText()
+            preferences?.heigth = heigthAthlete.getInputText().toInt()
+            preferences?.weight = weightAthlete.getInputText().toFloat()
+            preferences?.genre = genreAthlete
+            preferences?.birthdate = birthdateAthlete.getInputText()
+
             val action = PersonalDataFragmentDirections.actionPersonalDataFragmentToSiginFragment(
-                    experience,
-                    goal,
-                    duration,
-                    days,
-                    frequency!!,
-                    rmSquat!!,
-                    rmPress!!,
-                    rmDeadlift!!,
-                    nameAthlete.getInputText(),
-                    heigthAthlete.getInputText().toInt(),
-                    weightAthlete.getInputText().toFloat(),
-                    genreAthlete,
-                    birthdateAthlete.getInputText()
+                    preferences
             )
             NavHostFragment.findNavController(this).navigate(action)
         }

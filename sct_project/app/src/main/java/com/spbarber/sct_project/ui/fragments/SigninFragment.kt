@@ -20,6 +20,7 @@ import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentSiginBinding
 import com.spbarber.sct_project.databinding.FragmentSigninFormBinding
 import com.spbarber.sct_project.databinding.MyProgressBarBinding
+import com.spbarber.sct_project.entities.Preferences
 import com.spbarber.sct_project.entities.User
 import com.spbarber.sct_project.viewmodels.UsuarioViewModel
 import java.util.*
@@ -40,49 +41,9 @@ class SigninFragment : Fragment() {
         //Bindeo del formulario para el registro
         val bindingForm = FragmentSigninFormBinding.bind(binding.scrollviewSignin.rootView)
 
-        val experience = arguments?.let {
-            SigninFragmentArgs.fromBundle(it).experience
+        val preferences = arguments?.let {
+            SigninFragmentArgs.fromBundle(it).preferences
         }
-        val goal = arguments?.let {
-            SigninFragmentArgs.fromBundle(it).goal
-        }
-        val duration = arguments?.let {
-            SigninFragmentArgs.fromBundle(it).duration
-        }
-        val days = arguments?.let {
-            SigninFragmentArgs.fromBundle(it).days
-        }
-        val frequency = arguments?.let {
-            SigninFragmentArgs.fromBundle(it).frequency
-        }
-        val rmSquat = arguments?.let {
-            SigninFragmentArgs.fromBundle(it).rmSquat
-        }
-        val rmPress = arguments?.let {
-            SigninFragmentArgs.fromBundle(it).rmPress
-        }
-        val rmDeadlift = arguments?.let {
-            SigninFragmentArgs.fromBundle(it).rmDeadlift
-        }
-        val nameAthlete = arguments?.let {
-            SigninFragmentArgs.fromBundle(it).name
-        }
-        val heigth = arguments?.let {
-            SigninFragmentArgs.fromBundle(it).heigth
-        }
-        val weight = arguments?.let {
-            SigninFragmentArgs.fromBundle(it).weight
-        }
-        val genre = arguments?.let {
-            SigninFragmentArgs.fromBundle(it).genre
-        }
-        val birthdate = arguments?.let {
-            SigninFragmentArgs.fromBundle(it).birthdate
-        }
-        Log.i(
-            "TAG",
-            "$experience $goal $duration $days $frequency $rmSquat $rmPress $rmDeadlift $nameAthlete $heigth $weight $genre $birthdate"
-        )
 
         binding.btnGoogleLogin.setOnClickListener {
             if (binding.btnMailLogin.isVisible) {
@@ -100,35 +61,10 @@ class SigninFragment : Fragment() {
 
         binding.btnBack.setOnClickListener {
             val action = SigninFragmentDirections.actionSiginFragmentToPersonalDataFragment(
-                experience,
-                goal,
-                duration,
-                days,
-                frequency!!,
-                rmSquat!!,
-                rmPress!!,
-                rmDeadlift!!
+                preferences
             )
             NavHostFragment.findNavController(this).navigate(action)
         }
-
-        //Recogemos todos las preferencias del usuario
-        val userPreferences = mutableListOf(
-            experience,
-            goal,
-            duration,
-            days,
-            frequency,
-            rmSquat,
-            rmPress,
-            rmDeadlift,
-            nameAthlete,
-            heigth,
-            weight,
-            genre,
-            birthdate
-        )
-
 
         bindingForm.tietName.addTextChangedListener {
             if (it.isNullOrBlank()) {
@@ -253,6 +189,12 @@ class SigninFragment : Fragment() {
                 }
 
             }
+            preferences?.firstname = firstName.getInputText()
+            preferences?.surname = surnames.getInputText()
+            preferences?.username = username.getInputText()
+            preferences?.password = password.getInputText()
+            preferences?.confirmPassword = confirmPassword.getInputText()
+
             val user = User(
                 firstName.getInputText(),
                 surnames.getInputText(),
@@ -261,34 +203,20 @@ class SigninFragment : Fragment() {
                 Date(System.currentTimeMillis()),
                 Date(System.currentTimeMillis())
             )
+
             //Para indicar que está cargando
             bindingProgressBar.myProgressBar.visibility = View.VISIBLE
             //Registro por Firebase
-
-            model.registro(user)
+            model.signin(user, preferences!!)
                 .observe(viewLifecycleOwner, { exception ->
                     if (exception==null) {
                         Log.i("TAG", "Entra en el IF...")
-                        goToApp(
-                            experience,
-                            goal,
-                            duration,
-                            days,
-                            frequency!!,
-                            rmSquat!!,
-                            rmPress!!,
-                            rmDeadlift!!,
-                            nameAthlete,
-                            heigth!!,
-                            weight!!,
-                            genre,
-                            birthdate,
-                            firstName.getInputText(),
-                            surnames.getInputText(),
-                            username.getInputText(),
-                            password.getInputText()
+                        goToProgramGenerator(
+                            preferences
                         )
                     } else {
+                        bindingProgressBar.myProgressBar.visibility = View.GONE
+                        Log.d("TAG", exception.toString())
                         when (exception) {
                             is FirebaseAuthInvalidCredentialsException -> {
                                 Snackbar.make(
@@ -332,44 +260,12 @@ class SigninFragment : Fragment() {
         return binding.root
     }
 
-    private fun goToApp(
-        experience: String?,
-        goal: String?,
-        duration: String?,
-        days: String?,
-        frequency: Int,
-        rmSquat: Float,
-        rmPress: Float,
-        rmDeadlift: Float,
-        nameAthlete: String?,
-        heigth: Int,
-        weight: Float,
-        genre: String?,
-        birthdate: String?,
-        firstname: String,
-        lastname: String,
-        username: String,
-        password: String
+    private fun goToProgramGenerator(
+        preferences: Preferences
     ) {
         val action = SigninFragmentDirections
             .actionSiginFragmentToReviewAndConfirmFragment(
-                experience,
-                goal,
-                duration,
-                days,
-                frequency,
-                rmSquat,
-                rmPress,
-                rmDeadlift,
-                nameAthlete,
-                heigth,
-                weight,
-                genre,
-                birthdate,
-                firstname,
-                lastname,
-                username,
-                password
+                preferences
             )
         NavHostFragment.findNavController(this).navigate(action)
     }

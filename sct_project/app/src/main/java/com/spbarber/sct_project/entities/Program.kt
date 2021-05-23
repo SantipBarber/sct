@@ -8,5 +8,4 @@ data class Program(
     val startDate: Date,
     val endDate: Date,
     val goal: String,
-    val idAthlete: Athlete
 )

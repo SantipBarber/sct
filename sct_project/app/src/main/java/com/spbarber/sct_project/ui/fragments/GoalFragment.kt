@@ -18,10 +18,11 @@ class GoalFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGoalBinding.inflate(layoutInflater)
-        val experience = arguments?.let {
-            GoalFragmentArgs.fromBundle(it).experience
+        val preferences = arguments?.let {
+            GoalFragmentArgs.fromBundle(it).preferences
         }
-        Log.i(TAG, "$experience")
+        //Log.i(TAG, "$experience")
+
 
         binding.btnGoalBack.setOnClickListener {
             val action = GoalFragmentDirections.actionGoalFragmentToExperienceFragment()
@@ -36,8 +37,9 @@ class GoalFragment : Fragment() {
                 R.id.rb_target_strength -> goalUser = "improveEndurance"
                 R.id.rb_target_size -> goalUser = "size"
             }
+            preferences?.goal = goalUser
 
-            val action = GoalFragmentDirections.actionGoalFragmentToTempRuleFragment(experience, goalUser)
+            val action = GoalFragmentDirections.actionGoalFragmentToTempRuleFragment(preferences)
             NavHostFragment.findNavController(this).navigate(action)
             //Log.i(TAG, "$experience $goalUser")
         }

@@ -1,15 +1,18 @@
 package com.spbarber.sct_project.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentInitBinding
+import com.spbarber.sct_project.viewmodels.UsuarioViewModel
 
 
 class InitFragment : Fragment() {
@@ -35,11 +38,11 @@ class InitFragment : Fragment() {
     public override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        if(currentUser != null){
-            val action = InitFragmentDirections.actionInitFragmentToSctAppFragment()
-            NavHostFragment.findNavController(this).navigate(action)
-        }
+        //val currentUser = auth.currentUser
+        //if(currentUser != null){
+        //    val action = InitFragmentDirections.actionInitFragmentToMainAppFragment()
+        //    NavHostFragment.findNavController(this).navigate(action)
+        //}
     }
 
 }

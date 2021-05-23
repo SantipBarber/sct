@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.ReviewAndConfirmFragment">
@@ -12,28 +11,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.025"/>
+        app:layout_constraintGuide_percent="0.025" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/main_vertical_end_guide"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.975"/>
+        app:layout_constraintGuide_percent="0.975" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/main_horizontal_start_guide"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.0125"/>
+        app:layout_constraintGuide_percent="0.0125" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/main_horizontal_end_guide"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9875"/>
+        app:layout_constraintGuide_percent="0.9875" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_back"
@@ -60,50 +59,265 @@
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:background="@color/color_surface"
-        app:layout_constraintTop_toBottomOf="@+id/btn_back"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_back"
+        app:zigzagBackgroundColor="@color/black"
         app:zigzagElevation="1dp"
         app:zigzagHeight="4dp"
         app:zigzagPaddingContent="16dp"
         app:zigzagShadowAlpha="0.9"
-        app:zigzagSides="top|bottom"
-        app:zigzagBackgroundColor="@color/black"
-        />
+        app:zigzagSides="top|bottom" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mcv_preference_summary"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:backgroundTint="@color/color_background"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toTopOf="@+id/main_bottom_separator"
+        app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
+        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
+        app:layout_constraintTop_toBottomOf="@+id/main_top_separator">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_user_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_weight="1"
+                    android:cropToPadding="true"
+                    android:src="@mipmap/logo_sct"
+                    app:civ_border_width="3dp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_review_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Nombre del atleta: "
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_review_age"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Edad del atleta: "
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_review_genre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Género del atleta: "
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_review_heigth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Altura del atleta: "
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_review_weight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Peso del atleta: "
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_user_preferences"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Experiencia: "
+                        android:textStyle="italic"
+                        android:gravity="center"
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Objetivo: "
+                        android:textStyle="italic"
+                        android:gravity="center"
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Duración: "
+                        android:textStyle="italic"
+                        android:gravity="center"
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Número de días: "
+                        android:textStyle="italic"
+                        android:gravity="center"
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Frecuencia: "
+                        android:textStyle="italic"
+                        android:gravity="center"
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_review_experience"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Experiencia usuario"
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="18sp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/tv_review_goal"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Objetivo usuario"
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="18sp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/tv_review_duration"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Objetivo usuario"
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="18sp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/tv_review_days"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Objetivo usuario"
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="18sp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/tv_review_frequency"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Objetivo usuario"
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="18sp"
+                        android:gravity="center"/>
+
+                </LinearLayout>
 
 
+            </LinearLayout>
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <ir.beigirad.zigzagview.ZigzagView
         android:id="@+id/main_bottom_separator"
         android:layout_width="match_parent"
         android:layout_height="10dp"
+        android:layout_marginBottom="15dp"
         android:background="@color/color_surface"
         app:layout_constraintBottom_toTopOf="@+id/btn_generate"
-        app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:zigzagBackgroundColor="@color/black"
         app:zigzagElevation="1dp"
         app:zigzagHeight="4dp"
         app:zigzagPaddingContent="16dp"
         app:zigzagShadowAlpha="0.9"
-        app:zigzagSides="top|bottom"
-        app:zigzagBackgroundColor="@color/black"
-        android:layout_marginBottom="15dp" />
+        app:zigzagSides="top|bottom" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_generate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/main_horizontal_end_guide"
-        app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
-        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="@color/color_secondary"
+        android:clickable="true"
+        android:focusable="true"
         android:text="Generar Programa"
         android:textStyle="bold"
         app:cornerRadius="15dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_marginBottom="10dp"
-        />
+        app:layout_constraintBottom_toTopOf="@id/main_horizontal_end_guide"
+        app:layout_constraintEnd_toStartOf="@+id/main_vertical_end_guide"
+        app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide" />
 </androidx.constraintlayout.widget.ConstraintLayout>

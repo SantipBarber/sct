@@ -9,16 +9,18 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.NavHostFragment
 import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentExperienceBinding
+import com.spbarber.sct_project.entities.Preferences
 
 
 class ExperienceFragment : Fragment() {
     private val TAG = "log"
     private lateinit var binding: FragmentExperienceBinding
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = FragmentExperienceBinding.inflate(layoutInflater)
         val view = binding.root
-
+        var preferences = Preferences()
         binding.btnBackSigin.setOnClickListener {
             val action = ExperienceFragmentDirections.actionExperienceFragmentToInitFragment()
             NavHostFragment.findNavController(this).navigate(action)
@@ -32,7 +34,8 @@ class ExperienceFragment : Fragment() {
                 R.id.rb_experience_advance -> experienceUser = "advanced"
             }
 
-            val action = ExperienceFragmentDirections.actionExperienceFragmentToGoalFragment(experienceUser)
+            preferences.experience = experienceUser
+            val action = ExperienceFragmentDirections.actionExperienceFragmentToGoalFragment(preferences)
             NavHostFragment.findNavController(this).navigate(action)
             Log.i(TAG, experienceUser)
         }

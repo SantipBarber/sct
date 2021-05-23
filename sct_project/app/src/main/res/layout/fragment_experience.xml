@@ -156,8 +156,6 @@
             app:layout_constraintStart_toEndOf="@+id/main_vertical_start_guide" />
     </RadioGroup>
 
-
-
     <ir.beigirad.zigzagview.ZigzagView
         android:id="@+id/main_bottom_separator"
         android:layout_width="match_parent"
