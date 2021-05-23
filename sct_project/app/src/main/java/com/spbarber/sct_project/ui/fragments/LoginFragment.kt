@@ -111,7 +111,7 @@ class LoginFragment : Fragment() {
                 .observe(viewLifecycleOwner, { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
-                        model._users.observe(viewLifecycleOwner, { it ->
+                        model._users.observe(viewLifecycleOwner, {
 
 
                         })
@@ -143,7 +143,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun goToApp() {
-        val action = LoginFragmentDirections.actionLoginFragmentToBottomNavGraph()
+        val action = LoginFragmentDirections.actionGlobalBottomNavGraph()
         NavHostFragment.findNavController(this).navigate(action)
     }
 

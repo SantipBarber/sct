@@ -2,11 +2,9 @@ package com.spbarber.sct_project.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.snackbar.Snackbar
@@ -32,6 +30,12 @@ class WorkoutFragment : Fragment() {
     ): View? {
         binding = FragmentWorkoutBinding.inflate(layoutInflater)
 
+        binding.btnLogout.setOnClickListener {
+            listener?.hideBottomNavigation()
+            getAuth().signOut()
+            NavHostFragment.findNavController(this).navigate(R.id.action_global_initFragment2)
+        }
+
 
         return binding.root
     }
@@ -41,6 +45,7 @@ class WorkoutFragment : Fragment() {
         val currentUser = getAuth().currentUser
         val nameUser = currentUser?.email
         if(currentUser != null){
+            listener?.showBottomNavigation()
             Snackbar.make(binding.root, "El usuario logueado es $nameUser", Snackbar.LENGTH_LONG).show()
         }
     }
@@ -49,6 +54,7 @@ class WorkoutFragment : Fragment() {
         super.onAttach(context)
         listener = context as MainActivity
         listener!!.showBottomNavigation()
+        listener!!.hideBottomNavigation()
     }
 
 }

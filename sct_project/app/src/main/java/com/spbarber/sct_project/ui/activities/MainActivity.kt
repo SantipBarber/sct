@@ -34,7 +34,10 @@ class MainActivity : AppCompatActivity(), MainListener {
     }
 
     override fun hideBottomNavigation() {
+        binding.mainBottomNavSeparator.visibility = View.GONE
         binding.bottomNavView.visibility = View.GONE
+        binding.btnMore.visibility = View.GONE
+        binding.mainTopNavSeparator. visibility = View.GONE
     }
 
 }
