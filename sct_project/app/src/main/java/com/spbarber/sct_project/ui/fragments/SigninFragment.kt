@@ -16,30 +16,33 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.firestore.FirebaseFirestoreException
+import com.spbarber.sct_project.App
 import com.spbarber.sct_project.R
-import com.spbarber.sct_project.databinding.FragmentSiginBinding
+import com.spbarber.sct_project.databinding.FragmentSigninBinding
 import com.spbarber.sct_project.databinding.FragmentSigninFormBinding
 import com.spbarber.sct_project.databinding.MyProgressBarBinding
-import com.spbarber.sct_project.entities.Preferences
-import com.spbarber.sct_project.entities.User
+import com.spbarber.sct_project.entities.*
+import com.spbarber.sct_project.viewmodels.AthleteViewModel
 import com.spbarber.sct_project.viewmodels.UsuarioViewModel
 import java.util.*
 import java.util.regex.Pattern
 
 class SigninFragment : Fragment() {
-    private lateinit var binding: FragmentSiginBinding
+    private lateinit var binding: FragmentSigninBinding
+    private lateinit var bindingForm: FragmentSigninFormBinding
     private lateinit var bindingProgressBar: MyProgressBarBinding
 
     private val model: UsuarioViewModel by viewModels()
+    private val modelAthlete: AthleteViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSiginBinding.inflate(layoutInflater)
+        binding = FragmentSigninBinding.inflate(layoutInflater)
         bindingProgressBar = MyProgressBarBinding.inflate(layoutInflater)
 
         //Bindeo del formulario para el registro
-        val bindingForm = FragmentSigninFormBinding.bind(binding.scrollviewSignin.rootView)
+        bindingForm = FragmentSigninFormBinding.bind(binding.scrollviewSignin.rootView)
 
         val preferences = arguments?.let {
             SigninFragmentArgs.fromBundle(it).preferences
@@ -139,6 +142,8 @@ class SigninFragment : Fragment() {
         }
 
         binding.btnSignin.setOnClickListener {
+            //Para indicar que está cargando
+            bindingProgressBar.myProgressBar.visibility = View.VISIBLE
             val firstName = bindingForm.tietName
             val surnames = bindingForm.tietSurnames
             val username = bindingForm.tietUser
@@ -204,12 +209,10 @@ class SigninFragment : Fragment() {
                 Date(System.currentTimeMillis())
             )
 
-            //Para indicar que está cargando
-            bindingProgressBar.myProgressBar.visibility = View.VISIBLE
             //Registro por Firebase
             model.signin(user, preferences!!)
                 .observe(viewLifecycleOwner, { exception ->
-                    if (exception==null) {
+                    if (exception == null) {
                         Log.i("TAG", "Entra en el IF...")
                         goToProgramGenerator(
                             preferences
@@ -245,16 +248,68 @@ class SigninFragment : Fragment() {
                                     "No se ha podido añadir la colección a Firebase",
                                     Snackbar.LENGTH_LONG
                                 ).show()
-                            } else -> {
-                            Snackbar.make(
-                                binding.root,
-                                "Algo no ha ido bien",
-                                Snackbar.LENGTH_LONG
-                            ).show()
+                            }
+                            else -> {
+                                Snackbar.make(
+                                    binding.root,
+                                    "Algo no ha ido bien",
+                                    Snackbar.LENGTH_LONG
+                                ).show()
                             }
                         }
                     }
                 })
+            val records = mutableListOf<Record>()
+            val idExerciseSquat = "3ZDB8cWGFkmBxFbXgXXm"
+            val idExercisePress = "cqsbfSG3Z0dFJJfs7QrS"
+            val idExerciseDeadlift = "cX70IjX2iapEThrofdJC"
+            val recordSquat = Record(
+                Date(System.currentTimeMillis()),
+                preferences.rmSquat,
+                idExerciseSquat
+            )
+            val recordPress = Record(
+                Date(System.currentTimeMillis()),
+                preferences.rmPress,
+                idExercisePress
+            )
+            val recordDeadlift = Record(
+                Date(System.currentTimeMillis()),
+                preferences.rmDeadlift,
+                idExerciseDeadlift
+            )
+            val recordsAthlete = listOf(recordSquat, recordPress, recordDeadlift)
+            records.addAll(recordsAthlete)
+            val programs = mutableListOf<Program>()
+            val program1 = Program(
+                1,
+                "Primer programa",
+                Date(
+                    System.currentTimeMillis()
+                ),
+                Date(System.currentTimeMillis()),
+                preferences.goal.toString()
+            )
+            programs.add(program1)
+            val newAthlete = Athlete(
+                preferences.name.toString(),
+                preferences.heigth,
+                preferences.weight,
+                preferences.birthdate.toString(),
+                preferences.genre.toString(),
+                App.getAuth().currentUser?.uid.toString(),
+                records,
+                programs
+            )
+            modelAthlete.createAthlete(newAthlete).observe(viewLifecycleOwner, { exception ->
+                when (exception) {
+                    is FirebaseFirestoreException -> {
+                        Log.i("TAG", "no se ha podido almaccenar el atleta")
+                    }
+                }
+
+            })
+
         }
 
         return binding.root

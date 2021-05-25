@@ -20,12 +20,4 @@
         android:name="com.spbarber.sct_project.ui.fragments.StatsFragment"
         android:label="fragment_stats"
         tools:layout="@layout/fragment_stats" />
-    <fragment
-        android:id="@+id/initFragment2"
-        android:name="com.spbarber.sct_project.ui.fragments.InitFragment"
-        android:label="fragment_init"
-        tools:layout="@layout/fragment_init" />
-    <action
-        android:id="@+id/action_global_initFragment2"
-        app:destination="@id/initFragment2" />
 </navigation>

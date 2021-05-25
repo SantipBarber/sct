@@ -6,12 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentGoalBinding
+import com.spbarber.sct_project.viewmodels.TrainingDataViewModel
 
 class GoalFragment : Fragment() {
     private lateinit var binding: FragmentGoalBinding
+    private val model: TrainingDataViewModel by viewModels()
     private val TAG = "TAG"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +41,15 @@ class GoalFragment : Fragment() {
                 R.id.rb_target_size -> goalUser = "size"
             }
             preferences?.goal = goalUser
+
+            /*model.getTrainingData(goalUser.capitalize())
+                .observe(viewLifecycleOwner, { task ->
+                if (task.isNotEmpty()){
+                    model._dataTraining.observe(viewLifecycleOwner, {
+
+                    })
+                }
+            })*/
 
             val action = GoalFragmentDirections.actionGoalFragmentToTempRuleFragment(preferences)
             NavHostFragment.findNavController(this).navigate(action)

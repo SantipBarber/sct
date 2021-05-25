@@ -14,6 +14,8 @@
         <action
             android:id="@+id/action_initFragment_to_loginFragment"
             app:destination="@id/loginFragment"
+            app:popUpTo="@id/initFragment"
+            app:popUpToInclusive="true"
             />
         <action
             android:id="@+id/action_initFragment_to_experienceFragment"
@@ -36,6 +38,11 @@
             app:argType="string"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_loginFragment_to_initFragment"
+            app:destination="@id/initFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -119,7 +126,7 @@
         android:id="@+id/siginFragment"
         android:name="com.spbarber.sct_project.ui.fragments.SigninFragment"
         android:label="fragment_sigin"
-        tools:layout="@layout/fragment_sigin" >
+        tools:layout="@layout/fragment_signin" >
         <argument
             android:name="preferences"
             app:argType="com.spbarber.sct_project.entities.Preferences"
@@ -169,12 +176,18 @@
             app:argType="com.spbarber.sct_project.entities.Preferences"
             app:nullable="true" />
     </fragment>
-    <include app:graph="@navigation/nav_sct_app" />
+    <include app:graph="@navigation/nav_sct_app" >
+        <action
+            android:id="@+id/action_global_initFragment"
+            app:destination="@id/initFragment" />
+    </include>
     <action
         android:id="@+id/action_global_bottom_nav_graph"
         app:destination="@id/bottom_nav_graph"
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_enter_anim"
-        app:popExitAnim="@anim/nav_default_exit_anim" />
+        app:popExitAnim="@anim/nav_default_exit_anim"
+        app:popUpTo="@id/loginFragment"
+        app:popUpToInclusive="true"/>
 </navigation>

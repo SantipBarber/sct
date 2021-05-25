@@ -1,23 +1,22 @@
 package com.spbarber.sct_project.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentInitBinding
-import com.spbarber.sct_project.viewmodels.UsuarioViewModel
+import com.spbarber.sct_project.viewmodels.TrainingDataViewModel
 
 
 class InitFragment : Fragment() {
     private lateinit var binding: FragmentInitBinding
-    private val auth = Firebase.auth
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment

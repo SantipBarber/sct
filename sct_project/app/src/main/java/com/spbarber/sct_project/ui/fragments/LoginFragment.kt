@@ -1,10 +1,12 @@
 package com.spbarber.sct_project.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,6 +17,8 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentLoginBinding
 import com.spbarber.sct_project.databinding.MyProgressBarBinding
+import com.spbarber.sct_project.ui.activities.AppActivity
+import com.spbarber.sct_project.viewmodels.TrainingDataViewModel
 import com.spbarber.sct_project.viewmodels.UsuarioViewModel
 import java.util.regex.Pattern
 
@@ -23,6 +27,7 @@ class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var bindingProgressBar: MyProgressBarBinding
     private val model: UsuarioViewModel by viewModels()
+    private val model2: TrainingDataViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -139,12 +144,19 @@ class LoginFragment : Fragment() {
                 })
         }
 
+        binding.btnLoginBack.setOnClickListener {
+            val action = LoginFragmentDirections.actionLoginFragmentToInitFragment()
+            NavHostFragment.findNavController(this).navigate(action)
+        }
+
         return binding.root
     }
 
     private fun goToApp() {
-        val action = LoginFragmentDirections.actionGlobalBottomNavGraph()
-        NavHostFragment.findNavController(this).navigate(action)
+        val intent = Intent(context, AppActivity::class.java)
+        Toast.makeText(context, "Accediendo a la app", Toast.LENGTH_LONG).show()
+        startActivity(intent)
+        activity?.finish()
     }
 
     private fun TextInputEditText.getInputText(): String {

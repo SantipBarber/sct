@@ -35,7 +35,12 @@ class UsuarioViewModel : ViewModel() {
                     getFirestore().collection("users").document("${getAuth().currentUser?.uid}")
                 docRef.get()
                     .addOnCompleteListener { document ->
-                        Log.i(T, "Snapshot de los datos de usuario: ${document.result}")
+                        Log.i(T, "-----" +
+                                "---------" +
+                                "-----------" +
+                                "----------" +
+                                "----------" +
+                                "----------Snapshot de los datos de usuario: ${document.result}")
                     }
                 _users.postValue(users)
             }

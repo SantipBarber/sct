@@ -7,33 +7,4 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.WorkoutFragment">
 
-    <TextView
-        android:id="@+id/tv_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Estamos ya en la aplicación después del Login"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:textColor="@color/white"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_logout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        text="Logout"
-        android:backgroundTint="@color/color_secondary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_main"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:text="Cerrar sesión"
-        />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
