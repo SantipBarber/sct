@@ -36,20 +36,20 @@ class GoalFragment : Fragment() {
             var goalUser = ""
             val goalUserID = binding.rgTarget.checkedRadioButtonId
             when(goalUserID){
-                R.id.rb_target_max_strength -> goalUser = "maxStrength"
-                R.id.rb_target_strength -> goalUser = "improveEndurance"
-                R.id.rb_target_size -> goalUser = "size"
+                R.id.rb_target_max_strength -> goalUser = "Maximal Strength"
+                R.id.rb_target_strength -> goalUser = "Improve Endurance"
+                R.id.rb_target_size -> goalUser = "Size"
             }
             preferences?.goal = goalUser
 
-            /*model.getTrainingData(goalUser.capitalize())
-                .observe(viewLifecycleOwner, { task ->
-                if (task.isNotEmpty()){
-                    model._dataTraining.observe(viewLifecycleOwner, {
-
-                    })
+            val duration = "10 weeks"
+            model.getTrainingData(goalUser.capitalize(), duration)
+                .observe(viewLifecycleOwner, { trainingData ->
+                if (!trainingData.trainingData.isNullOrEmpty()){
+                    Log.i(TAG, "Lanzado el getTrainingData")
+                    //
                 }
-            })*/
+            })
 
             val action = GoalFragmentDirections.actionGoalFragmentToTempRuleFragment(preferences)
             NavHostFragment.findNavController(this).navigate(action)
