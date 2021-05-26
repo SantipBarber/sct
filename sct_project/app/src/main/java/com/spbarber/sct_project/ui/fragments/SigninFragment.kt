@@ -47,6 +47,9 @@ class SigninFragment : Fragment() {
         val preferences = arguments?.let {
             SigninFragmentArgs.fromBundle(it).preferences
         }
+        //De momento no queremos que se vea el login con Google
+        //binding.btnGoogleLogin.isVisible = false
+
 
         binding.btnGoogleLogin.setOnClickListener {
             if (binding.btnMailLogin.isVisible) {
@@ -260,9 +263,9 @@ class SigninFragment : Fragment() {
                     }
                 })
             val records = mutableListOf<Record>()
-            val idExerciseSquat = "3ZDB8cWGFkmBxFbXgXXm"
-            val idExercisePress = "cqsbfSG3Z0dFJJfs7QrS"
-            val idExerciseDeadlift = "cX70IjX2iapEThrofdJC"
+            val idExerciseSquat = "squat"
+            val idExercisePress = "benchpress"
+            val idExerciseDeadlift = "deadlift"
             val recordSquat = Record(
                 Date(System.currentTimeMillis()),
                 preferences.rmSquat,
@@ -307,7 +310,6 @@ class SigninFragment : Fragment() {
                         Log.i("TAG", "no se ha podido almaccenar el atleta")
                     }
                 }
-
             })
 
         }

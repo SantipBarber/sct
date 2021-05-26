@@ -12,4 +12,8 @@ data class User(
     val updateAt: Date
 ) {
     constructor() : this("", "", "santiaguet@me.com", "123456", Date(), Date())
+
+    override fun toString(): String {
+        return super.toString()
+    }
 }

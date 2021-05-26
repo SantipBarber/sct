@@ -58,7 +58,7 @@ class TempRuleFragment : Fragment() {
             when(binding.rgFrecuency.checkedRadioButtonId){
                 R.id.rb_frequency_1 -> frequencyMovement = 1
                 R.id.rb_frequency_2 -> frequencyMovement = 2
-                R.id.rb_frequency_3 -> frequencyMovement = 3
+                //R.id.rb_frequency_3 -> frequencyMovement = 3
             }
             preferences?.duration = durationProgramItem
             preferences?.days = trainingDaysItem

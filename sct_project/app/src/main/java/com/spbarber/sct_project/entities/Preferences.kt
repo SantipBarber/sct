@@ -42,10 +42,11 @@ data class Preferences(
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
-    ) {
-    }
+        ){
 
+    }
     constructor() : this("", "", "", "", 1, 0.0F, 0.0F, 0.0F, "", 170, 80F, "", "", "", "", "", "", "")
+
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(experience)

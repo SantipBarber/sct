@@ -53,7 +53,7 @@ class GoalFragment : Fragment() {
 
             val action = GoalFragmentDirections.actionGoalFragmentToTempRuleFragment(preferences)
             NavHostFragment.findNavController(this).navigate(action)
-            //Log.i(TAG, "$experience $goalUser")
+            Log.i(TAG, "$preferences")
         }
 
         return binding.root

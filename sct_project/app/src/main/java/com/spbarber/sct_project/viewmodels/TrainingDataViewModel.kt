@@ -46,7 +46,7 @@ class TrainingDataViewModel : ViewModel() {
             .addOnSuccessListener { documents ->
                 //val data = documents.data
                 val hashMap = documents.data
-                hashMap?.put("6 weeks", documents.data!!.get("6 weeks"))
+                //hashMap?.put("6 weeks", documents.data!!.get("6 weeks"))
                 //hashMap?.put("8 weeks", documents.data!!.get("8 weeks"))
                 //hashMap?.put("10 weeks", documents.data!!.get("10 weeks"))
                 //hashMap?.put("12 weeks", documents.data!!.get("12 weeks"))
@@ -66,7 +66,7 @@ class TrainingDataViewModel : ViewModel() {
                 //trainingData.trainingData.put("10 weeks", ten)
                 //trainingData.trainingData.put("12 weeks", twelve)
                 trainingData.trainingData.put(duration, varsByDuration)
-                Log.i(TAG, "$trainingData")
+                Log.i(TAG, "${trainingData}")
                 dataTraining.value = trainingData
             }
         return dataTraining

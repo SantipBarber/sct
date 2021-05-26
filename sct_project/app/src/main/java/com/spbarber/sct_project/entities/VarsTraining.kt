@@ -1,6 +1,5 @@
 package com.spbarber.sct_project.entities
 
-import com.google.firebase.firestore.PropertyName
 import com.google.gson.annotations.SerializedName
 
 data class VarsTraining(@SerializedName("final_intensity") val finalIntensity: Int,
