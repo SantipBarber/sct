@@ -70,7 +70,7 @@ class AppActivity : AppCompatActivity() {
         val currentUser = App.getAuth().currentUser
         val nameUser = currentUser?.email
         if(currentUser != null){
-            Snackbar.make(binding.root, "El usuario logueado es $nameUser", Snackbar.LENGTH_LONG).show()
+            //Snackbar.make(binding.root, "El usuario logueado es $nameUser", Snackbar.LENGTH_LONG).show()
         } else {
             val intent = Intent(this, MainActivity::class.java)
             Toast.makeText(this, "Volviendo al init fragment", Toast.LENGTH_LONG).show()

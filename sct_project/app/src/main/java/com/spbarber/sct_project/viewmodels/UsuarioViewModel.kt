@@ -9,6 +9,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.ktx.toObject
+import com.google.gson.Gson
 import com.spbarber.sct_project.App.Companion.getAuth
 import com.spbarber.sct_project.App.Companion.getFirestore
 import com.spbarber.sct_project.entities.Preferences
@@ -26,7 +27,7 @@ class UsuarioViewModel : ViewModel() {
         }
     }
 
-    private fun loadUsers(){
+    private fun loadUsers() {
         viewModelScope.launch {
             withContext(Dispatchers.IO)
             {
@@ -35,12 +36,14 @@ class UsuarioViewModel : ViewModel() {
                     getFirestore().collection("users").document("${getAuth().currentUser?.uid}")
                 docRef.get()
                     .addOnCompleteListener { document ->
-                        Log.i(T, "-----" +
-                                "---------" +
-                                "-----------" +
-                                "----------" +
-                                "----------" +
-                                "----------Snapshot de los datos de usuario: ${document.result}")
+                        Log.i(
+                            T, "-----" +
+                                    "---------" +
+                                    "-----------" +
+                                    "----------" +
+                                    "----------" +
+                                    "----------Snapshot de los datos de usuario: ${document.result}"
+                        )
                     }
                 _users.postValue(users)
             }
@@ -56,7 +59,7 @@ class UsuarioViewModel : ViewModel() {
         return data
     }
 
-    fun getUser(uid: String): LiveData<User>{
+    fun getUser(uid: String): LiveData<User> {
         val data = MutableLiveData<User>()
         getFirestore()
             .collection(Constants.USERS)
@@ -69,21 +72,30 @@ class UsuarioViewModel : ViewModel() {
         return data
     }
 
-//    fun getPreferences(uid: String): LiveData<Preferences> {
-//        val prefs = MutableLiveData<Preferences>()
-//
-//        getFirestore().collection(Constants.USERS).document(Constants.PREFS).get().addOnSuccessListener { document ->
-//            if (document!=null){
-//                val userPrefs = document.toObject<Preferences>()
-//                prefs.value = userPrefs!!
-//            }
-//        }
-//        return prefs
-//    }
+    fun getPreferences(user: String): LiveData<Preferences> {
+        val data = MutableLiveData<Preferences>()
+        getFirestore()
+            .collection(Constants.USERS)
+            .document(user)
+            .get()
+            .addOnSuccessListener { dataUser ->
+                val index = "preferences"
+                val prefs = dataUser.data!!["preferences"]
+                //Log.i("TAG", prefs.toString())
+                val dataJson = Gson().toJson(prefs)
+                //Log.i("TAG", dataJson.toString())
 
-    //fun getUserData(): LiveData<List<User>> {
-    //  return users.equals(users ,getAuth().currentUser.uid)
-    //}
+                val preferences = Gson().fromJson(dataJson, Preferences::class.java)
+                //Log.i("TAG", preferencesUserMap.toString())
+
+                //Log.i("TAG", preferecesUser.toString())
+                data.value = preferences
+
+            }
+
+        //Log.i("TAG", data.toString())
+        return data
+    }
 
     fun signin(user: User, preferences: Preferences): LiveData<Exception?> {
         Log.i(T, "Entrando en la función registro")

@@ -118,7 +118,6 @@ class LoginFragment : Fragment() {
                         // Sign in success, update UI with the signed-in user's information
                         model._users.observe(viewLifecycleOwner, {
 
-
                         })
                         goToApp()
                     } else {
@@ -154,7 +153,7 @@ class LoginFragment : Fragment() {
 
     private fun goToApp() {
         val intent = Intent(context, AppActivity::class.java)
-        Toast.makeText(context, "Accediendo a la app", Toast.LENGTH_LONG).show()
+        //Toast.makeText(context, "Accediendo a la app", Toast.LENGTH_LONG).show()
         startActivity(intent)
         activity?.finish()
     }

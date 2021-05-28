@@ -1,27 +1,29 @@
 package com.spbarber.sct_project.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.tabs.TabLayout
+import com.google.firebase.firestore.FirebaseFirestoreException
 import com.spbarber.sct_project.App.Companion.getAuth
-import com.spbarber.sct_project.adapters.ListViewAdapter
 import com.spbarber.sct_project.adapters.SummaryRecyclerViewAdapter
 import com.spbarber.sct_project.databinding.FragmentReviewAndConfirmBinding
-import com.spbarber.sct_project.entities.Preferences
-import com.spbarber.sct_project.entities.TrainingDay
-import com.spbarber.sct_project.viewmodels.UsuarioViewModel
+import com.spbarber.sct_project.entities.*
+import com.spbarber.sct_project.ui.activities.AppActivity
+import com.spbarber.sct_project.viewmodels.AthleteViewModel
+import java.util.*
 
 class ReviewAndConfirmFragment : Fragment() {
     private lateinit var binding: FragmentReviewAndConfirmBinding
-    private val model: UsuarioViewModel by viewModels()
+    private val modelAthlete: AthleteViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,17 +40,7 @@ class ReviewAndConfirmFragment : Fragment() {
             ReviewAndConfirmFragmentArgs.fromBundle(it).preferences
         }
 
-        loadPersonalData(
-            preferences?.name.toString(),
-            preferences?.birthdate.toString(),
-            preferences?.genre.toString(),
-            preferences?.heigth.toString(),
-            preferences?.weight.toString(),
-            preferences?.experience.toString(),
-            preferences?.goal.toString(),
-            preferences?.days.toString(),
-            preferences?.frequency.toString()
-        )
+
 
         binding.btnBack.setOnClickListener {
             val action =
@@ -60,40 +52,109 @@ class ReviewAndConfirmFragment : Fragment() {
 
         loadProgramSummary(preferences!!)
 
-        //Generar programa
-        val user = getAuth().currentUser?.uid
-
         binding.btnGenerate.setOnClickListener {
-            model.getUser(user.toString()).observe(viewLifecycleOwner, {
-                //print(it.toString())
-                //Log.i("TAG", "Mensaje $it")
-                it.let {
-                    binding.tvReviewName.setText(it?.lastName)
+            val records = mutableListOf<Record>()
+            val idExerciseSquat = "squat"
+            val idExercisePress = "benchpress"
+            val idExerciseDeadlift = "deadlift"
+            val recordSquat = Record(
+                Date(System.currentTimeMillis()),
+                preferences.rmSquat,
+                idExerciseSquat
+            )
+            val recordPress = Record(
+                Date(System.currentTimeMillis()),
+                preferences.rmPress,
+                idExercisePress
+            )
+            val recordDeadlift = Record(
+                Date(System.currentTimeMillis()),
+                preferences.rmDeadlift,
+                idExerciseDeadlift
+            )
+            val recordsAthlete = listOf(recordSquat, recordPress, recordDeadlift)
+            records.addAll(recordsAthlete)
+
+            val programs = mutableListOf<Program>()
+            val program1 = Program(
+                1,
+                "Primer programa",
+                Date(
+                    System.currentTimeMillis()
+                ),
+                Date(System.currentTimeMillis()),
+                preferences.goal.toString(),
+                preferences.duration.toString()
+            )
+            programs.add(program1)
+
+
+            val trainingDays = loadTrainingDays(preferences)
+            val newAthlete = Athlete(
+                preferences.name.toString(),
+                preferences.heigth,
+                preferences.weight,
+                preferences.birthdate.toString(),
+                preferences.genre.toString(),
+                getAuth().currentUser?.uid.toString(),
+                records,
+                programs,
+                trainingDays
+            )
+            modelAthlete.createAthlete(newAthlete).observe(viewLifecycleOwner, { exception ->
+                when (exception) {
+                    is FirebaseFirestoreException -> {
+                        Log.i("TAG", "no se ha podido almacenar el atleta")
+                    }
                 }
             })
-//            model.getPreferences(user.toString()).observe(viewLifecycleOwner, { prefs ->
-//                print(prefs.toString())
-//            })
+            goToApp()
         }
-
 
         return binding.root
     }
 
-    private fun loadProgramSummary(preferences: Preferences) {
-        //Contexto --> RequireContext() por estar en un fragment
-        //Layout donde cargar los datos
-        //Datos
-        /*val adapter = ListViewAdapter(
-            requireContext(),
-            android.R.layout.simple_list_item_1,
-            loadTrainingDays(preferences)
-        )
-        binding.programSummary.adapter = adapter*/
+    private fun loadTrainingDays(preferences: Preferences): List<TrainingDay> {
+        val trainingDays = mutableListOf<TrainingDay>()
+        when(preferences.days.toString()){
+            "3 días" -> {
+                val day1 = TrainingDay(1, "Sentadilla", "Si")
+                val day2 = TrainingDay(2, "Cardio", "Opcional")
+                val day3 = TrainingDay(3, "Press banca", "Si")
+                val day4 = TrainingDay(4, "Descanso", "No")
+                val day5 = TrainingDay(5, "Peso muerto", "Si")
+                val day6 = TrainingDay(6, "Cardio", "Opcional")
+                val day7 = TrainingDay(7, "Descanso", "No")
+                val days = listOf(day1, day2, day3, day4, day5, day6, day7)
+                trainingDays.addAll(days)
 
-        val myAdapter = SummaryRecyclerViewAdapter(loadTrainingDays(preferences))
+            }
+            "5 días" -> {
+
+            }
+            "6 días" -> {
+                val day1 = TrainingDay(1, "Sentadilla", "No")
+                val day2 = TrainingDay(2, "Peso muerto variante", "Si")
+                val day3 = TrainingDay(3, "Press banca", "No")
+                val day4 = TrainingDay(4, "Sentadilla variante", "Si")
+                val day5 = TrainingDay(5, "Peso muerto", "No")
+                val day6 = TrainingDay(6, "Press banca variante", "Si")
+                val day7 = TrainingDay(7, "Descanso", "No")
+                val days = listOf(day1, day2, day3, day4, day5, day6, day7)
+                trainingDays.addAll(days)
+            }
+        }
+
+        return trainingDays
+    }
+
+
+    private fun loadProgramSummary(preferences: Preferences) {
+
+        val myAdapter = SummaryRecyclerViewAdapter(preferences)
         val recyclerView = binding.programSummary
 
+        Log.i("TAG", "Se ha creado el RecyclerView")
         recyclerView.apply {
             //Aquí configuramos de qué forma se visualizan las vistas
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
@@ -102,62 +163,11 @@ class ReviewAndConfirmFragment : Fragment() {
 
     }
 
-
-
-    private fun loadTrainingDays(preferences: Preferences): List<TrainingDay> {
-        val trainingDays = mutableListOf<TrainingDay>()
-        val days = preferences.days.toString()
-        Log.i("TAG", days)
-        when(days){
-            "3 días" -> {
-                trainingDays.add(TrainingDay(1, "Back Squat"))
-                trainingDays.add(TrainingDay(2, "Bench Press"))
-                trainingDays.add(TrainingDay(3, "Deadlift"))
-
-            }
-            "4 días" -> {
-
-            }
-            "5 días" -> {
-
-            }
-            "6 días" -> {
-                trainingDays.add(TrainingDay(1, "Back Squat"))
-                trainingDays.add(TrainingDay(2, "Bench Press"))
-                trainingDays.add(TrainingDay(3, "Deadlift"))
-                trainingDays.add(TrainingDay(4, "Squat Variant"))
-                trainingDays.add(TrainingDay(5, "Bench Press Variant"))
-                trainingDays.add(TrainingDay(6, "Deadlift Variant"))
-            }
-            else -> return trainingDays
-        }
-        Log.i("TAG", "${trainingDays.size}")
-
-        return trainingDays
-    }
-
-    private fun loadPersonalData(
-        name: String,
-        birthdate: String,
-        genre: String,
-        heigth: String,
-        weight: String,
-        experience: String,
-        goal: String,
-        days: String,
-        frequency: String
-    ) {
-        binding.tvReviewName.text = "Atleta: $name"
-        //Hay que calcular la edad
-        binding.tvReviewAge.text = "Edad: $birthdate"
-        binding.tvReviewGenre.text = "Género: $genre"
-        binding.tvReviewHeigth.text = "Altura: $heigth"
-        binding.tvReviewWeight.text = "Peso: $weight"
-        binding.tvReviewExperience.text = experience
-        binding.tvReviewGoal.text = goal
-        binding.tvReviewDays.text = days
-        binding.tvReviewFrequency.text = "$frequency x movimiento"
-
+    private fun goToApp() {
+        val intent = Intent(context, AppActivity::class.java)
+        Toast.makeText(context, "Accediendo a la app desde review!", Toast.LENGTH_LONG).show()
+        startActivity(intent)
+        activity?.finish()
     }
 
 

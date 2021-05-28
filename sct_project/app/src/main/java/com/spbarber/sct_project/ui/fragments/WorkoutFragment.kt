@@ -14,12 +14,6 @@ class WorkoutFragment : Fragment() {
 
         binding = FragmentWorkoutBinding.inflate(layoutInflater)
 
-        /*if (getAuth().currentUser == null){
-            val intent = Intent(requireContext(), MainActivity::class.java)
-            Toast.makeText(context, "Volviendo al init fragment", Toast.LENGTH_LONG).show()
-            startActivity(intent)
-        }*/
-
     }
 
     override fun onCreateView(

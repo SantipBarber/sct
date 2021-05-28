@@ -1,36 +1,533 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    <TextView
-        android:id="@+id/tv_num_day_list_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView"
-        android:gravity="center_horizontal"
-        android:textColor="@color/color_secondary"
-        android:textStyle="bold"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:strokeColor="@color/color_secondary"
+    app:strokeWidth="2dp"
+    android:backgroundTint="@color/primary_light_color"
+    android:elevation="5dp"
+    android:focusable="false"
+    android:clickable="false"
+    app:cardCornerRadius="15dp"
+    >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <LinearLayout
+                android:id="@+id/ll_user_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tv_exercise_day_list_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView"
-        android:gravity="center_horizontal"
-        android:textColor="@color/color_secondary"/>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:layout_weight="1"
+                    android:cropToPadding="true"
+                    android:src="@mipmap/logo_sct"
+                    app:civ_border_width="3dp" />
 
-    <TextView
-        android:id="@+id/tv_extra_list_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView"
-        android:gravity="center_horizontal"
-        android:textColor="@color/color_secondary"
-        android:textStyle="italic"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp">
 
-</LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_review_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Nombre del atleta: "
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="20sp"
+                        android:textStyle="italic|bold"/>
+
+                    <TextView
+                        android:id="@+id/tv_review_age"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Edad del atleta: "
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_review_genre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Género del atleta: "
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_review_heigth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Altura del atleta: "
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_review_weight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Peso del atleta: "
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_user_preferences"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Experiencia: "
+                        android:textStyle="italic"
+                        android:gravity="center"
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Objetivo: "
+                        android:textStyle="italic"
+                        android:gravity="center"
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Duración: "
+                        android:textStyle="italic"
+                        android:gravity="center"
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Entrenamiento: "
+                        android:textStyle="italic"
+                        android:gravity="center"
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Frecuencia: "
+                        android:textStyle="italic"
+                        android:gravity="center"
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_review_experience"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Experiencia usuario"
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="18sp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/tv_review_goal"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Objetivo usuario"
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="18sp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/tv_review_duration"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Objetivo usuario"
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="18sp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/tv_review_days"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Objetivo usuario"
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="18sp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/tv_review_frequency"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Objetivo usuario"
+                        android:textColor="@color/color_on_primary"
+                        android:textSize="18sp"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30sp"
+                    android:text="Resumen"
+                    android:textStyle="italic|bold"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:textColor="@color/color_secondary"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="5dp">
+                    <TextView
+
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:gravity="start"
+                        android:paddingLeft="20sp"
+                        android:textColor="@color/color_on_primary"
+                        android:paddingStart="20sp" />
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:text="Ejercicio principal"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/color_error"/>
+                    <TextView
+
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Accesorios"
+                        android:textSize="16sp"
+                        android:gravity="end"
+                        android:textStyle="bold"
+                        android:paddingRight="20sp"
+                        android:textColor="@color/color_error"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_summary_week_day_one"
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Día X"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:gravity="start"
+                        android:paddingLeft="20sp"
+                        android:textColor="@color/color_on_primary"
+                        android:paddingStart="20sp" />
+                    <TextView
+                        android:id="@+id/tv_exercise_day_one"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:text="Ejercicio principal"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:textColor="@color/color_on_primary"/>
+                    <TextView
+                        android:id="@+id/tv_accesories_day_one"
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Accesorios"
+                        android:textSize="16sp"
+                        android:gravity="end"
+                        android:paddingRight="20sp"
+                        android:textColor="@color/color_on_primary"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_summary_week_day_two"
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Día X"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:gravity="start"
+                        android:paddingLeft="20sp"
+                        android:textColor="@color/color_on_primary"/>
+                    <TextView
+                        android:id="@+id/tv_exercise_day_two"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:text="Ejercicio principal"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:textColor="@color/color_on_primary"/>
+                    <TextView
+                        android:id="@+id/tv_accesories_day_two"
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Accesorios"
+                        android:textSize="16sp"
+                        android:gravity="end"
+                        android:paddingRight="20sp"
+                        android:textColor="@color/color_on_primary"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_summary_week_day_three"
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Día X"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:gravity="start"
+                        android:paddingLeft="20sp"
+                        android:textColor="@color/color_on_primary"/>
+                    <TextView
+                        android:id="@+id/tv_exercise_day_three"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:text="Ejercicio principal"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:textColor="@color/color_on_primary"/>
+                    <TextView
+                        android:id="@+id/tv_accesories_day_three"
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Accesorios"
+                        android:textSize="16sp"
+                        android:gravity="end"
+                        android:paddingRight="20sp"
+                        android:textColor="@color/color_on_primary"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_summary_week_day_four"
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Día X"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:gravity="start"
+                        android:paddingLeft="20sp"
+                        android:textColor="@color/color_on_primary"/>
+                    <TextView
+                        android:id="@+id/tv_exercise_day_four"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:text="Ejercicio principal"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:textColor="@color/color_on_primary"/>
+                    <TextView
+                        android:id="@+id/tv_accesories_day_four"
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Accesorios"
+                        android:textSize="16sp"
+                        android:gravity="end"
+                        android:paddingRight="20sp"
+                        android:textColor="@color/color_on_primary"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_summary_week_day_five"
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Día X"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:gravity="start"
+                        android:paddingLeft="20sp"
+                        android:textColor="@color/color_on_primary"/>
+                    <TextView
+                        android:id="@+id/tv_exercise_day_five"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:text="Ejercicio principal"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:textColor="@color/color_on_primary"/>
+                    <TextView
+                        android:id="@+id/tv_accesories_day_five"
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Accesorios"
+                        android:textSize="16sp"
+                        android:gravity="end"
+                        android:paddingRight="20sp"
+                        android:textColor="@color/color_on_primary"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_summary_week_day_six"
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Día X"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:gravity="start"
+                        android:paddingLeft="20sp"
+                        android:textColor="@color/color_on_primary"/>
+                    <TextView
+                        android:id="@+id/tv_exercise_day_six"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:text="Ejercicio principal"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:textColor="@color/color_on_primary"/>
+                    <TextView
+                        android:id="@+id/tv_accesories_day_six"
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Accesorios"
+                        android:textSize="16sp"
+                        android:gravity="end"
+                        android:paddingRight="20sp"
+                        android:textColor="@color/color_on_primary"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_summary_week_day_seven"
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Día X"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:gravity="start"
+                        android:paddingLeft="20sp"
+                        android:textColor="@color/color_on_primary"/>
+                    <TextView
+                        android:id="@+id/tv_exercise_day_seven"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:text="Ejercicio principal"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:textColor="@color/color_on_primary"/>
+                    <TextView
+                        android:id="@+id/tv_accesories_day_seven"
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Accesorios"
+                        android:textSize="16sp"
+                        android:gravity="end"
+                        android:paddingRight="20sp"
+                        android:textColor="@color/color_on_primary"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+</com.google.android.material.card.MaterialCardView>

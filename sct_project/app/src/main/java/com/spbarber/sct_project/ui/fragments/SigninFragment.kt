@@ -1,10 +1,12 @@
 package com.spbarber.sct_project.ui.fragments
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -24,6 +26,8 @@ import com.spbarber.sct_project.databinding.MyProgressBarBinding
 import com.spbarber.sct_project.entities.*
 import com.spbarber.sct_project.viewmodels.AthleteViewModel
 import com.spbarber.sct_project.viewmodels.UsuarioViewModel
+import java.time.LocalDate
+import java.time.Period
 import java.util.*
 import java.util.regex.Pattern
 
@@ -33,7 +37,7 @@ class SigninFragment : Fragment() {
     private lateinit var bindingProgressBar: MyProgressBarBinding
 
     private val model: UsuarioViewModel by viewModels()
-    private val modelAthlete: AthleteViewModel by viewModels()
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,9 +51,6 @@ class SigninFragment : Fragment() {
         val preferences = arguments?.let {
             SigninFragmentArgs.fromBundle(it).preferences
         }
-        //De momento no queremos que se vea el login con Google
-        //binding.btnGoogleLogin.isVisible = false
-
 
         binding.btnGoogleLogin.setOnClickListener {
             if (binding.btnMailLogin.isVisible) {
@@ -211,6 +212,7 @@ class SigninFragment : Fragment() {
                 Date(System.currentTimeMillis()),
                 Date(System.currentTimeMillis())
             )
+            goToProgramGenerator(preferences!!)
 
             //Registro por Firebase
             model.signin(user, preferences!!)
@@ -262,55 +264,6 @@ class SigninFragment : Fragment() {
                         }
                     }
                 })
-            val records = mutableListOf<Record>()
-            val idExerciseSquat = "squat"
-            val idExercisePress = "benchpress"
-            val idExerciseDeadlift = "deadlift"
-            val recordSquat = Record(
-                Date(System.currentTimeMillis()),
-                preferences.rmSquat,
-                idExerciseSquat
-            )
-            val recordPress = Record(
-                Date(System.currentTimeMillis()),
-                preferences.rmPress,
-                idExercisePress
-            )
-            val recordDeadlift = Record(
-                Date(System.currentTimeMillis()),
-                preferences.rmDeadlift,
-                idExerciseDeadlift
-            )
-            val recordsAthlete = listOf(recordSquat, recordPress, recordDeadlift)
-            records.addAll(recordsAthlete)
-            val programs = mutableListOf<Program>()
-            val program1 = Program(
-                1,
-                "Primer programa",
-                Date(
-                    System.currentTimeMillis()
-                ),
-                Date(System.currentTimeMillis()),
-                preferences.goal.toString()
-            )
-            programs.add(program1)
-            val newAthlete = Athlete(
-                preferences.name.toString(),
-                preferences.heigth,
-                preferences.weight,
-                preferences.birthdate.toString(),
-                preferences.genre.toString(),
-                App.getAuth().currentUser?.uid.toString(),
-                records,
-                programs
-            )
-            modelAthlete.createAthlete(newAthlete).observe(viewLifecycleOwner, { exception ->
-                when (exception) {
-                    is FirebaseFirestoreException -> {
-                        Log.i("TAG", "no se ha podido almaccenar el atleta")
-                    }
-                }
-            })
 
         }
 
@@ -331,6 +284,21 @@ class SigninFragment : Fragment() {
         return text.toString()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getAge(preferences: Preferences): Int {
+        val birthdate = preferences.birthdate.toString()
+        val listDate = birthdate.split("/").toTypedArray()
+        println(listDate.contentToString())
+
+        val ageAthlete = Period.between(
+            LocalDate.of(listDate[2].toInt(), listDate[1].toInt(), listDate[0].toInt()),
+            LocalDate.now()
+        ).years
+
+        println(ageAthlete.toString())
+
+        return ageAthlete
+    }
 
 }
 

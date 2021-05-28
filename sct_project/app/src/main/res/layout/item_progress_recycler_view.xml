@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:strokeColor="@color/color_secondary"
+    app:strokeWidth="2dp"
+    android:backgroundTint="@color/primary_light_color"
+    android:elevation="5dp"
+    android:focusable="false"
+    android:clickable="false"
+    app:cardCornerRadius="15dp"
+    >
+
+    <LinearLayout
+        android:id="@+id/ll_main_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_rv_week"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="SEMANA 1"
+            android:textColor="@color/color_on_primary"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="- Resumen"
+            android:textColor="@color/color_on_primary"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            android:paddingLeft="50dp"
+            android:layout_marginBottom="5dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="- Intensidad:"
+                android:textColor="@color/color_on_primary"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                android:paddingLeft="75dp"
+                android:layout_marginBottom="5dp"/>
+            <TextView
+                android:id="@+id/tv_rv_percent_rm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="% RM"
+                android:textColor="@color/color_on_primary"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                android:gravity="end"
+                android:paddingRight="50dp"
+                android:layout_marginBottom="5dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="- Volumen:"
+                android:textColor="@color/color_on_primary"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                android:paddingLeft="75dp"
+                android:layout_marginBottom="5dp"/>
+            <TextView
+                android:id="@+id/tv_rv_total_volume"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Volumen total"
+                android:textColor="@color/color_on_primary"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                android:gravity="end"
+                android:paddingRight="50dp"
+                android:layout_marginBottom="5dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="- Sentadilla:"
+                android:textColor="@color/color_on_primary"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                android:paddingLeft="75dp"
+                android:layout_marginBottom="5dp"/>
+            <TextView
+                android:id="@+id/tv_rv_squat_volume"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="kg"
+                android:textColor="@color/color_on_primary"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                android:gravity="end"
+                android:paddingRight="50dp"
+                android:layout_marginBottom="5dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="- Press banca:"
+                android:textColor="@color/color_on_primary"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                android:paddingLeft="75dp"
+                android:layout_marginBottom="5dp"/>
+            <TextView
+                android:id="@+id/tv_rv_bench_press_volume"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="kg"
+                android:textColor="@color/color_on_primary"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                android:gravity="end"
+                android:paddingRight="50dp"
+                android:layout_marginBottom="5dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="- Peso muerto:"
+                android:textColor="@color/color_on_primary"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                android:paddingLeft="75dp"
+                android:layout_marginBottom="5dp"/>
+            <TextView
+                android:id="@+id/tv_rv_deadlift_volume"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="kg"
+                android:textColor="@color/color_on_primary"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                android:gravity="end"
+                android:paddingRight="50dp"
+                android:layout_marginBottom="5dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

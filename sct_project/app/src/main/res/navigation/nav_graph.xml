@@ -176,18 +176,4 @@
             app:argType="com.spbarber.sct_project.entities.Preferences"
             app:nullable="true" />
     </fragment>
-    <include app:graph="@navigation/nav_sct_app" >
-        <action
-            android:id="@+id/action_global_initFragment"
-            app:destination="@id/initFragment" />
-    </include>
-    <action
-        android:id="@+id/action_global_bottom_nav_graph"
-        app:destination="@id/bottom_nav_graph"
-        app:enterAnim="@anim/nav_default_enter_anim"
-        app:exitAnim="@anim/nav_default_exit_anim"
-        app:popEnterAnim="@anim/nav_default_enter_anim"
-        app:popExitAnim="@anim/nav_default_exit_anim"
-        app:popUpTo="@id/loginFragment"
-        app:popUpToInclusive="true"/>
 </navigation>

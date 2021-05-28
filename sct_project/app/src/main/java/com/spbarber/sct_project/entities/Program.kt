@@ -8,4 +8,7 @@ data class Program(
     val startDate: Date,
     val endDate: Date,
     val goal: String,
-)
+    val duration: String
+){
+    constructor(): this(-1, "", Date(System.currentTimeMillis()), Date(System.currentTimeMillis()),"", "")
+}
