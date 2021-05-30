@@ -8,7 +8,9 @@ data class Program(
     val startDate: Date,
     val endDate: Date,
     val goal: String,
-    val duration: String
+    val duration: String,
+    val trainingDays: List<TrainingDay>,
+    val weeks: List<Week>
 ){
-    constructor(): this(-1, "", Date(System.currentTimeMillis()), Date(System.currentTimeMillis()),"", "")
+    constructor(): this(-1, "", Date(System.currentTimeMillis()), Date(System.currentTimeMillis()),"", "", mutableListOf(), mutableListOf())
 }

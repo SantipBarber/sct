@@ -19,11 +19,13 @@ import com.spbarber.sct_project.databinding.FragmentReviewAndConfirmBinding
 import com.spbarber.sct_project.entities.*
 import com.spbarber.sct_project.ui.activities.AppActivity
 import com.spbarber.sct_project.viewmodels.AthleteViewModel
+import com.spbarber.sct_project.viewmodels.TrainingDataViewModel
 import java.util.*
 
 class ReviewAndConfirmFragment : Fragment() {
     private lateinit var binding: FragmentReviewAndConfirmBinding
     private val modelAthlete: AthleteViewModel by viewModels()
+    private val modelTrainingData: TrainingDataViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +42,6 @@ class ReviewAndConfirmFragment : Fragment() {
             ReviewAndConfirmFragmentArgs.fromBundle(it).preferences
         }
 
-
-
         binding.btnBack.setOnClickListener {
             val action =
                 ReviewAndConfirmFragmentDirections.actionReviewAndConfirmFragmentToSiginFragment(
@@ -53,43 +53,22 @@ class ReviewAndConfirmFragment : Fragment() {
         loadProgramSummary(preferences!!)
 
         binding.btnGenerate.setOnClickListener {
-            val records = mutableListOf<Record>()
-            val idExerciseSquat = "squat"
-            val idExercisePress = "benchpress"
-            val idExerciseDeadlift = "deadlift"
-            val recordSquat = Record(
-                Date(System.currentTimeMillis()),
-                preferences.rmSquat,
-                idExerciseSquat
-            )
-            val recordPress = Record(
-                Date(System.currentTimeMillis()),
-                preferences.rmPress,
-                idExercisePress
-            )
-            val recordDeadlift = Record(
-                Date(System.currentTimeMillis()),
-                preferences.rmDeadlift,
-                idExerciseDeadlift
-            )
-            val recordsAthlete = listOf(recordSquat, recordPress, recordDeadlift)
-            records.addAll(recordsAthlete)
+            createAthlete(preferences)
+            goToApp()
+        }
 
-            val programs = mutableListOf<Program>()
-            val program1 = Program(
-                1,
-                "Primer programa",
-                Date(
-                    System.currentTimeMillis()
-                ),
-                Date(System.currentTimeMillis()),
-                preferences.goal.toString(),
-                preferences.duration.toString()
-            )
-            programs.add(program1)
+        return binding.root
+    }
 
+    private fun createAthlete(preferences: Preferences) {
+        modelTrainingData.getTrainingData(
+            preferences.goal!!.capitalize(),
+            getDuration(preferences.duration.toString())
+        ).observe(viewLifecycleOwner, { dataTraining ->
+            val weeksOfProgram = loadWeeks(dataTraining, preferences)
+            val programs = newProgram(preferences, weeksOfProgram)
+            val records = newRecords(preferences)
 
-            val trainingDays = loadTrainingDays(preferences)
             val newAthlete = Athlete(
                 preferences.name.toString(),
                 preferences.heigth,
@@ -98,25 +77,220 @@ class ReviewAndConfirmFragment : Fragment() {
                 preferences.genre.toString(),
                 getAuth().currentUser?.uid.toString(),
                 records,
-                programs,
-                trainingDays
+                programs
             )
             modelAthlete.createAthlete(newAthlete).observe(viewLifecycleOwner, { exception ->
                 when (exception) {
                     is FirebaseFirestoreException -> {
                         Log.i("TAG", "no se ha podido almacenar el atleta")
                     }
+                    else -> {
+                        Log.i("TAG", "Hemos almacenado al atleta correctamente!!!!")
+                    }
                 }
             })
-            goToApp()
-        }
+        })
+    }
 
-        return binding.root
+    private fun newProgram(preferences: Preferences, weeks: List<Week>): List<Program> {
+        val program = mutableListOf<Program>()
+        val trainingDays = loadTrainingDays(preferences)
+        val newProgram = Program(
+            1,
+            "Primer programa",
+            Date(
+                System.currentTimeMillis()
+            ),
+            Date(System.currentTimeMillis()),
+            preferences.goal.toString(),
+            preferences.duration.toString(),
+            trainingDays,
+            weeks
+        )
+        program.add(newProgram)
+
+        return program
+    }
+
+    private fun newRecords(preferences: Preferences): List<Record> {
+        val records = mutableListOf<Record>()
+        val idExerciseSquat = "squat"
+        val idExercisePress = "benchpress"
+        val idExerciseDeadlift = "deadlift"
+        val recordSquat = Record(
+            Date(System.currentTimeMillis()),
+            preferences.rmSquat,
+            idExerciseSquat
+        )
+        val recordPress = Record(
+            Date(System.currentTimeMillis()),
+            preferences.rmPress,
+            idExercisePress
+        )
+        val recordDeadlift = Record(
+            Date(System.currentTimeMillis()),
+            preferences.rmDeadlift,
+            idExerciseDeadlift
+        )
+        val recordsAthlete = listOf(recordSquat, recordPress, recordDeadlift)
+        records.addAll(recordsAthlete)
+
+        return records
+    }
+
+    private fun loadWeeks(dataTraining: TrainingData, preferences: Preferences): MutableList<Week> {
+        val durationWeeks = getDuration(preferences.duration.toString())
+        val delimiter = " "
+        val numberOfWeeks = durationWeeks.split(delimiter)
+        val weeks = mutableListOf<Week>()
+
+        dataTraining.trainingData.forEach {
+            var intensityWeek = it.value.initIntensity.toFloat()
+            var totalReps = it.value.initReps
+            var squatVolume = intensityWeek / 100 * preferences.rmSquat * totalReps
+            var pressVolume = intensityWeek / 100 * preferences.rmPress * totalReps
+            var deadliftVolume = intensityWeek / 100 * preferences.rmDeadlift * totalReps
+            var totalVolume = squatVolume + pressVolume + deadliftVolume
+            var restBetweenClusters = it.value.restBetClusters.toFloat()
+            var setDuration = when (preferences.goal) {
+                "Size" -> 5
+                "Improve Endurance" -> 7
+                "Maximal Strength" -> 10
+                else -> 10
+            }
+            var totalSets = it.value.initSets
+
+            for (i in 1..numberOfWeeks[0].toInt()) {
+                val week = Week(
+                    i,
+                    "Semana $i",
+                    intensityWeek,
+                    totalVolume,
+                    squatVolume,
+                    pressVolume,
+                    deadliftVolume,
+                    restBetweenClusters,
+                    setDuration,
+                    totalSets,
+                    totalReps
+                )
+                weeks.add(week)
+                when (it.value.modFactor) {
+                    2 -> {
+                        when (numberOfWeeks[0].toInt()) {
+                            6 -> {
+                                if (i > 1 && i % 2 == 0) {
+                                    if (preferences.goal == "Maximal Strength") {
+                                        intensityWeek *= it.value.intensityIncrease.toFloat()
+                                        totalReps -= 3
+                                        squatVolume =
+                                            intensityWeek / 100 * preferences.rmSquat * totalReps
+                                        pressVolume =
+                                            intensityWeek / 100 * preferences.rmSquat * totalReps
+                                        deadliftVolume =
+                                            intensityWeek / 100 * preferences.rmSquat * totalReps
+                                        totalVolume =
+                                            squatVolume + pressVolume + deadliftVolume
+                                        totalSets -= it.value.setDecrease.toInt()
+                                        restBetweenClusters *= it.value.restIncrease.toFloat()
+                                    } else {
+                                        intensityWeek *= it.value.intensityIncrease.toFloat()
+                                        totalReps -= 6
+                                        squatVolume =
+                                            intensityWeek / 100 * preferences.rmSquat * totalReps
+                                        pressVolume =
+                                            intensityWeek / 100 * preferences.rmSquat * totalReps
+                                        deadliftVolume =
+                                            intensityWeek / 100 * preferences.rmSquat * totalReps
+                                        totalVolume =
+                                            squatVolume + pressVolume + deadliftVolume
+                                        totalSets -= it.value.setDecrease.toInt()
+                                        restBetweenClusters *= it.value.restIncrease.toFloat()
+                                    }
+                                }
+                            }
+                            8 -> {
+                                if (i > 1 && i % 2 == 0) {
+                                    if (preferences.goal == "Maximal Strength") {
+                                        intensityWeek *= it.value.intensityIncrease.toFloat()
+                                        totalReps -= 3
+                                        squatVolume =
+                                            intensityWeek / 100 * preferences.rmSquat * totalReps
+                                        pressVolume =
+                                            intensityWeek / 100 * preferences.rmSquat * totalReps
+                                        deadliftVolume =
+                                            intensityWeek / 100 * preferences.rmSquat * totalReps
+                                        totalVolume =
+                                            squatVolume + pressVolume + deadliftVolume
+                                        totalSets -= it.value.setDecrease.toInt()
+                                        restBetweenClusters *= it.value.restIncrease.toFloat()
+                                    } else {
+                                        intensityWeek *= it.value.intensityIncrease.toFloat()
+                                        totalReps -= 6
+                                        squatVolume =
+                                            intensityWeek / 100 * preferences.rmSquat * totalReps
+                                        pressVolume =
+                                            intensityWeek / 100 * preferences.rmSquat * totalReps
+                                        deadliftVolume =
+                                            intensityWeek / 100 * preferences.rmSquat * totalReps
+                                        totalVolume =
+                                            squatVolume + pressVolume + deadliftVolume
+                                        totalSets -= it.value.setDecrease.toInt()
+                                        restBetweenClusters *= it.value.restIncrease.toFloat()
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    3 -> {
+                        if (i > 1 && i % 3 == 0) {
+                            if (preferences.goal == "Maximal Strength") {
+                                intensityWeek *= it.value.intensityIncrease.toFloat()
+                                totalReps -= 3
+                                squatVolume =
+                                    intensityWeek / 100 * preferences.rmSquat * totalReps
+                                pressVolume =
+                                    intensityWeek / 100 * preferences.rmSquat * totalReps
+                                deadliftVolume =
+                                    intensityWeek / 100 * preferences.rmSquat * totalReps
+                                totalVolume = squatVolume + pressVolume + deadliftVolume
+                                totalSets -= it.value.setDecrease.toInt()
+                                restBetweenClusters *= it.value.restIncrease.toFloat()
+                            } else {
+                                intensityWeek *= it.value.intensityIncrease.toFloat()
+                                totalReps -= 6
+                                squatVolume =
+                                    intensityWeek / 100 * preferences.rmSquat * totalReps
+                                pressVolume =
+                                    intensityWeek / 100 * preferences.rmSquat * totalReps
+                                deadliftVolume =
+                                    intensityWeek / 100 * preferences.rmSquat * totalReps
+                                totalVolume =
+                                    squatVolume + pressVolume + deadliftVolume
+                                totalSets -= it.value.setDecrease.toInt()
+                                restBetweenClusters *= it.value.restIncrease.toFloat()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return weeks
+    }
+
+    private fun getDuration(duration: String): String {
+        return when (duration) {
+            "6 semanas" -> "6 weeks"
+            "8 semanas" -> "8 weeks"
+            "10 semanas" -> "10 weeks"
+            "12 semanas" -> "12 weeks"
+            else -> "6 weeks"
+        }
     }
 
     private fun loadTrainingDays(preferences: Preferences): List<TrainingDay> {
         val trainingDays = mutableListOf<TrainingDay>()
-        when(preferences.days.toString()){
+        when (preferences.days.toString()) {
             "3 días" -> {
                 val day1 = TrainingDay(1, "Sentadilla", "Si")
                 val day2 = TrainingDay(2, "Cardio", "Opcional")
@@ -148,19 +322,15 @@ class ReviewAndConfirmFragment : Fragment() {
         return trainingDays
     }
 
-
     private fun loadProgramSummary(preferences: Preferences) {
 
         val myAdapter = SummaryRecyclerViewAdapter(preferences)
         val recyclerView = binding.programSummary
-
-        Log.i("TAG", "Se ha creado el RecyclerView")
         recyclerView.apply {
             //Aquí configuramos de qué forma se visualizan las vistas
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
             adapter = myAdapter
         }
-
     }
 
     private fun goToApp() {

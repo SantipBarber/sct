@@ -2,7 +2,6 @@ package com.spbarber.sct_project.ui.fragments
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,13 +17,11 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.firestore.FirebaseFirestoreException
-import com.spbarber.sct_project.App
 import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentSigninBinding
 import com.spbarber.sct_project.databinding.FragmentSigninFormBinding
 import com.spbarber.sct_project.databinding.MyProgressBarBinding
 import com.spbarber.sct_project.entities.*
-import com.spbarber.sct_project.viewmodels.AthleteViewModel
 import com.spbarber.sct_project.viewmodels.UsuarioViewModel
 import java.time.LocalDate
 import java.time.Period
@@ -215,16 +212,16 @@ class SigninFragment : Fragment() {
             goToProgramGenerator(preferences!!)
 
             //Registro por Firebase
-            model.signin(user, preferences!!)
+            model.signin(user, preferences)
                 .observe(viewLifecycleOwner, { exception ->
                     if (exception == null) {
-                        Log.i("TAG", "Entra en el IF...")
+                        //Log.i("TAG", "Entra en el IF...")
                         goToProgramGenerator(
                             preferences
                         )
                     } else {
                         bindingProgressBar.myProgressBar.visibility = View.GONE
-                        Log.d("TAG", exception.toString())
+                        //Log.d("TAG", exception.toString())
                         when (exception) {
                             is FirebaseAuthInvalidCredentialsException -> {
                                 Snackbar.make(

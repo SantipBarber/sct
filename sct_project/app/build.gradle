@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId "com.spbarber.sct_project"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -77,5 +77,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     //Corrutinas
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
+    //Para gráficos
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
 }

@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.spbarber.sct_project.App
 import com.spbarber.sct_project.adapters.ProgressRecyclerViewAdapter
 import com.spbarber.sct_project.databinding.FragmentProgressBinding
+import com.spbarber.sct_project.entities.Preferences
 import com.spbarber.sct_project.entities.VarsTraining
+import com.spbarber.sct_project.entities.Week
 import com.spbarber.sct_project.viewmodels.AthleteViewModel
 import com.spbarber.sct_project.viewmodels.TrainingDataViewModel
 import com.spbarber.sct_project.viewmodels.UsuarioViewModel
@@ -24,16 +26,11 @@ class ProgressFragment : Fragment() {
     private val modelAthlete: AthleteViewModel by viewModels()
     private val modelTrainingData: TrainingDataViewModel by viewModels()
     private val modelUserViewModel: UsuarioViewModel by viewModels()
-    private val madapter: ProgressRecyclerViewAdapter = ProgressRecyclerViewAdapter()
+    //private val myAdapter: ProgressRecyclerViewAdapter = ProgressRecyclerViewAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val rv = binding.rvProgress
-        rv.apply {
-            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-            adapter = madapter
-        }
-        //Crear el recycler view
+
     }
 
     override fun onCreateView(
@@ -53,29 +50,41 @@ class ProgressFragment : Fragment() {
                          * En el observador de UsuarioViewModel getPreferences()
                          */
                         val preferences = preferencesData
-                        val athlete = preferences?.name
-                        val goal = preferences?.goal
-                        val duration = "6 weeks"
-
-                        Log.i(TAG, goal.toString())
-                        Log.i(TAG, duration.toString())
-                        modelTrainingData.getTrainingData(goal.toString(), duration.toString())
-                            .observe(viewLifecycleOwner, { trainingData ->
-                                /**
-                                 * En el observador de TrainingDataViewModel getTrainingData()
-                                 */
-                                //madapter.newItems(trainingData)
-                                //Actualizar los datos del adaptador
-                                Log.i(TAG, trainingData.toString())
-
-                            })
+                        val athlete = preferences!!.name
+                        val goal = preferences?.goal.toString()
+                        val duration = getWeeks(preferences)
+                        modelAthlete.getAthlete(athlete!!).observe(viewLifecycleOwner, {athleteData ->
+                            createRecyclerView(athleteData.programs[0].weeks)
+                        })
                     })
             })
-
-
-
 
         return binding.root
     }
 
+    private fun createRecyclerView(weeks: List<Week>){
+        val myAdapter = ProgressRecyclerViewAdapter(weeks as MutableList<Week>)
+        val recyclerView = binding.rvProgress
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(
+                requireContext(),
+                RecyclerView.VERTICAL,
+                false
+            )
+            adapter = myAdapter
+        }
+    }
+
+    private fun getWeeks(preferences: Preferences): Int {
+        Log.i(TAG, "En la función ${preferences.duration.toString()}")
+        var durationProgram = 6
+        when (preferences.duration.toString()) {
+            "6 weeks" -> durationProgram = 6
+            "8 weeks" -> durationProgram = 8
+            "10 weeks" -> durationProgram = 10
+            "12 weeks" -> durationProgram = 12
+            else -> durationProgram = 6
+        }
+        return durationProgram
+    }
 }

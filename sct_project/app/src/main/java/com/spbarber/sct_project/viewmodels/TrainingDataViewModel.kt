@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.spbarber.sct_project.App.Companion.getFirestore
 import com.spbarber.sct_project.entities.VarsTraining
-import com.spbarber.sct_project.models.TrainingData
+import com.spbarber.sct_project.entities.TrainingData
 import com.spbarber.sct_project.utils.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

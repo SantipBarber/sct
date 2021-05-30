@@ -9,9 +9,9 @@ data class Athlete(
     val idUser: String,
     val records: List<Record>,
     val programs: List<Program>,
-    val trainingDays: List<TrainingDay>
+
 ) {
-    constructor() : this("",171, 90F,"2/12/1980", "1","", mutableListOf(), mutableListOf(), mutableListOf())
+    constructor() : this("",171, 90F,"2/12/1980", "1","", mutableListOf(), mutableListOf())
     override fun toString(): String {
         return super.toString()
     }

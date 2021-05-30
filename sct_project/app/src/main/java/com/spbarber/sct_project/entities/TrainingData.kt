@@ -1,4 +1,4 @@
-package com.spbarber.sct_project.models
+package com.spbarber.sct_project.entities
 
 import com.spbarber.sct_project.entities.VarsTraining
 

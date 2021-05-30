@@ -53,7 +53,7 @@ class AthleteViewModel : ViewModel() {
     }
 
     fun createAthlete(athlete: Athlete): LiveData<Exception?>{
-        Log.i(TAG, "Se está creando el nuevo atleta")
+        //Log.i(TAG, "Se está creando el nuevo atleta")
         val data = MutableLiveData<Exception?>()
         getFirestore()
             .collection(Constants.ATHLETES)
@@ -61,7 +61,7 @@ class AthleteViewModel : ViewModel() {
             .set(athlete)
             .addOnCompleteListener { taskNewAthlete ->
                 if (taskNewAthlete.isSuccessful){
-                    Log.i(TAG, "El atleta ha sido almacenado")
+                    //Log.i(TAG, "El atleta ha sido almacenado")
                     data.value = null
                 } else {
                     Log.i(TAG, "No se ha podido crear. Ver excecpción")
