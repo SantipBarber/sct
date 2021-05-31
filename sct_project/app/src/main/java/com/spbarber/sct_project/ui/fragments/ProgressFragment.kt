@@ -13,20 +13,15 @@ import com.spbarber.sct_project.App
 import com.spbarber.sct_project.adapters.ProgressRecyclerViewAdapter
 import com.spbarber.sct_project.databinding.FragmentProgressBinding
 import com.spbarber.sct_project.entities.Preferences
-import com.spbarber.sct_project.entities.VarsTraining
 import com.spbarber.sct_project.entities.Week
 import com.spbarber.sct_project.viewmodels.AthleteViewModel
-import com.spbarber.sct_project.viewmodels.TrainingDataViewModel
 import com.spbarber.sct_project.viewmodels.UsuarioViewModel
 
 class ProgressFragment : Fragment() {
     private val TAG = "TAG"
-    private lateinit var varsTraining: MutableMap<String, VarsTraining>
     private lateinit var binding: FragmentProgressBinding
     private val modelAthlete: AthleteViewModel by viewModels()
-    private val modelTrainingData: TrainingDataViewModel by viewModels()
     private val modelUserViewModel: UsuarioViewModel by viewModels()
-    //private val myAdapter: ProgressRecyclerViewAdapter = ProgressRecyclerViewAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
