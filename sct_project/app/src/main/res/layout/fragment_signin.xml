@@ -132,7 +132,8 @@
         app:cornerRadius="7.5dp"
         app:strokeColor="@color/color_on_primary"
         android:text="Continuar con email"
-        android:paddingLeft="40dp" />
+        android:paddingLeft="40dp"
+        />
 
     <ScrollView
         android:id="@+id/scrollview_signin"

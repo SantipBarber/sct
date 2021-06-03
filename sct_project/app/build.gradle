@@ -79,5 +79,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
     //Para gráficos
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    //Iconos tope guapos
+    implementation 'info.androidhive:fontawesome:0.0.5'
 
 }

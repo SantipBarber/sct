@@ -43,7 +43,7 @@ class PersonalDataFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             run {
                 if (hasFocus) {
                     binding.tilAthleteName.error = ""
-                    binding.tietAthleteName.text?.clear()
+                    //binding.tietAthleteName.text?.clear()
                 }
             }
         }
@@ -61,7 +61,7 @@ class PersonalDataFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             run {
                 if (hasFocus) {
                     binding.tilAthleteHeigth.error = ""
-                    binding.tietAtheteHeigth.text?.clear()
+                    //binding.tietAtheteHeigth.text?.clear()
                 }
 
             }
@@ -80,7 +80,7 @@ class PersonalDataFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             run {
                 if (hasFocus) {
                     binding.tilAthleteWeight.error = ""
-                    binding.tietAthleteWeight.text?.clear()
+                    //binding.tietAthleteWeight.text?.clear()
                 }
             }
         }
@@ -98,7 +98,7 @@ class PersonalDataFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             run {
                 if (hasFocus) {
                     binding.tilAthleteBirthdate.error = ""
-                    binding.tietAthleteBirthdate.text?.clear()
+                    //binding.tietAthleteBirthdate.text?.clear()
                 }
             }
         }

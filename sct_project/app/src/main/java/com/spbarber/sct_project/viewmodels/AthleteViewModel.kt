@@ -3,7 +3,6 @@ package com.spbarber.sct_project.viewmodels
 import android.util.Log
 import androidx.lifecycle.*
 import com.google.firebase.firestore.ktx.toObject
-import com.google.gson.Gson
 import com.spbarber.sct_project.App.Companion.getFirestore
 import com.spbarber.sct_project.entities.Athlete
 import com.spbarber.sct_project.utils.Constants
@@ -70,6 +69,23 @@ class AthleteViewModel : ViewModel() {
             }
         return data
 
+    }
+
+    fun updateTrainingDone(athlete: Athlete, week: Int, arrayDay: Int): LiveData<Exception?>{
+        val data = MutableLiveData<Exception?>()
+
+        getFirestore()
+            .collection(Constants.ATHLETES)
+            .document(athlete.nameAthlete)
+            .update(mapOf("programs.0.trainingDays.$arrayDay.trainingDone.$week" to true)).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    data.value = null
+                } else {
+                    Log.i(TAG, "No se ha podido crear. Ver excecpción")
+                    data.value = it.exception
+                }
+            }
+        return data
     }
 
 

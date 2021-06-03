@@ -79,7 +79,6 @@ class UsuarioViewModel : ViewModel() {
             .document(user)
             .get()
             .addOnSuccessListener { dataUser ->
-                val index = "preferences"
                 val prefs = dataUser.data!!["preferences"]
                 //Log.i("TAG", prefs.toString())
                 val dataJson = Gson().toJson(prefs)

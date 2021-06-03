@@ -46,8 +46,6 @@ class ProgressFragment : Fragment() {
                          */
                         val preferences = preferencesData
                         val athlete = preferences!!.name
-                        val goal = preferences?.goal.toString()
-                        val duration = getWeeks(preferences)
                         modelAthlete.getAthlete(athlete!!).observe(viewLifecycleOwner, {athleteData ->
                             createRecyclerView(athleteData.programs[0].weeks)
                         })

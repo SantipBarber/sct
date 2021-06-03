@@ -7,7 +7,7 @@
     app:strokeColor="@color/color_secondary"
     app:strokeWidth="2dp"
     android:backgroundTint="@color/primary_light_color"
-    android:elevation="5dp"
+    app:cardElevation="5dp"
     android:focusable="false"
     android:clickable="false"
     app:cardCornerRadius="15dp"
