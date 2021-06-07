@@ -33,17 +33,10 @@ class UsuarioViewModel : ViewModel() {
             {
                 val users = mutableListOf<com.google.firebase.firestore.auth.User>()
                 val docRef =
-                    getFirestore().collection("users").document("${getAuth().currentUser?.uid}")
+                    getFirestore().collection(Constants.USERS).document("${getAuth().currentUser?.uid}")
                 docRef.get()
                     .addOnCompleteListener { document ->
-                        Log.i(
-                            T, "-----" +
-                                    "---------" +
-                                    "-----------" +
-                                    "----------" +
-                                    "----------" +
-                                    "----------Snapshot de los datos de usuario: ${document.result}"
-                        )
+
                     }
                 _users.postValue(users)
             }
@@ -80,19 +73,13 @@ class UsuarioViewModel : ViewModel() {
             .get()
             .addOnSuccessListener { dataUser ->
                 val prefs = dataUser.data!!["preferences"]
-                //Log.i("TAG", prefs.toString())
                 val dataJson = Gson().toJson(prefs)
-                //Log.i("TAG", dataJson.toString())
 
                 val preferences = Gson().fromJson(dataJson, Preferences::class.java)
-                //Log.i("TAG", preferencesUserMap.toString())
 
-                //Log.i("TAG", preferecesUser.toString())
                 data.value = preferences
-
             }
 
-        //Log.i("TAG", data.toString())
         return data
     }
 
@@ -133,16 +120,12 @@ class UsuarioViewModel : ViewModel() {
                             } else {
                                 data.value = taskChangeProfile.exception
                             }
-
                         }
                     }
-
                 } else {
                     data.value = task.exception
                 }
             }
         return data
     }
-
-
 }

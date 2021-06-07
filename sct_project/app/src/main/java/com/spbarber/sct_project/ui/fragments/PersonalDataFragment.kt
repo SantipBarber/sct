@@ -2,8 +2,6 @@ package com.spbarber.sct_project.ui.fragments
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.os.PatternMatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +10,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.textfield.TextInputEditText
+import com.spbarber.sct_project.App
 import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentPersonalDataBinding
 import java.util.*
@@ -21,7 +20,7 @@ class PersonalDataFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     private lateinit var binding: FragmentPersonalDataBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         binding = FragmentPersonalDataBinding.inflate(layoutInflater)
 
         val preferences = arguments?.let {
@@ -168,10 +167,18 @@ class PersonalDataFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             preferences?.genre = genreAthlete
             preferences?.birthdate = birthdateAthlete.getInputText()
 
-            val action = PersonalDataFragmentDirections.actionPersonalDataFragmentToSiginFragment(
-                    preferences
-            )
-            NavHostFragment.findNavController(this).navigate(action)
+            if (!App.getAuth().currentUser!!.isAnonymous){
+                val action = PersonalDataFragmentDirections.actionPersonalDataFragmentToReviewAndConfirmFragment(preferences)
+                NavHostFragment.findNavController(this).navigate(action)
+            }
+            else {
+                val action =
+                    PersonalDataFragmentDirections.actionPersonalDataFragmentToSiginFragment(
+                        preferences
+                    )
+                NavHostFragment.findNavController(this).navigate(action)
+            }
+
         }
 
         binding.tietAthleteBirthdate.setOnFocusChangeListener { _, hasFocus ->

@@ -71,22 +71,5 @@ class AthleteViewModel : ViewModel() {
 
     }
 
-    fun updateTrainingDone(athlete: Athlete, week: Int, arrayDay: Int): LiveData<Exception?>{
-        val data = MutableLiveData<Exception?>()
-
-        getFirestore()
-            .collection(Constants.ATHLETES)
-            .document(athlete.nameAthlete)
-            .update(mapOf("programs.0.trainingDays.$arrayDay.trainingDone.$week" to true)).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    data.value = null
-                } else {
-                    Log.i(TAG, "No se ha podido crear. Ver excecpción")
-                    data.value = it.exception
-                }
-            }
-        return data
-    }
-
 
 }

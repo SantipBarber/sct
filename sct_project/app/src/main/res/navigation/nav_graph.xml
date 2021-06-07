@@ -120,6 +120,9 @@
             android:name="preferences"
             app:argType="com.spbarber.sct_project.entities.Preferences"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_personalDataFragment_to_reviewAndConfirmFragment"
+            app:destination="@id/reviewAndConfirmFragment" />
     </fragment>
 
     <fragment

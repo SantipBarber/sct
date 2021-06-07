@@ -144,6 +144,7 @@ class WorkoutFragment : Fragment() {
         }
 
         spinnerSelectWeek.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -260,16 +261,7 @@ class WorkoutFragment : Fragment() {
                 binding.btnTrainDone.setOnClickListener {
                     binding.tvIconCheck.compoundDrawables.getOrNull(2)?.setTint(Color.GREEN)
                     //Log.i(TAG, "Cambiando color")
-                    modelAthlete.updateTrainingDone(athleteData, arrayWeek, arrayDay).observe(viewLifecycleOwner, { exception ->
-                        when (exception) {
-                            is FirebaseFirestoreException -> {
-                                Log.i("TAG", "no se ha actualizar el estado del entrenamiento")
-                            }
-                            else -> {
-                                Log.i("TAG", "Hemos actualizado el estado")
-                            }
-                        }
-                    })
+                    //Hay que modificar en la base de datos el valor de trainingDone
                 }
 
             }

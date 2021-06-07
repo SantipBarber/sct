@@ -37,6 +37,14 @@ class AppActivity : AppCompatActivity() {
             Log.i("TAG", "Se ha pulsado el botón de menú")
         }
 
+        binding.btnNew.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("newProgram", true)
+            Toast.makeText(this, "Al init fragment, crear nuevo programa", Toast.LENGTH_LONG).show()
+            startActivity(intent)
+            finish()
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -74,6 +82,7 @@ class AppActivity : AppCompatActivity() {
         } else {
             val intent = Intent(this, MainActivity::class.java)
             Toast.makeText(this, "Volviendo al init fragment", Toast.LENGTH_LONG).show()
+
             startActivity(intent)
             finish()
         }
