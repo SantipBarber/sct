@@ -17,11 +17,11 @@ data class Preferences(
     var weight: Float,
     var genre: String?,
     var birthdate: String?,
-    var firstname: String?,
-    var surname: String?,
-    var username: String?,
-    var password: String?,
-    var confirmPassword: String?
+    //var firstname: String?,
+    //var surname: String?,
+    //var username: String?,
+    //var password: String?,
+    //var confirmPassword: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
@@ -37,15 +37,15 @@ data class Preferences(
         parcel.readFloat(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString()
+        //parcel.readString(),
+        //parcel.readString(),
+        //parcel.readString(),
+        //parcel.readString(),
+        //parcel.readString()
         ){
 
     }
-    constructor() : this("", "", "", "", 1, 0.0F, 0.0F, 0.0F, "", 170, 80F, "", "", "", "", "", "", "")
+    constructor() : this("", "", "", "", 1, 0.0F, 0.0F, 0.0F, "", 170, 80F, "", "")
 
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -62,11 +62,11 @@ data class Preferences(
         parcel.writeFloat(weight)
         parcel.writeString(genre)
         parcel.writeString(birthdate)
-        parcel.writeString(firstname)
-        parcel.writeString(surname)
-        parcel.writeString(username)
-        parcel.writeString(password)
-        parcel.writeString(confirmPassword)
+        //parcel.writeString(firstname)
+        //parcel.writeString(surname)
+        //parcel.writeString(username)
+        //parcel.writeString(password)
+        //parcel.writeString(confirmPassword)
     }
 
     override fun describeContents(): Int {

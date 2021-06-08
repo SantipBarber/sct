@@ -112,7 +112,7 @@ class PersonalDataFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             val heigthAthlete = binding.tietAtheteHeigth
             val weightAthlete = binding.tietAthleteWeight
             var genreAthlete = ""
-            var genreAthleteID = binding.rgAthleteGender.checkedRadioButtonId
+            val genreAthleteID = binding.rgAthleteGender.checkedRadioButtonId
             when (genreAthleteID) {
                 R.id.rb_genre_man -> genreAthlete = "man"
                 R.id.rb_genre_woman -> genreAthlete = "woman"
@@ -167,7 +167,7 @@ class PersonalDataFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             preferences?.genre = genreAthlete
             preferences?.birthdate = birthdateAthlete.getInputText()
 
-            if (!App.getAuth().currentUser!!.isAnonymous){
+            if (App.getAuth().currentUser != null){
                 val action = PersonalDataFragmentDirections.actionPersonalDataFragmentToReviewAndConfirmFragment(preferences)
                 NavHostFragment.findNavController(this).navigate(action)
             }

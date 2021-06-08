@@ -2,6 +2,7 @@ package com.spbarber.sct_project.ui.fragments
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,14 +17,15 @@ import com.spbarber.sct_project.App
 import com.spbarber.sct_project.databinding.FragmentStatsBinding
 import com.spbarber.sct_project.entities.Athlete
 import com.spbarber.sct_project.viewmodels.AthleteViewModel
-import com.spbarber.sct_project.viewmodels.UsuarioViewModel
+import com.spbarber.sct_project.viewmodels.UserViewModel
 import kotlin.math.absoluteValue
+import kotlin.math.exp
 
 
 class StatsFragment : Fragment() {
     private lateinit var binding: FragmentStatsBinding
     private val modelAthlete: AthleteViewModel by viewModels()
-    private val modelUser: UsuarioViewModel by viewModels()
+    private val modelUser: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +52,7 @@ class StatsFragment : Fragment() {
                         createGraph(athleteData, lineChart)
 
                         //Rellenamos los datos de la tabla RM
+                        Log.i("TAG", preferencesData.experience.toString())
 
                         binding.tvLlRmTableSquat1.text = athleteData.records[0].idExercise.capitalize()
                         binding.tvLlRmTableSquat2.text = athleteData.records[0].weight.toInt().toString()
@@ -62,13 +65,8 @@ class StatsFragment : Fragment() {
                         binding.tvLlRmTableDeadlift1.text = athleteData.records[2].idExercise.capitalize()
                         binding.tvLlRmTableDeadlift2.text = athleteData.records[2].weight.toInt().toString()
                         binding.tvLlRmTableDeadlift3.text = getNewRecord(athleteData, preferencesData.experience.toString(),2)
-
                     })
             })
-
-
-
-
         return binding.root
     }
 
@@ -88,9 +86,7 @@ class StatsFragment : Fragment() {
                 newRecord = r.absoluteValue.toInt().toString()
             }
         }
-
         return newRecord
-
     }
 
     private fun createGraph(athleteData: Athlete, lineChart: LineChart) {
@@ -115,7 +111,7 @@ class StatsFragment : Fragment() {
         val lineDataVolume = LineDataSet(volumeData, "Volumen (kg)")
 
         lineDataIntensity.color = Color.RED
-        lineDataIntensity.setDrawValues(true)
+        lineDataIntensity.setDrawValues(false)
         lineDataIntensity.yMin
         lineDataIntensity.setDrawCircles(true)
         lineDataIntensity.setCircleColor(Color.RED)
@@ -128,7 +124,7 @@ class StatsFragment : Fragment() {
         lineDataIntensity.enableDashedHighlightLine(10F, 5F, 0F)
 
         lineDataVolume.color = Color.BLUE
-        lineDataVolume.setDrawValues(true)
+        lineDataVolume.setDrawValues(false)
         lineDataVolume.setDrawCircles(true)
         lineDataVolume.setCircleColor(Color.BLUE)
         lineDataVolume.lineWidth = 3F

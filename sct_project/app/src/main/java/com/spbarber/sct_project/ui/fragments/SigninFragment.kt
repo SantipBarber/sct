@@ -22,7 +22,7 @@ import com.spbarber.sct_project.databinding.FragmentSigninBinding
 import com.spbarber.sct_project.databinding.FragmentSigninFormBinding
 import com.spbarber.sct_project.databinding.MyProgressBarBinding
 import com.spbarber.sct_project.entities.*
-import com.spbarber.sct_project.viewmodels.UsuarioViewModel
+import com.spbarber.sct_project.viewmodels.UserViewModel
 import java.time.LocalDate
 import java.time.Period
 import java.util.*
@@ -33,7 +33,7 @@ class SigninFragment : Fragment() {
     private lateinit var bindingForm: FragmentSigninFormBinding
     private lateinit var bindingProgressBar: MyProgressBarBinding
 
-    private val model: UsuarioViewModel by viewModels()
+    private val model: UserViewModel by viewModels()
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -195,11 +195,11 @@ class SigninFragment : Fragment() {
                 }
 
             }
-            preferences?.firstname = firstName.getInputText()
-            preferences?.surname = surnames.getInputText()
-            preferences?.username = username.getInputText()
-            preferences?.password = password.getInputText()
-            preferences?.confirmPassword = confirmPassword.getInputText()
+            //preferences?.firstname = firstName.getInputText()
+            //preferences?.surname = surnames.getInputText()
+            //preferences?.username = username.getInputText()
+            //preferences?.password = password.getInputText()
+            //preferences?.confirmPassword = confirmPassword.getInputText()
 
             val user = User(
                 firstName.getInputText(),

@@ -5,9 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.spbarber.sct_project.R
@@ -28,15 +28,15 @@ class TempRuleFragment : Fragment() {
 
 
         val spinnerDuration: Spinner = binding.dropdownMenuDuration
-        // Create an ArrayAdapter using the string array and a default spinner layout
+        // Creamos un ArrayAdapter usando el string-array deseado y el diseño de Spinner deseado
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.duration_array,
             R.layout.custom_spinner_item
         ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
+            // Especifique el diseño que se utilizará cuando aparezca la lista de opciones
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
+            // Aplicamos el adaptador al spinner o ruleta
             spinnerDuration.adapter = adapter
         }
 
@@ -54,6 +54,27 @@ class TempRuleFragment : Fragment() {
             val action =
                 TempRuleFragmentDirections.actionTempRuleFragmentToGoalFragment(preferences)
             NavHostFragment.findNavController(this).navigate(action)
+        }
+
+        spinnerFrequency.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                if (id.toInt() == 0) {
+                    binding.rgFrecuency.check(R.id.rb_frequency_1)
+                } else if (id.toInt() == 1){
+                    binding.rgFrecuency.check(R.id.rb_frequency_2)
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
         }
 
         binding.btnTempRuleNext.setOnClickListener {

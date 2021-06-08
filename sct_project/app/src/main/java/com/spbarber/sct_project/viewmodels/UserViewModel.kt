@@ -19,7 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class UsuarioViewModel : ViewModel() {
+class UserViewModel : ViewModel() {
     private val T = "TAG"
     val _users: MutableLiveData<List<com.google.firebase.firestore.auth.User>> by lazy {
         MutableLiveData<List<com.google.firebase.firestore.auth.User>>().also {

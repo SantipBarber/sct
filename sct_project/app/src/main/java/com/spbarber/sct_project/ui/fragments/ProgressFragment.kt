@@ -10,18 +10,18 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.spbarber.sct_project.App
-import com.spbarber.sct_project.adapters.ProgressRecyclerViewAdapter
 import com.spbarber.sct_project.databinding.FragmentProgressBinding
 import com.spbarber.sct_project.entities.Preferences
 import com.spbarber.sct_project.entities.Week
 import com.spbarber.sct_project.viewmodels.AthleteViewModel
-import com.spbarber.sct_project.viewmodels.UsuarioViewModel
+import com.spbarber.sct_project.viewmodels.UserViewModel
+import com.ºspbarber.sct_project.adapters.ProgressRecyclerViewAdapter
 
 class ProgressFragment : Fragment() {
     private val TAG = "TAG"
     private lateinit var binding: FragmentProgressBinding
     private val modelAthlete: AthleteViewModel by viewModels()
-    private val modelUserViewModel: UsuarioViewModel by viewModels()
+    private val modelUserViewModel: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

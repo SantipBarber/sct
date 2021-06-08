@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -18,23 +17,18 @@ import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentLoginBinding
 import com.spbarber.sct_project.databinding.MyProgressBarBinding
 import com.spbarber.sct_project.ui.activities.AppActivity
-import com.spbarber.sct_project.viewmodels.TrainingDataViewModel
-import com.spbarber.sct_project.viewmodels.UsuarioViewModel
+import com.spbarber.sct_project.viewmodels.UserViewModel
 import java.util.regex.Pattern
 
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var bindingProgressBar: MyProgressBarBinding
-    private val model: UsuarioViewModel by viewModels()
-    private val model2: TrainingDataViewModel by viewModels()
+    private val model: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentLoginBinding.inflate(layoutInflater)
-        binding.btnGoogleLogin.setOnClickListener {
-
-        }
     }
 
     override fun onCreateView(
@@ -143,10 +137,12 @@ class LoginFragment : Fragment() {
                 })
         }
 
+
         binding.btnLoginBack.setOnClickListener {
             val action = LoginFragmentDirections.actionLoginFragmentToInitFragment()
             NavHostFragment.findNavController(this).navigate(action)
         }
+
 
         return binding.root
     }

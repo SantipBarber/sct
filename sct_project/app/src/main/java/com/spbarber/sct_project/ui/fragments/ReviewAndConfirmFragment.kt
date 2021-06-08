@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
@@ -74,7 +73,7 @@ class ReviewAndConfirmFragment : Fragment() {
                 records,
                 programs
             )
-            modelAthlete.createAthlete(newAthlete).observe(viewLifecycleOwner, { exception ->
+            modelAthlete.createAthlete(newAthlete, preferences).observe(viewLifecycleOwner, { exception ->
                 when (exception) {
                     is FirebaseFirestoreException -> {
                         Log.i("TAG", "no se ha podido almacenar el atleta")
@@ -339,7 +338,7 @@ class ReviewAndConfirmFragment : Fragment() {
 
     private fun goToApp() {
         val intent = Intent(context, AppActivity::class.java)
-        Toast.makeText(context, "Accediendo a la app desde review!", Toast.LENGTH_LONG).show()
+        //Toast.makeText(context, "Accediendo a la app desde review!", Toast.LENGTH_LONG).show()
         startActivity(intent)
         activity?.finish()
     }

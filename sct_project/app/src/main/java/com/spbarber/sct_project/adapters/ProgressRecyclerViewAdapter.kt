@@ -1,6 +1,5 @@
-package com.spbarber.sct_project.adapters
+package com.ºspbarber.sct_project.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -38,9 +37,11 @@ class ProgressRecyclerViewAdapter(private val items: List<Week>) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder.newInstance(parent, this)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        ViewHolder.newInstance(parent, this)
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.fillData(items[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
+        holder.fillData(items[position])
 
     override fun getItemCount(): Int = items.size
 }

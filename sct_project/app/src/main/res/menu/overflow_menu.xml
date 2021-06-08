@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/option_1"
-        android:title="Settings"
-        />
-    <item android:id="@+id/option_2"
-        android:title="Nuevo" />
-    <item android:id="@+id/option_3"
-        android:title="Cerrar sesión"
-        app:showAsAction="ifRoom"
-        android:onClick="signOut"/>
+    <item
+        android:id="@+id/option_1"
+        android:title="Set Avatar"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/option_2"
+        android:title="Set password"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/option_3"
+        android:title="Terms"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/option_4"
+        android:title="Privacy Policy"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/option_5"
+        android:onClick="signOut"
+        android:title="Cerrar sesión" />
 </menu>

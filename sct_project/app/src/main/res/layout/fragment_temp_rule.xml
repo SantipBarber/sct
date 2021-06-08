@@ -177,7 +177,8 @@
             android:layout_marginEnd="15dp"
             android:text="1x"
             android:textColor="@color/color_secondary"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:clickable="false"/>
 
         <RadioButton
             android:id="@+id/rb_frequency_2"
@@ -187,7 +188,8 @@
             android:layout_marginEnd="15dp"
             android:text="2x"
             android:textColor="@color/color_secondary"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:clickable="false"/>
 
         <!--<RadioButton
             android:id="@+id/rb_frequency_3"

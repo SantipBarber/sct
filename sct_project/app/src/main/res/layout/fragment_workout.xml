@@ -51,7 +51,8 @@
         app:layout_constraintStart_toStartOf="@+id/main_vertical_start_guide"
         app:layout_constraintTop_toBottomOf="@+id/main_horizontal_start_guide"
         app:strokeColor="@color/color_secondary"
-        app:strokeWidth="2dp">
+        app:strokeWidth="2dp"
+        android:isScrollContainer="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -108,10 +109,28 @@
                     android:textStyle="italic|bold" />
             </LinearLayout>
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_select_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:gravity="center"
+                android:layout_weight="1"
+                android:padding="30dp"
+                android:text="Escoge una semana y un día"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                />
+
+            <LinearLayout
+                android:id="@+id/ll_workout_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -121,6 +140,7 @@
                     android:layout_marginTop="10dp">
 
                     <TextView
+                        android:id="@+id/tv_workout_warm_up"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -132,6 +152,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_workout_mobility"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -152,6 +173,7 @@
                     >
 
                     <info.androidhive.fontawesome.FontTextView
+                        android:id="@+id/tv_workout_icon1"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="@string/fa_blind_solid"
@@ -165,12 +187,15 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_workout_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="15dp">
+                android:padding="15dp"
+                android:visibility="gone">
 
                 <info.androidhive.fontawesome.FontTextView
+                    android:id="@+id/tv_workout_icon2"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/fa_dumbbell_solid"
@@ -190,7 +215,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="Día X"
                         android:textAlignment="center"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -201,7 +225,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="Movimiento"
                         android:textAlignment="center"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -212,7 +235,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="- X sets"
                         android:textAlignment="center"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -223,7 +245,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="- x/x/x/x/x reps"
                         android:textAlignment="center"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -233,9 +254,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_workout_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -248,7 +271,6 @@
                         android:id="@+id/tv_workout_weight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="- Peso:         kg"
                         android:textAlignment="textStart"
                         android:paddingLeft="100dp"
                         android:textSize="18sp"
@@ -259,7 +281,6 @@
                         android:id="@+id/tv_workout_accesories"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="- Accesorios:         "
                         android:textAlignment="textStart"
                         android:paddingLeft="100dp"
                         android:textSize="18sp"
@@ -281,18 +302,19 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_workout_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingStart="15dp"
-                android:paddingEnd="15dp">
+                android:paddingEnd="15dp"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_workout_rest"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:text="- Descanso en clusters: "
                     android:textAlignment="center"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -304,7 +326,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:text="- Duración de cada set: "
                     android:textAlignment="center"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -325,7 +346,7 @@
         android:backgroundTint="@color/color_secondary"
         android:clickable="true"
         android:focusable="true"
-        android:text="- Marcar como realizado -"
+        android:text="Marcar como realizado"
         android:textStyle="bold"
         app:cornerRadius="15dp"
         app:layout_constraintBottom_toTopOf="@id/main_horizontal_end_guide"

@@ -34,13 +34,11 @@ class AppActivity : AppCompatActivity() {
 
         binding.btnMore.setOnClickListener { view ->
             showMenu(view, R.menu.overflow_menu)
-            Log.i("TAG", "Se ha pulsado el botón de menú")
         }
 
         binding.btnNew.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("newProgram", true)
-            Toast.makeText(this, "Al init fragment, crear nuevo programa", Toast.LENGTH_LONG).show()
             startActivity(intent)
             finish()
         }
@@ -76,13 +74,10 @@ class AppActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         val currentUser = App.getAuth().currentUser
-        val nameUser = currentUser?.email
         if(currentUser != null){
-            //Snackbar.make(binding.root, "El usuario logueado es $nameUser", Snackbar.LENGTH_LONG).show()
+            Log.i("TAG", currentUser.toString())
         } else {
             val intent = Intent(this, MainActivity::class.java)
-            Toast.makeText(this, "Volviendo al init fragment", Toast.LENGTH_LONG).show()
-
             startActivity(intent)
             finish()
         }
