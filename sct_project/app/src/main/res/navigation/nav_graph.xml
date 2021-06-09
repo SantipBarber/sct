@@ -178,5 +178,8 @@
             android:name="preferences"
             app:argType="com.spbarber.sct_project.entities.Preferences"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_reviewAndConfirmFragment_to_personalDataFragment"
+            app:destination="@id/personalDataFragment" />
     </fragment>
 </navigation>

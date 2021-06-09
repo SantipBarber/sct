@@ -209,10 +209,9 @@ class SigninFragment : Fragment() {
                 Date(System.currentTimeMillis()),
                 Date(System.currentTimeMillis())
             )
-            goToProgramGenerator(preferences!!)
 
             //Registro por Firebase
-            model.signin(user, preferences)
+            model.signin(user, preferences!!)
                 .observe(viewLifecycleOwner, { exception ->
                     if (exception == null) {
                         //Log.i("TAG", "Entra en el IF...")
@@ -254,7 +253,7 @@ class SigninFragment : Fragment() {
                             else -> {
                                 Snackbar.make(
                                     binding.root,
-                                    "Algo no ha ido bien",
+                                    "El nombre de usuario ya existe. Debes introducir otro para registrarte.",
                                     Snackbar.LENGTH_LONG
                                 ).show()
                             }

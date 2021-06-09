@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.spbarber.sct_project.App.Companion.getAuth
 import com.spbarber.sct_project.adapters.SummaryRecyclerViewAdapter
@@ -48,7 +49,6 @@ class ReviewAndConfirmFragment : Fragment() {
 
         binding.btnGenerate.setOnClickListener {
             createAthlete(preferences)
-            goToApp()
         }
 
         return binding.root
@@ -73,16 +73,23 @@ class ReviewAndConfirmFragment : Fragment() {
                 records,
                 programs
             )
-            modelAthlete.createAthlete(newAthlete, preferences).observe(viewLifecycleOwner, { exception ->
-                when (exception) {
-                    is FirebaseFirestoreException -> {
-                        Log.i("TAG", "no se ha podido almacenar el atleta")
+
+            modelAthlete.createAthlete(newAthlete, preferences)
+                .observe(viewLifecycleOwner, { exception ->
+                    if (exception == null) {
+                        goToApp()
+                    } else {
+                        when (exception) {
+                            is FirebaseFirestoreException -> {
+                                Log.i("TAG", "no se ha podido almacenar el atleta")
+                            }
+                            else -> {
+                                Log.i("TAG", "Hemos almacenado al atleta correctamente!!!!")
+                            }
+                        }
                     }
-                    else -> {
-                        Log.i("TAG", "Hemos almacenado al atleta correctamente!!!!")
-                    }
-                }
-            })
+
+                })
         })
     }
 

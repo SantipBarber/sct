@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
-            android:inputType="textPersonName"
+            android:inputType="text"
             android:text="SpBarber"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -181,7 +181,7 @@
             android:layout_height="wrap_content"
             android:focusable="true"
             android:clickable="true"
-            android:inputType="numberDecimal"
+            android:inputType="text"
             android:text="89.5"
             />
     </com.google.android.material.textfield.TextInputLayout>

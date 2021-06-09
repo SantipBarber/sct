@@ -15,7 +15,7 @@ import com.spbarber.sct_project.viewmodels.TrainingDataViewModel
 class GoalFragment : Fragment() {
     private lateinit var binding: FragmentGoalBinding
     private val model: TrainingDataViewModel by viewModels()
-    private val TAG = "TAG"
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,8 +24,6 @@ class GoalFragment : Fragment() {
         val preferences = arguments?.let {
             GoalFragmentArgs.fromBundle(it).preferences
         }
-        //Log.i(TAG, "$experience")
-
 
         binding.btnGoalBack.setOnClickListener {
             val action = GoalFragmentDirections.actionGoalFragmentToExperienceFragment()
@@ -46,23 +44,15 @@ class GoalFragment : Fragment() {
             model.getTrainingData(goalUser.capitalize(), duration)
                 .observe(viewLifecycleOwner, { trainingData ->
                 if (!trainingData.trainingData.isNullOrEmpty()){
-                    Log.i(TAG, "Lanzado el getTrainingData")
-                    //
+
                 }
             })
 
             val action = GoalFragmentDirections.actionGoalFragmentToTempRuleFragment(preferences)
             NavHostFragment.findNavController(this).navigate(action)
-            Log.i(TAG, "$preferences")
         }
 
         return binding.root
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
 
 }

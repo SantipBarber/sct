@@ -2,6 +2,7 @@ package com.spbarber.sct_project.ui.fragments
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +28,6 @@ class PersonalDataFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             PersonalDataFragmentArgs.fromBundle(it).preferences
         }
 
-
         binding.tietAthleteName.addTextChangedListener {
             val size = it!!.length
             if (size < 2) {
@@ -35,22 +35,22 @@ class PersonalDataFragment : Fragment(), DatePickerDialog.OnDateSetListener {
                 binding.tilAthleteName.error = "Introduce un nombre válido"
             } else {
                 binding.tilAthleteName.error = ""
-                binding.tilAthleteName.helperText = ""
             }
         }
         binding.tietAthleteName.setOnFocusChangeListener { _, hasFocus ->
             run {
                 if (hasFocus) {
                     binding.tilAthleteName.error = ""
-                    //binding.tietAthleteName.text?.clear()
                 }
             }
         }
 
         binding.tietAtheteHeigth.addTextChangedListener {
-            val size = it!!.toString().toInt()
-            if (size < 130) {
+            val size = it!!.length
+            if (size < 3 || it!!.toString().toInt() < 130) {
                 binding.tilAthleteHeigth.error = "Introduce una altura válida"
+            } else if (size < 1 || it.isNullOrEmpty()){
+                it.insert(0, "0")
             } else {
                 binding.tilAthleteHeigth.error = ""
                 binding.tilAthleteHeigth.helperText = ""
@@ -60,26 +60,26 @@ class PersonalDataFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             run {
                 if (hasFocus) {
                     binding.tilAthleteHeigth.error = ""
-                    //binding.tietAtheteHeigth.text?.clear()
                 }
 
             }
         }
 
         binding.tietAthleteWeight.addTextChangedListener {
-            val size = it!!.toString().toFloat()
-            if (size < 40) {
+            val size = it!!.length
+            if (size < 2 || it.toString().toFloat() < 40) {
                 binding.tilAthleteWeight.error = "Introduce un peso válido"
-            } else {
+            } else if (size < 1 || it.isNullOrEmpty()){
+                it.insert(0, "0")
+            }
+            else {
                 binding.tilAthleteWeight.error = ""
-                binding.tilAthleteWeight.helperText = ""
             }
         }
         binding.tietAthleteName.setOnFocusChangeListener { _, hasFocus ->
             run {
                 if (hasFocus) {
                     binding.tilAthleteWeight.error = ""
-                    //binding.tietAthleteWeight.text?.clear()
                 }
             }
         }
@@ -97,7 +97,6 @@ class PersonalDataFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             run {
                 if (hasFocus) {
                     binding.tilAthleteBirthdate.error = ""
-                    //binding.tietAthleteBirthdate.text?.clear()
                 }
             }
         }
@@ -112,8 +111,7 @@ class PersonalDataFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             val heigthAthlete = binding.tietAtheteHeigth
             val weightAthlete = binding.tietAthleteWeight
             var genreAthlete = ""
-            val genreAthleteID = binding.rgAthleteGender.checkedRadioButtonId
-            when (genreAthleteID) {
+            when (binding.rgAthleteGender.checkedRadioButtonId) {
                 R.id.rb_genre_man -> genreAthlete = "man"
                 R.id.rb_genre_woman -> genreAthlete = "woman"
             }

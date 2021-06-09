@@ -193,6 +193,7 @@ class WorkoutFragment : Fragment() {
                 "Día ${athleteData.programs[0].trainingDays[arrayDay].numDay}"
             binding.tvWorkoutMovement.text = athleteData.programs[0].trainingDays[arrayDay].exercise
 
+
             val intensityWeek = athleteData.programs[0].weeks[arrayWeek].intensity / 100
             var weightForExercise = 0.0F
             val exercise = athleteData.programs[0].trainingDays[arrayDay].exercise
@@ -268,17 +269,24 @@ class WorkoutFragment : Fragment() {
                 }
             }
 
-            Log.i(TAG, "${athleteData.programs[0].trainingDays[arrayDay].trainingDone[arrayWeek]}")
-            if (!athleteData.programs[0].trainingDays[arrayDay].trainingDone[arrayWeek]) {
-                binding.btnTrainDone.setOnClickListener {
+            modelAthlete.getAthlete(athleteData.nameAthlete).observe(viewLifecycleOwner, {
+                Log.i(TAG, "${it.programs[0].trainingDays[arrayDay].trainingDone[arrayWeek]}")
+                if (!it.programs[0].trainingDays[arrayDay].trainingDone[arrayWeek]) {
+                    binding.tvIconCheck.compoundDrawables.getOrNull(2)?.setTint(Color.RED)
+                    binding.btnTrainDone.setOnClickListener {
+                        binding.tvIconCheck.compoundDrawables.getOrNull(2)?.setTint(Color.GREEN)
+                        //Log.i(TAG, "Cambiando color")
+                        //Hay que modificar en la base de datos el valor de trainingDone
+
+                        modelAthlete.updateDoneTraining(athleteData, arrayDay, arrayWeek)
+                    }
+
+                } else {
                     binding.tvIconCheck.compoundDrawables.getOrNull(2)?.setTint(Color.GREEN)
-                    //Log.i(TAG, "Cambiando color")
-                    //Hay que modificar en la base de datos el valor de trainingDone
-
-                    modelAthlete.updateDoneTraining(athleteData, arrayDay, arrayWeek)
                 }
+            })
 
-            }
+
 
         }
 

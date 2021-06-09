@@ -1,7 +1,6 @@
 package com.spbarber.sct_project.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import com.spbarber.sct_project.R
 import com.spbarber.sct_project.databinding.FragmentTempRuleBinding
 
 class TempRuleFragment : Fragment() {
-    private val TAG = "TAG"
     private lateinit var binding: FragmentTempRuleBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -91,7 +89,6 @@ class TempRuleFragment : Fragment() {
             preferences?.duration = durationProgramItem
             preferences?.days = trainingDaysItem
             preferences?.frequency = frequencyMovement
-            Log.i("TAG", frequencyMovement.toString())
             val action =
                 TempRuleFragmentDirections.actionTempRuleFragmentToRecordsFragment2(preferences)
             NavHostFragment.findNavController(this).navigate(action)
@@ -100,10 +97,5 @@ class TempRuleFragment : Fragment() {
         return binding.root
 
     }
-
-    fun changeFrequency(){
-
-    }
-
 }
 
